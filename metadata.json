@@ -1,0 +1,6 @@
+{
+  "name": "CBZ Holdings",
+  "description": "Professional, modern and unified digital platform for CBZ Holdings banking, insurance, and wealth ecosystem.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
