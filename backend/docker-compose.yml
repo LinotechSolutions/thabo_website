@@ -33,9 +33,9 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
-    container_name: cbz-backend
+    container_name: cbz-backend-api
     restart: unless-stopped
     ports:
       - "8000:8000"
@@ -60,20 +60,6 @@ services:
       sh -c "python manage.py migrate &&
              python manage.py seed_cbz_data &&
              gunicorn cbz_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3"
-
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: cbz-frontend
-    restart: unless-stopped
-    ports:
-      - "3000:80"
-    environment:
-      - NODE_ENV=production
-      - VITE_API_URL=http://localhost:8000/api
-    depends_on:
-      - backend
 
 volumes:
   postgres_data:

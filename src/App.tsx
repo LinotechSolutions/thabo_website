@@ -18,6 +18,7 @@ import { SbuPropertiesView } from './components/SbuPropertiesView';
 import { SbuBankingView } from './components/SbuBankingView';
 import { LoginModal, PortalType } from './components/LoginModal';
 import { Footer } from './components/Footer';
+import ChatWidget from './components/ChatWidget';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenType>('home');
@@ -148,6 +149,9 @@ export default function App() {
         onNavigate={setCurrentScreen}
         initialPortal={loginPortal}
       />
+
+      {/* Full-site AI Concierge — persists across all screen changes */}
+      <ChatWidget />
 
     </div>
   );
