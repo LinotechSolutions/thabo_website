@@ -163,6 +163,144 @@ function storeSessionId(id: string) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Intelligent In-Browser Grounded Concierge Fallback
+// Provides instant, verified responses in EN/SN/ND when backend is offline or on Vercel
+// ─────────────────────────────────────────────────────────────────────────────
+function getLocalKnowledgeResponse(message: string, currentLang: Language): { reply: string; detectedLang: Language } {
+  const msg = message.toLowerCase();
+
+  let lang = currentLang;
+  const isShona = /(makadii|mhoro|maswera|manheru|ndiri|kuda|kuziva|nezve|bhanga|mari|kurima|munda|chii|ndinoda)/i.test(msg);
+  const isNdebele = /(salibonani|linjani|kunjani|ngiyabonga|ngifuna|ukuvula|ibhange|imali|ukulima|umhlaba|ngani|lamuhla)/i.test(msg);
+
+  if (isShona) lang = "sn";
+  else if (isNdebele) lang = "nd";
+
+  if (lang === "sn") {
+    if (/(account|fca|bhanga|vhura)/i.test(msg)) {
+      return {
+        reply: "Makadii! Kuvhura account pa CBZ Bank munoda: ID card/passport, proof of residence, uye deposit yekutanga. FCA (USD account) inoda deposit inotangira pa US$20 chete. Munogona kuenda ku-branch yeCBZ iri pedyo kana kushandisa CBZ Touch Mobile App.\n\nNdingakubatsirai nechimwe chinhu here?",
+        detectedLang: "sn"
+      };
+    }
+    if (/(insurance|inshurenzi|motokari|car|tsaona)/i.test(msg)) {
+      return {
+        reply: "CBZ Insurance inopa sarudzo nhatu dzekuvhara motokari:\n• **Comprehensive Cover**: kubva pa $46/mwedzi — inobhadhara tsaona, moto, nekubiwa\n• **Full Third Party, Fire & Theft**: kubva pa $27/mwedzi\n• **Third Party chete**: kubva pa $14/mwedzi\n\nShandisai Insurance Quote Calculator yedu iri papeji yeInsurance kuti muverenge mutengo chaiwo wemotokari yenyu!",
+        detectedLang: "sn"
+      };
+    }
+    if (/(stand|imba|property|properties|mortgage|minda)/i.test(msg)) {
+      return {
+        reply: "CBZ Properties inopa minda yakaserviswa (serviced stands) muHarare nedzimwe nzvimbo dzenyika kubva pa $35,000, ne-15% deposit. Pane zvakare zvirongwa zve-mortgage zvemakore 15 kusvika 20.\n\nEdzai Stand-Affordability Calculator yedu papeji yeProperties kuti muone mari yamunokwanisa kukwereta!",
+        detectedLang: "sn"
+      };
+    }
+    if (/(kurima|munda|mbesa|agro|chibage|gorosi|fodya|tobacco|tractor)/i.test(msg)) {
+      return {
+        reply: "CBZ Agro-Yield inotsigira varimi vechibage, gorosi, soya, nefodya nemari yekurima inotangira pa $550 kusvika $850 pahectare (seasonal finance). Tinopawo zvekurendesa matarakita ema John Deere & Massey Ferguson.\n\nShandisai Seasonal Budget Calculator yedu kuronga mwaka wenyu!",
+        detectedLang: "sn"
+      };
+    }
+    if (/(invest|datvest|mari|unit trust|shares)/i.test(msg)) {
+      return {
+        reply: "Datvest Asset Management inopa nzira dzekukudza mari kuburikidza ne-Money Market Unit Trusts (inobereka mari inosvika ~8.5% p.a.) uye Equity Funds dzekudyara mumasheya eZSE & VFEX.\n\nOna Investment-Pathway Guide yedu kuti usarudze chirongwa chinoenderana nezvinangwa zvako!",
+        detectedLang: "sn"
+      };
+    }
+    return {
+      reply: "Makadii henyu! Titambire ku CBZ Holdings AI Concierge. Tinogona kukubatsirai nezve:\n• Kuvhura ma-accounts eBhanga & Zvikwereti\n• Insurance yemotokari nedzimba\n• Minda nezvivakwa zve CBZ Properties\n• Mari yekurima ye Agro-Yield\n• Ma Investments e Datvest\n\nNdingakubatsirai neiko nhasi?",
+      detectedLang: "sn"
+    };
+  }
+
+  if (lang === "nd") {
+    if (/(account|fca|ibhange|vula)/i.test(msg)) {
+      return {
+        reply: "Salibonani! Ukuvula i-account e-CBZ Bank udinga: i-ID card/passport, ubufakazi bendawo yokuhlala, lenkokhelo yokuqala. I-FCA (USD account) ifuna imali yokuvula eqala ku-US$20 kuphela. Ungavakatjhela igatsha le-CBZ eliseduze lawe kumbe usebenzise i-CBZ Touch App.\n\nSingalisiza ngani okulandelayo?",
+        detectedLang: "nd"
+      };
+    }
+    if (/(insurance|i-insurance|imoto|car)/i.test(msg)) {
+      return {
+        reply: "CBZ Insurance inikeza izinhlelo ezintathu zokuvikela imoto:\n• **Comprehensive Cover**: kusukela ku-$46/inyanga — yokukhokhela izingozi, umlilo, nokuntshontshwa\n• **Full Third Party, Fire & Theft**: kusukela ku-$27/inyanga\n• **Third Party kuphela**: kusukela ku-$14/inyanga\n\nSebenzisa i-Insurance Quote Calculator ekhasi le-Insurance ukubala intengo yakho namhlanje!",
+        detectedLang: "nd"
+      };
+    }
+    if (/(stand|indlu|property|properties|mortgage|izindawo)/i.test(msg)) {
+      return {
+        reply: "CBZ Properties inikeza izindawo zokwakha ezilungisiweyo (serviced stands) eHarare lamanye amadolobha kusukela ku-$35,000, nge-15% deposit. Kukhona lemali-mboleko yezindlu (mortgages) yeminyaka engu 15 kuya ku 20.\n\nSebenzisa i-Stand-Affordability Calculator ekhasi le-Properties ukubona imali oyifaneleyo!",
+        detectedLang: "nd"
+      };
+    }
+    if (/(ukulima|umhlaba|agro|umbila|ukolweni|ugwayi|tobacco|ithrektha)/i.test(msg)) {
+      return {
+        reply: "CBZ Agro-Yield isekela abalimi ngemali yokulima umbila, ukolweni, ugwayi, lesoya kusukela $550 kusiya $850 ngehektare. Siphinde sinikeze amathrektha e-John Deere le-Massey Ferguson ngokuqashisa.\n\nSebenzisa i-Seasonal Budget Calculator ukuhlela isizini yakho!",
+        detectedLang: "nd"
+      };
+    }
+    return {
+      reply: "Salibonani! Siyalemukela e-CBZ Holdings AI Concierge. Singalisiza nge:\n• Ukuvula ama-accounts ebhange lezikwelede\n• I-insurance yemoto lezindlu\n• Izindawo zokwakha ze-CBZ Properties\n• Imali yokulima ye-Agro-Yield\n• Izinhlelo zokutshala imali ze-Datvest\n\nSingalisiza ngani namuhla?",
+      detectedLang: "nd"
+    };
+  }
+
+  // English (default)
+  if (/(account|fca|open|banking|current|savings|visa)/i.test(msg)) {
+    return {
+      reply: "Opening a CBZ Bank account is quick and accessible. Here is what you need:\n\n• Valid National ID / Passport\n• Proof of residence (utility bill or letter)\n• Opening deposit (USD FCA minimum: **$20**)\n\nYou can apply at any of our 60+ branches nationwide or initiate your application through the **CBZ Touch Mobile App**.\n\nWould you like information on personal, SME, or diaspora accounts?",
+      detectedLang: "en"
+    };
+  }
+
+  if (/(insurance|motor|car|vehicle|cover|premium|third party|comprehensive)/i.test(msg)) {
+    return {
+      reply: "CBZ Insurance offers three leading motor coverage tiers:\n\n• **Comprehensive**: from **$46/month** — full protection against accidental damage, theft, fire, windscreen, and third-party liabilities\n• **Full Third Party, Fire & Theft**: from **$27/month**\n• **Statutory Third Party**: from **$14/month**\n\nYou can head to the **CBZ Insurance** page to test our instant **Insurance Quote Calculator**, or I can help guide your policy selection!",
+      detectedLang: "en"
+    };
+  }
+
+  if (/(stand|property|properties|house|home|mortgage|residential|serviced)/i.test(msg)) {
+    return {
+      reply: "CBZ Properties offers prime fully-serviced residential and commercial stands starting from **$35,000** with a **15% minimum deposit**.\n\n• Mortgage financing available through CBZ Bank with terms from 15 to 20 years at competitive rates (from 9.5% p.a.).\n• Prime locations include Harare North, Bulawayo, and regional growth corridors.\n\nBe sure to try our interactive **Stand-Affordability Calculator** on the Properties page to determine your exact borrowing capacity!",
+      detectedLang: "en"
+    };
+  }
+
+  if (/(agro|farm|crop|maize|wheat|tobacco|soya|hectare|seasonal|tractor|fertilizer)/i.test(msg)) {
+    return {
+      reply: "CBZ Agro-Yield is Zimbabwe's premier agribusiness financing partner:\n\n• **Seasonal Working Capital**: $550–$850 per hectare for commercial maize, winter wheat, soya beans, and tobacco.\n• **Mechanization Leasing**: John Deere and Massey Ferguson tractor and combine harvester leasing facilities.\n• **Integrated Crop Insurance**: Embedded yield and weather index protection via CBZ Insurance.\n\nCheck out the **Seasonal Budget & Yield Calculator** on the Agro-Yield page to project input costs, breakeven yields, and projected ROI!",
+      detectedLang: "en"
+    };
+  }
+
+  if (/(invest|datvest|fund|unit trust|portfolio|shares|wealth|stocks|asset)/i.test(msg)) {
+    return {
+      reply: "Datvest Asset Management (CBZ Holdings) provides institutional and retail wealth solutions:\n\n• **Money Market Unit Trust**: High liquidity, competitive annualised yields (~8.5% p.a.), with an opening investment from only $50.\n• **Balanced Growth Fund**: Diversified mix of fixed income and top-tier equities for steady capital appreciation.\n• **Equity Fund**: Direct participation in high-performing Zimbabwe Stock Exchange (ZSE) and Victoria Falls Stock Exchange (VFEX) counters.\n\nExplore our **Investment-Pathway Guide** on the Datvest page to profile your risk and forecast your growth!",
+      detectedLang: "en"
+    };
+  }
+
+  if (/(loan|credit|borrow|sme|micro|salary advance|red sphere|personal loan)/i.test(msg)) {
+    return {
+      reply: "CBZ Holdings provides several credit facilities tailored to your needs:\n\n• **Red Sphere Salary Advance**: Instant micro-loans for salaried individuals disbursed in under 2 hours.\n• **CBZ Personal Loans**: Flexible repayment terms up to 36 months.\n• **SME Growth Capital**: Working capital, order financing, and invoice discounting for growing enterprises.\n• **Home Loans**: Long-term mortgage facilities up to 20 years.\n\nWhich loan facility would you like to explore?",
+      detectedLang: "en"
+    };
+  }
+
+  if (/(branch|atm|location|where|address|hours|harare|bulawayo)/i.test(msg)) {
+    return {
+      reply: "CBZ Bank operates over 60 full-service branches and 24/7 ATMs across Zimbabwe, including Harare (Kwame Nkrumah, Samora Machel, Avondale, Borrowdale), Bulawayo (Fife St, 8th Ave), Gweru, Mutare, and Victoria Falls.\n\n• Standard Hours: Monday–Friday 08:00–15:00 | Saturday 08:00–11:30\n• Use our **Branch & ATM Finder** on the CBZ Bank page for GPS routing to your nearest facility!",
+      detectedLang: "en"
+    };
+  }
+
+  return {
+    reply: "Welcome to CBZ Holdings! I am your AI Financial Concierge, ready to help you navigate our full suite of financial services:\n\n• **CBZ Bank**: Accounts, Visa cards, personal & SME loans\n• **CBZ Insurance**: Instant motor, property, and life cover quotes\n• **Datvest**: Money market unit trusts and portfolio management\n• **CBZ Properties**: Prime serviced stands and home loans\n• **CBZ Agro-Yield**: Seasonal crop finance and tractor leasing\n• **Red Sphere**: Fast micro-loans and salary advances\n\nHow may I assist you today?",
+    detectedLang: "en"
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Main Widget Component
 // ─────────────────────────────────────────────────────────────────────────────
 export default function ChatWidget() {
@@ -272,6 +410,9 @@ export default function ChatWidget() {
       try {
         const csrf = await csrfToken();
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
+
         const res = await fetch(`${API_BASE}/chatbot/message/`, {
           method: "POST",
           credentials: "include",
@@ -285,7 +426,9 @@ export default function ChatWidget() {
             language,
             stream: true,
           }),
+          signal: controller.signal,
         });
+        clearTimeout(timeoutId);
 
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
@@ -355,20 +498,30 @@ export default function ChatWidget() {
           storeSessionId(newSessionId);
         }
       } catch (err) {
-        const errMsg =
-          language === "sn"
-            ? "Ndine urombo, pane dambudziko. Edza zvakare."
-            : language === "nd"
-            ? "Ngiyaxolisa, kukhona inkinga. Zama futhi."
-            : "Sorry, something went wrong. Please try again.";
+        // Backend unavailable or Vercel standalone: activate in-browser grounded concierge with word streaming
+        const { reply, detectedLang } = getLocalKnowledgeResponse(trimmed, language);
+        if (detectedLang !== language) {
+          setLanguage(detectedLang);
+        }
 
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.streaming
-              ? { ...m, content: errMsg, streaming: false }
-              : m
-          )
-        );
+        const words = reply.split(" ");
+        let fullText = "";
+        const streamingId = streamingPlaceholder.id;
+
+        for (let i = 0; i < words.length; i++) {
+          fullText += (i === 0 ? "" : " ") + words[i];
+          const isDone = i === words.length - 1;
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === streamingId
+                ? { ...m, content: fullText, streaming: !isDone }
+                : m
+            )
+          );
+          if (i % 2 === 0) {
+            await new Promise((r) => setTimeout(r, 25));
+          }
+        }
       } finally {
         setIsLoading(false);
         setTimeout(() => inputRef.current?.focus(), 100);

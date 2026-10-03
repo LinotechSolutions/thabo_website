@@ -26,7 +26,16 @@ if not SECRET_KEY:
     SECRET_KEY = "django-insecure-dev-fallback-key-cbz-development-only-39f82d1c"
 
 ALLOWED_HOSTS = env.list(
-    "DJANGO_ALLOWED_HOSTS", default=["localhost", "127.0.0.1", "0.0.0.0"]
+    "DJANGO_ALLOWED_HOSTS",
+    default=[
+        "localhost",
+        "127.0.0.1",
+        "0.0.0.0",
+        "testserver",
+        ".railway.app",
+        ".vercel.app",
+        "*",
+    ],
 )
 
 # Application definition
@@ -142,6 +151,12 @@ CORS_ALLOWED_ORIGINS = env.list(
         "http://127.0.0.1:5173",
     ],
 )
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https:\/\/.*\.vercel\.app$",
+    r"^https:\/\/.*\.up\.railway\.app$",
+    r"^http:\/\/localhost:\d+$",
+    r"^http:\/\/127\.0\.0\.1:\d+$",
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     "accept",
@@ -162,6 +177,8 @@ CSRF_TRUSTED_ORIGINS = env.list(
         "http://127.0.0.1:3000",
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://*.vercel.app",
+        "https://*.up.railway.app",
     ],
 )
 CSRF_COOKIE_HTTPONLY = False  # Client reads CSRF cookie to provide in X-CSRFToken header
