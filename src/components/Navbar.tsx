@@ -12,7 +12,9 @@ import {
   CreditCard,
   Briefcase,
   TrendingUp,
-  FileText
+  FileText,
+  UserPlus,
+  PhoneCall
 } from 'lucide-react';
 import { CbzLogo } from './CbzLogo';
 import { ScreenType, Subsidiary } from '../types';
@@ -22,6 +24,8 @@ interface NavbarProps {
   currentScreen: ScreenType;
   onNavigate: (screen: ScreenType) => void;
   onOpenLogin: (portal?: 'personal' | 'corporate' | 'self-service') => void;
+  onOpenAccount?: () => void;
+  onOpenContact?: () => void;
   entityName?: string;
 }
 
@@ -29,6 +33,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentScreen,
   onNavigate,
   onOpenLogin,
+  onOpenAccount,
+  onOpenContact,
   entityName = 'Holdings'
 }) => {
   const [activeMega, setActiveMega] = useState<string | null>(null);
@@ -154,6 +160,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Smartphone className="w-3.5 h-3.5 text-[#E4002B]" />
               <span>CBZ Touch</span>
             </button>
+
+            {/* Open Account Primary CTA */}
+            {onOpenAccount && (
+              <button
+                onClick={onOpenAccount}
+                className="hidden md:inline-flex items-center space-x-1.5 bg-[#002554] hover:bg-[#0A3E80] text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-xs cursor-pointer border border-[#002554]"
+              >
+                <UserPlus className="w-3.5 h-3.5 text-red-400" />
+                <span>Open Account</span>
+              </button>
+            )}
 
             {/* Split Log In Button */}
             <div className="relative inline-flex shadow-sm rounded-full" ref={authMenuRef}>
@@ -1161,6 +1178,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="pt-3 border-t border-slate-100 flex flex-col space-y-2">
+            {onOpenAccount && (
+              <button
+                onClick={() => {
+                  onOpenAccount();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full py-2.5 bg-[#002554] text-white text-xs font-bold rounded-lg text-center cursor-pointer flex items-center justify-center space-x-2"
+              >
+                <UserPlus className="w-3.5 h-3.5 text-red-400" />
+                <span>Open an Account</span>
+              </button>
+            )}
             <button
               onClick={() => {
                 onOpenLogin();
@@ -1170,6 +1199,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               Log In to Online Banking
             </button>
+            {onOpenContact && (
+              <button
+                onClick={() => {
+                  onOpenContact();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full py-2 border border-slate-300 text-slate-700 text-xs font-bold rounded-lg text-center cursor-pointer flex items-center justify-center space-x-2"
+              >
+                <PhoneCall className="w-3.5 h-3.5 text-[#E4002B]" />
+                <span>Contact Channels & Toll-Free 460</span>
+              </button>
+            )}
           </div>
         </div>
       )}

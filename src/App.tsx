@@ -3,7 +3,9 @@ import { ScreenType, Country } from './types';
 import { COUNTRIES } from './data/cbzData';
 import { TopUtilityBar } from './components/TopUtilityBar';
 import { Navbar } from './components/Navbar';
+import { AnnouncementsBar } from './components/AnnouncementsBar';
 import { HeroSection } from './components/HeroSection';
+import { AnnouncementsSection } from './components/AnnouncementsSection';
 import { LifeStageSection } from './components/LifeStageSection';
 import { EcosystemGrid } from './components/EcosystemGrid';
 import { SolutionsSection } from './components/SolutionsSection';
@@ -17,6 +19,8 @@ import { SbuInvestmentsView } from './components/SbuInvestmentsView';
 import { SbuPropertiesView } from './components/SbuPropertiesView';
 import { SbuBankingView } from './components/SbuBankingView';
 import { LoginModal, PortalType } from './components/LoginModal';
+import { OpenAccountModal } from './components/OpenAccountModal';
+import { ContactChannelsModal } from './components/ContactChannelsModal';
 import { Footer } from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 
@@ -25,6 +29,8 @@ export default function App() {
   const [currentCountry, setCurrentCountry] = useState<Country>(COUNTRIES[0]);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [loginPortal, setLoginPortal] = useState<PortalType>('personal');
+  const [isOpenAccountOpen, setIsOpenAccountOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Scroll to top on screen change
   useEffect(() => {
@@ -34,7 +40,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">
 
-      {/* Top Utility Bar */}
+      {/* Top Utility Bar (Rotating Indicative FX, Toll-Free, WhatsApp, Channels Trigger) */}
       <TopUtilityBar
         currentCountry={currentCountry}
         onSelectCountry={setCurrentCountry}
@@ -54,9 +60,10 @@ export default function App() {
             : undefined
         }
         onGoHome={() => setCurrentScreen('home')}
+        onOpenContact={() => setIsContactModalOpen(true)}
       />
 
-      {/* Main Navigation Bar */}
+      {/* Main Navigation Bar (With Prominent Open Account button) */}
       <Navbar
         currentScreen={currentScreen}
         onNavigate={setCurrentScreen}
@@ -64,6 +71,8 @@ export default function App() {
           if (portal) setLoginPortal(portal);
           setIsLoginOpen(true);
         }}
+        onOpenAccount={() => setIsOpenAccountOpen(true)}
+        onOpenContact={() => setIsContactModalOpen(true)}
         entityName={
           currentScreen === 'bank'
             ? 'Bank'
@@ -85,12 +94,42 @@ export default function App() {
       <main className="flex-grow">
         {currentScreen === 'home' && (
           <div>
-            <HeroSection country={currentCountry} onNavigate={setCurrentScreen} />
+            {/* Urgent Corporate Notice Ticker */}
+            <AnnouncementsBar
+              onOpenAll={() => {
+                const el = document.getElementById('announcements-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+            />
+
+            {/* Clean Authoritative Hero (No AI gradients, no AI pills, Open Account CTA) */}
+            <HeroSection
+              country={currentCountry}
+              onNavigate={setCurrentScreen}
+              onOpenAccount={() => setIsOpenAccountOpen(true)}
+              onOpenContact={() => setIsContactModalOpen(true)}
+            />
+
+            {/* Dedicated Announcements & Press Room Section */}
+            <AnnouncementsSection />
+
+            {/* Life Stage Framework */}
             <LifeStageSection onNavigate={setCurrentScreen} />
+
+            {/* Group Subsidiaries (Showcasing Official Logos instead of card repetition) */}
             <EcosystemGrid onNavigate={setCurrentScreen} />
+
+            {/* Solutions Section */}
             <SolutionsSection onNavigate={setCurrentScreen} />
+
+            {/* Ziki Bill Payments */}
             <BillPaymentSection country={currentCountry} />
-            <NewsAndSupport country={currentCountry} />
+
+            {/* Omnichannel Support & Contact Directory */}
+            <NewsAndSupport
+              country={currentCountry}
+              onOpenContact={() => setIsContactModalOpen(true)}
+            />
           </div>
         )}
 
@@ -123,10 +162,12 @@ export default function App() {
         )}
       </main>
 
-      {/* Persistent Comprehensive Footer */}
+      {/* Persistent Comprehensive Footer (With Verified Social Media & Toll-Free Links) */}
       <Footer
         country={currentCountry}
         onNavigate={setCurrentScreen}
+        onOpenAccount={() => setIsOpenAccountOpen(true)}
+        onOpenContact={() => setIsContactModalOpen(true)}
         activeEntity={
           currentScreen === 'bank'
             ? 'Bank'
@@ -148,6 +189,19 @@ export default function App() {
         onClose={() => setIsLoginOpen(false)}
         onNavigate={setCurrentScreen}
         initialPortal={loginPortal}
+      />
+
+      {/* Interactive Open Account Modal */}
+      <OpenAccountModal
+        isOpen={isOpenAccountOpen}
+        onClose={() => setIsOpenAccountOpen(false)}
+        onNavigate={setCurrentScreen}
+      />
+
+      {/* Interactive All Contact Channels Modal */}
+      <ContactChannelsModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
 
       {/* Full-site AI Concierge — persists across all screen changes */}

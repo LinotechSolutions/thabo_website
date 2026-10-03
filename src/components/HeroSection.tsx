@@ -7,7 +7,12 @@ import {
   ChevronDown,
   Sparkles,
   Smartphone,
-  Compass
+  PhoneCall,
+  UserPlus,
+  Compass,
+  Lock,
+  Search,
+  CreditCard
 } from 'lucide-react';
 import { ScreenType, Country } from '../types';
 import { GOALS } from '../data/cbzData';
@@ -15,9 +20,16 @@ import { GOALS } from '../data/cbzData';
 interface HeroSectionProps {
   country: Country;
   onNavigate: (screen: ScreenType) => void;
+  onOpenAccount?: () => void;
+  onOpenContact?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  country,
+  onNavigate,
+  onOpenAccount,
+  onOpenContact
+}) => {
   const [goalText, setGoalText] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,7 +48,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate })
     g.label.toLowerCase().includes(goalText.toLowerCase())
   );
 
-  // H-01: Selection only populates input & closes dropdown. User must click "Show Me How" to navigate.
   const handleSelectGoal = (goal: typeof GOALS[0]) => {
     setGoalText(goal.label);
     setIsOpen(false);
@@ -54,26 +65,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate })
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 pt-10 pb-20 border-b border-slate-200">
-      {/* Background Decorative Graphic Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00255408_1px,transparent_1px),linear-gradient(to_bottom,#00255408_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+    <section className="bg-white border-b border-slate-200">
+      {/* Top Accent Institutional Strip */}
+      <div className="h-1 bg-gradient-to-r from-[#002554] via-[#E4002B] to-[#002554]" />
 
-      {/* Decorative Red & Navy Glow Accents */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-red-100/60 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 -right-32 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Hero Left Content */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200/60 text-[#E4002B]">
-              <span className="w-2 h-2 rounded-full bg-[#E4002B] animate-pulse" />
-              <span className="text-xs font-bold tracking-wide uppercase">
-                Unified Financial Services Ecosystem
-              </span>
+            {/* Authoritative Corporate Eyebrow (No generic AI pill with pulse dot) */}
+            <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-[#002554]">
+              <span className="w-1.5 h-4 bg-[#E4002B] rounded-xs inline-block" />
+              <span>CBZ Holdings Limited · Listed on the Zimbabwe Stock Exchange</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#002554] leading-[1.1]">
+            {/* Dominant Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#002554] leading-[1.08]">
               One Group.{' '}
               <span className="text-[#E4002B] block sm:inline">
                 Every Financial Possibility.
@@ -81,102 +88,135 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate })
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
-              Banking, insurance, investments, property development, and agri-finance — nine interconnected institutions unified into a seamless, modern experience.
+              Commercial banking, insurance, asset management, property development, and agri-finance — nine synergised institutions powering your financial journey under one trusted balance sheet.
             </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            {/* Action Buttons: Prioritizing "Open an Account" (the primary customer goal) */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              {onOpenAccount && (
+                <button
+                  onClick={onOpenAccount}
+                  className="px-6 py-3.5 bg-[#E4002B] hover:bg-[#C50025] text-white text-sm font-bold rounded-xl shadow-md transition-all duration-150 transform hover:-translate-y-0.5 flex items-center space-x-2 cursor-pointer"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  <span>Open an Account</span>
+                </button>
+              )}
+
               <button
                 onClick={() => onNavigate('group')}
-                className="px-6 py-3.5 bg-[#E4002B] hover:bg-[#C50025] text-white text-sm font-bold rounded-xl shadow-md cbz-shadow-red transition-all duration-200 transform hover:-translate-y-0.5 flex items-center space-x-2 cursor-pointer"
+                className="px-6 py-3.5 bg-[#002554] hover:bg-[#0A3E80] text-white text-sm font-bold rounded-xl shadow-sm transition-all duration-150 flex items-center space-x-2 cursor-pointer"
               >
-                <span>Explore the Group</span>
+                <span>Explore the 9 Businesses</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              {/* H-04: Neutral CTA promoting all 9 businesses */}
-              <button
-                onClick={() => onNavigate('group')}
-                className="px-6 py-3.5 bg-white hover:bg-slate-50 text-[#002554] text-sm font-bold rounded-xl border border-slate-300 shadow-xs transition-all duration-200 flex items-center space-x-2 cursor-pointer"
-              >
-                <span>Explore All 9 Businesses</span>
-              </button>
+              {onOpenContact && (
+                <button
+                  onClick={onOpenContact}
+                  className="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-all duration-150 flex items-center space-x-2 cursor-pointer"
+                >
+                  <PhoneCall className="w-4 h-4 text-[#E4002B]" />
+                  <span>Toll-Free 460 / 461</span>
+                </button>
+              )}
             </div>
 
-            {/* Credibility Badges */}
-            <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-6 text-xs text-slate-600">
+            {/* Credibility Institutional Badges */}
+            <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center gap-6 text-xs text-slate-600">
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-[#E4002B]" />
-                <span className="font-semibold">
+                <span>
                   <strong>46 Years</strong> of Market Leadership
                 </span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-[#002554]" />
-                <span className="font-semibold">
+                <span>
                   <strong>ZSE: CBZ</strong> Listed Since 1998
                 </span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span className="font-semibold">
+                <span>
                   <strong>9 Synergised</strong> Business Units
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Hero Right Visual: Elegant Light Card with Photo */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl overflow-hidden bg-white p-3 border border-slate-200 shadow-xl">
-              <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-slate-100">
-                {/* C-04: Local image asset replacing Unsplash URL */}
+          {/* Hero Right Visual: Authentic Corporate Showcase (De-cardified) */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-md">
+              <div className="relative aspect-[16/10] bg-slate-200 overflow-hidden">
                 <img
                   src="/images/cbz-banking-branch.jpg"
                   alt="CBZ Bank Headquarters & Branches"
-                  className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/images/cbz-banking.png';
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#001736]/70 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="px-2 py-0.5 rounded bg-[#E4002B] text-xs font-bold uppercase tracking-wider">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#001736]/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4 text-white">
+                  <span className="px-2 py-0.5 rounded bg-[#E4002B] text-[10px] font-bold uppercase tracking-wider">
                     CBZ Towers · Harare
                   </span>
                   <p className="text-sm font-bold mt-1 text-white/95">
-                    Centralizing Capital, Powering African Growth
+                    Centralising Capital · Powering Sustainable Growth
                   </p>
                 </div>
               </div>
 
-              {/* Floating Quick Card - N-01: Descriptive CTA */}
-              <div className="mt-3 p-3 bg-slate-50 rounded-xl border border-slate-200/70 flex items-center justify-between text-xs">
-                <div className="flex items-center space-x-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#E4002B]/10 text-[#E4002B] flex items-center justify-center font-bold">
-                    <Sparkles className="w-4 h-4" />
+              {/* Fast Action Row: Answering customer intent immediately */}
+              <div className="p-4 grid grid-cols-2 gap-2 text-xs divide-x divide-slate-200">
+                <div className="pr-3">
+                  <div className="font-bold text-[#002554] flex items-center space-x-1.5">
+                    <UserPlus className="w-3.5 h-3.5 text-[#E4002B]" />
+                    <span>New to CBZ?</span>
                   </div>
-                  <div>
-                    <div className="font-bold text-[#002554]">Unified Customer ID</div>
-                    <div className="text-xs text-slate-500">Sign in once for all 9 businesses</div>
-                  </div>
+                  <p className="text-[11px] text-slate-500 mt-0.5">
+                    Open SmartCash or Nostro FCA with zero ledger fees.
+                  </p>
+                  {onOpenAccount && (
+                    <button
+                      onClick={onOpenAccount}
+                      className="mt-2 text-xs font-bold text-[#E4002B] hover:underline flex items-center space-x-1 cursor-pointer"
+                    >
+                      <span>Open in 3 steps</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  )}
                 </div>
-                <button
-                  onClick={() => onNavigate('group')}
-                  className="px-3 py-1.5 bg-[#002554] text-white rounded-lg font-bold text-xs hover:bg-[#0A3E80] transition-colors cursor-pointer"
-                >
-                  Explore Connected ID
-                </button>
+
+                <div className="pl-3">
+                  <div className="font-bold text-[#002554] flex items-center space-x-1.5">
+                    <PhoneCall className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Need Immediate Help?</span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-0.5">
+                    Toll-free 460 or WhatsApp +263 774 460 460 available 24/7.
+                  </p>
+                  {onOpenContact && (
+                    <button
+                      onClick={onOpenContact}
+                      className="mt-2 text-xs font-bold text-[#002554] hover:underline flex items-center space-x-1 cursor-pointer"
+                    >
+                      <span>All 7 Channels</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Interactive Goal Picker (I want to...) Panel */}
-        <div className="mt-12 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-lg relative z-20">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-100">
+        {/* Integrated Financial Services Gateway ("I want to...") */}
+        <div className="mt-12 bg-slate-50 rounded-2xl p-6 sm:p-7 border border-slate-200">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-5 border-b border-slate-200">
             <div className="flex-shrink-0">
-              <span className="text-xs font-extrabold uppercase tracking-widest text-[#E4002B] block">
+              <span className="text-xs font-black uppercase tracking-wider text-[#E4002B] block">
                 How Can We Help You Today?
               </span>
               <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-[#002554] mt-0.5">
@@ -201,8 +241,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate })
                       handleShowMeHow();
                     }
                   }}
-                  placeholder="e.g. Open a savings account, insure my vehicle, invest with Datvest..."
-                  className="w-full pl-4 pr-10 py-3.5 bg-slate-50 rounded-xl text-sm font-medium border border-slate-200 focus:outline-none focus:border-[#002554] focus:bg-white text-slate-800 placeholder-slate-400 transition-all shadow-2xs"
+                  placeholder="e.g. Open an account, insure my car, apply for mortgage, invest with Datvest..."
+                  className="w-full pl-4 pr-10 py-3 bg-white rounded-xl text-sm font-medium border border-slate-300 focus:outline-none focus:border-[#002554] text-slate-800 placeholder-slate-400 transition-all shadow-2xs"
                 />
                 <button
                   onClick={() => setIsOpen(!isOpen)}
@@ -259,41 +299,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate })
             {/* Main Action Trigger */}
             <button
               onClick={handleShowMeHow}
-              className="px-6 py-3.5 bg-[#002554] hover:bg-[#0A3E80] text-white text-sm font-bold rounded-xl shadow-sm transition-all duration-150 flex items-center justify-center space-x-2 cursor-pointer flex-shrink-0"
+              className="px-6 py-3 bg-[#002554] hover:bg-[#0A3E80] text-white text-sm font-bold rounded-xl shadow-xs transition-all duration-150 flex items-center justify-center space-x-2 cursor-pointer flex-shrink-0"
             >
               <span>Show Me How</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Quick Shortcuts Bar - H-07 & N-03: Consistent button navigation */}
+          {/* Quick Shortcuts Bar */}
           <div className="pt-4 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">
-              Popular Shortcuts:
+            <span className="text-slate-500 font-bold uppercase tracking-wider text-[11px]">
+              Direct Shortcuts:
             </span>
             <div className="flex flex-wrap items-center gap-2">
+              {onOpenAccount && (
+                <button
+                  type="button"
+                  onClick={onOpenAccount}
+                  className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#E4002B] hover:text-[#E4002B] text-slate-800 font-bold transition-colors flex items-center space-x-1.5 cursor-pointer shadow-2xs"
+                >
+                  <UserPlus className="w-3.5 h-3.5 text-[#E4002B]" />
+                  <span>Open SmartCash / Nostro</span>
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => onNavigate('journey')}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-red-50 hover:text-[#E4002B] text-slate-700 font-semibold transition-colors flex items-center space-x-1 cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#002554] text-slate-800 font-semibold transition-colors flex items-center space-x-1 cursor-pointer shadow-2xs"
               >
                 <span>Insure Car / Property</span>
-                <span className="text-xs bg-red-500 text-white px-1.5 py-0.2 rounded-full font-bold">Flow</span>
+                <span className="text-[10px] bg-red-500 text-white px-1.5 py-0.2 rounded font-bold">Fast Quote</span>
               </button>
               <button
                 type="button"
                 onClick={() => onNavigate('group')}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-[#002554] text-slate-700 font-semibold transition-colors flex items-center space-x-1 cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#002554] text-slate-800 font-semibold transition-colors flex items-center space-x-1 cursor-pointer shadow-2xs"
               >
-                <span>Buy a Home (Connected Flow)</span>
-                <span className="text-xs bg-blue-600 text-white px-1.5 py-0.2 rounded-full font-bold">New</span>
+                <span>Buy a Home (4-SBU Flow)</span>
               </button>
               <button
                 type="button"
-                onClick={() => onNavigate('sbu')}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-colors cursor-pointer"
+                onClick={() => onNavigate('invest')}
+                className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#002554] text-slate-800 font-semibold transition-colors cursor-pointer shadow-2xs"
               >
-                CBZ Insurance SBU
+                Invest with Datvest
               </button>
               <button
                 type="button"
@@ -301,7 +350,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate })
                   const el = document.getElementById('bill-payments');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#002554] text-slate-800 font-semibold transition-colors cursor-pointer shadow-2xs"
               >
                 Pay Bills via Ziki
               </button>
@@ -309,6 +358,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, onNavigate })
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

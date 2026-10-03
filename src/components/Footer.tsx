@@ -1,19 +1,95 @@
 import React from 'react';
+import {
+  PhoneCall,
+  MessageSquare,
+  Mail,
+  MapPin,
+  ExternalLink,
+  ShieldCheck,
+  UserPlus
+} from 'lucide-react';
 import { CbzLogo } from './CbzLogo';
 import { Country, ScreenType } from '../types';
 import { SUBSIDIARIES } from '../data/cbzData';
+import { SOCIAL_LINKS } from '../data/announcementsData';
 
 interface FooterProps {
   country: Country;
   onNavigate: (screen: ScreenType) => void;
+  onOpenAccount?: () => void;
+  onOpenContact?: () => void;
   activeEntity?: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ country, onNavigate, activeEntity }) => {
+export const Footer: React.FC<FooterProps> = ({
+  country,
+  onNavigate,
+  onOpenAccount,
+  onOpenContact,
+  activeEntity
+}) => {
   return (
     <footer className="bg-[#001736] text-white pt-16 pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Tier: Brand, Directory & Columns */}
+        {/* Top Tier: Multi-Channel Contact & Social Links Bar */}
+        <div className="pb-10 mb-10 border-b border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          {/* Contact Highlight: Toll Free & WhatsApp */}
+          <div className="flex flex-wrap items-center gap-6 text-xs">
+            <div className="flex items-center space-x-2.5">
+              <div className="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center font-bold">
+                <PhoneCall className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase font-bold text-slate-400">Toll-Free (All Networks)</div>
+                <div className="font-mono text-sm font-bold text-white">460 / 461</div>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2.5">
+              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                <MessageSquare className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase font-bold text-slate-400">WhatsApp Assistant</div>
+                <div className="font-mono text-sm font-bold text-white">+263 774 460 460</div>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2.5">
+              <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+                <Mail className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase font-bold text-slate-400">Client Support Email</div>
+                <div className="text-xs font-bold text-white">contactcentre@cbz.co.zw</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Media Links (Verified Official Channels) */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+              Follow CBZ Holdings:
+            </span>
+            <div className="flex items-center space-x-2">
+              {SOCIAL_LINKS.map((s, idx) => (
+                <a
+                  key={idx}
+                  href={s.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={`${s.name} (${s.handle})`}
+                  className="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors flex items-center space-x-1"
+                >
+                  <span>{s.name}</span>
+                  <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Directory Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
           {/* Brand Intro */}
           <div className="lg:col-span-1 space-y-4">
@@ -30,6 +106,18 @@ export const Footer: React.FC<FooterProps> = ({ country, onNavigate, activeEntit
               <div>5 Campbell Road, Pomona, Harare</div>
               <div>Tel: +263 24 2799 234-9 · 8677 004050</div>
             </div>
+
+            {onOpenAccount && (
+              <div className="pt-2">
+                <button
+                  onClick={onOpenAccount}
+                  className="px-4 py-2 bg-[#E4002B] hover:bg-[#C50025] text-white text-xs font-bold rounded-xl transition-colors inline-flex items-center space-x-1.5 cursor-pointer"
+                >
+                  <UserPlus className="w-3.5 h-3.5" />
+                  <span>Open an Account</span>
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Column 1: Group Subsidiaries */}
@@ -44,7 +132,7 @@ export const Footer: React.FC<FooterProps> = ({ country, onNavigate, activeEntit
                     onClick={() => {
                       if (sub.screen) onNavigate(sub.screen);
                     }}
-                    className="hover:text-white transition-colors text-left"
+                    className="hover:text-white transition-colors text-left cursor-pointer"
                   >
                     {sub.name}
                   </button>
@@ -59,14 +147,24 @@ export const Footer: React.FC<FooterProps> = ({ country, onNavigate, activeEntit
               Core Offerings
             </div>
             <ul className="space-y-1.5 text-xs text-slate-300">
-              <li><button onClick={() => onNavigate('bank')} className="hover:text-white">SmartCash & Everyday Accounts</button></li>
-              <li><button onClick={() => onNavigate('bank')} className="hover:text-white">Personal & Business Loans</button></li>
-              <li><button onClick={() => onNavigate('journey')} className="hover:text-white">Motor Vehicle Insurance</button></li>
-              <li><button onClick={() => onNavigate('sbu')} className="hover:text-white">Home & Contents Cover</button></li>
-              <li><button onClick={() => onNavigate('properties')} className="hover:text-white">Properties & Mortgages</button></li>
-              <li><button onClick={() => onNavigate('sbu')} className="hover:text-white">ComfortSure Funeral Plan</button></li>
-              <li><button onClick={() => onNavigate('invest')} className="hover:text-white">Datvest Money Market</button></li>
-              <li><button onClick={() => onNavigate('agro')} className="hover:text-white">Agro Input Financing</button></li>
+              {onOpenAccount && (
+                <li>
+                  <button
+                    onClick={onOpenAccount}
+                    className="text-red-400 hover:text-red-300 font-bold flex items-center space-x-1 cursor-pointer"
+                  >
+                    <span>✓ Open Bank Account in 3 Steps</span>
+                  </button>
+                </li>
+              )}
+              <li><button onClick={() => onNavigate('bank')} className="hover:text-white cursor-pointer">SmartCash & Everyday Accounts</button></li>
+              <li><button onClick={() => onNavigate('bank')} className="hover:text-white cursor-pointer">Personal & Business Loans</button></li>
+              <li><button onClick={() => onNavigate('journey')} className="hover:text-white cursor-pointer">Motor Vehicle Insurance</button></li>
+              <li><button onClick={() => onNavigate('sbu')} className="hover:text-white cursor-pointer">Home & Contents Cover</button></li>
+              <li><button onClick={() => onNavigate('properties')} className="hover:text-white cursor-pointer">Properties & Mortgages</button></li>
+              <li><button onClick={() => onNavigate('sbu')} className="hover:text-white cursor-pointer">ComfortSure Funeral Plan</button></li>
+              <li><button onClick={() => onNavigate('invest')} className="hover:text-white cursor-pointer">Datvest Money Market</button></li>
+              <li><button onClick={() => onNavigate('agro')} className="hover:text-white cursor-pointer">Agro Input Financing</button></li>
             </ul>
           </div>
 
@@ -79,6 +177,7 @@ export const Footer: React.FC<FooterProps> = ({ country, onNavigate, activeEntit
               <li><span className="hover:text-white cursor-pointer">CBZ Touch Mobile App</span></li>
               <li><span className="hover:text-white cursor-pointer">Internet Banking (Personal)</span></li>
               <li><span className="hover:text-white cursor-pointer">Corporate Internet Banking</span></li>
+              <li><span className="hover:text-white cursor-pointer">USSD Banking (*460#)</span></li>
               <li><span className="hover:text-white cursor-pointer">Ziki Marketplace</span></li>
               <li><span className="hover:text-white cursor-pointer">POP Payment Verification</span></li>
             </ul>
@@ -87,14 +186,26 @@ export const Footer: React.FC<FooterProps> = ({ country, onNavigate, activeEntit
           {/* Column 4: Governance & Legal */}
           <div>
             <div className="text-xs font-extrabold uppercase tracking-widest text-slate-300 mb-3">
-              Governance
+              Governance & Disclosures
             </div>
             <ul className="space-y-1.5 text-xs text-slate-300">
+              <li>
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('announcements-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="hover:text-white text-left cursor-pointer"
+                >
+                  Shareholder Circulars & Notices
+                </button>
+              </li>
+              <li><span className="hover:text-white cursor-pointer">Annual Reports Archive</span></li>
               <li><span className="hover:text-white cursor-pointer">Terms & Conditions</span></li>
               <li><span className="hover:text-white cursor-pointer">Privacy & Cookie Notice</span></li>
               <li><span className="hover:text-white cursor-pointer">Deposit Protection Scheme</span></li>
               <li><span className="hover:text-white cursor-pointer">Anti-Money Laundering Policy</span></li>
-              <li><span className="hover:text-white cursor-pointer">Zero Tolerance Whistleblowing</span></li>
+              <li><span className="hover:text-white cursor-pointer">Whistleblowing Hotline</span></li>
             </ul>
           </div>
         </div>

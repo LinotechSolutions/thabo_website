@@ -1,5 +1,5 @@
-import React from 'react';
-import { ArrowRight, Sparkles, Building2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, ChevronRight, ExternalLink, ShieldCheck, Building2, CheckCircle2 } from 'lucide-react';
 import { Subsidiary, ScreenType } from '../types';
 import { SUBSIDIARIES } from '../data/cbzData';
 import { CbzLogo } from './CbzLogo';
@@ -9,105 +9,257 @@ interface EcosystemGridProps {
 }
 
 export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
+  const [selectedSubId, setSelectedSubId] = useState<string>('bank');
+
+  const selectedSub =
+    SUBSIDIARIES.find((s) => s.id === selectedSubId) || SUBSIDIARIES[0];
+
+  // Helper to render official subsidiary logo badge
+  const renderSubsidiaryLogo = (sub: Subsidiary, size: 'sm' | 'md' | 'lg' = 'md') => {
+    if (sub.logo) {
+      const heightClass =
+        size === 'lg' ? 'h-10 sm:h-12' : size === 'md' ? 'h-7 sm:h-8' : 'h-6';
+      return (
+        <img
+          src={sub.logo}
+          alt={sub.name}
+          className={`${heightClass} w-auto max-w-[170px] object-contain mix-blend-multiply`}
+        />
+      );
+    }
+
+    // Official CBZ Brand identity for subsidiaries
+    return (
+      <CbzLogo
+        entity={sub.name.replace('CBZ ', '')}
+        size={size === 'lg' ? 36 : size === 'md' ? 28 : 22}
+        lightMode={true}
+      />
+    );
+  };
+
   return (
     <section className="py-16 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-slate-200">
           <div>
-            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-200/60 mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#E4002B]" />
-              <span className="text-xs font-bold text-[#E4002B] uppercase tracking-wider">
-                Integrated Financial Strength
-              </span>
+            <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-[#E4002B] mb-1.5">
+              <span className="w-1.5 h-3.5 bg-[#E4002B] rounded-xs inline-block" />
+              <span>Group Subsidiaries & Institutional Directory</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#002554]">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#002554]">
               Our Ecosystem.{' '}
               <span className="text-slate-500 font-semibold">
                 Stronger Together.
               </span>
             </h2>
+            <p className="text-sm text-slate-600 mt-1 max-w-2xl">
+              CBZ Holdings brings together nine market-leading financial institutions. Select any subsidiary below by its official brand logo to explore its specialized capabilities.
+            </p>
           </div>
+
           <button
             onClick={() => onNavigate('group')}
-            className="text-xs sm:text-sm font-bold text-[#E4002B] hover:text-[#C50025] flex items-center space-x-1 mt-4 md:mt-0 transition-colors"
+            className="text-xs sm:text-sm font-bold text-[#E4002B] hover:text-[#C50025] flex items-center space-x-1.5 mt-4 md:mt-0 transition-colors cursor-pointer"
           >
-            <span>See Cross-Entity Handover Journey</span>
+            <span>See Connected Group Journey</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
 
-        {/* 9 Subsidiaries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SUBSIDIARIES.map((sub) => (
-            <button
-              type="button"
-              key={sub.id}
-              onClick={() => {
-                if (sub.screen) onNavigate(sub.screen);
-              }}
-              className="text-left group relative bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-xl hover:border-slate-300 transition-all duration-200 overflow-hidden flex flex-col justify-between cursor-pointer transform hover:-translate-y-1 w-full focus:outline-none focus:ring-2 focus:ring-[#002554]"
-            >
-              {/* Image & Header Thumbnail */}
-              <div className="relative h-44 overflow-hidden bg-slate-100 w-full">
-                <img
-                  src={sub.image}
-                  alt={sub.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        {/* Subsidiary Logos Strip (Prominently showcasing official logos as requested) */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-xs mb-8">
+          <div className="text-xs font-black uppercase tracking-wider text-slate-400 mb-4">
+            Select Subsidiary by Official Brand Logo:
+          </div>
 
-                {/* Sub Category Badge */}
-                <div className="absolute top-3 left-3 flex items-center space-x-2">
-                  <span className="px-2.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-white/95 text-[#002554] shadow-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-3">
+            {SUBSIDIARIES.map((sub) => {
+              const isSelected = sub.id === selectedSubId;
+              return (
+                <button
+                  type="button"
+                  key={sub.id}
+                  onClick={() => setSelectedSubId(sub.id)}
+                  className={`p-3 rounded-xl border text-center flex flex-col items-center justify-center transition-all duration-150 cursor-pointer h-24 ${
+                    isSelected
+                      ? 'bg-blue-50/50 border-[#002554] ring-2 ring-[#002554]/10 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                  }`}
+                  title={sub.name}
+                >
+                  <div className="h-10 flex items-center justify-center">
+                    {renderSubsidiaryLogo(sub, 'sm')}
+                  </div>
+                  <span className="text-[10px] font-bold text-slate-700 mt-1 truncate max-w-full">
                     {sub.category}
                   </span>
-                  {sub.isCore && (
-                    <span className="px-2 py-0.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#E4002B] text-white">
-                      Core Bank
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Selected Subsidiary Spotlight (Clean editorial layout, not a repetitive card) */}
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+            {/* Visual Column */}
+            <div className="lg:col-span-5 relative bg-slate-900 min-h-[260px] lg:min-h-full">
+              <img
+                src={selectedSub.image}
+                alt={selectedSub.name}
+                className="w-full h-full object-cover opacity-80"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/images/cbz-banking.png';
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#001736] via-[#001736]/40 to-transparent" />
+
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#E4002B] text-white">
+                  {selectedSub.category} Division
+                </span>
+                <p className="text-base font-bold text-white mt-2 leading-snug">
+                  "{selectedSub.tagline}"
+                </p>
+              </div>
+            </div>
+
+            {/* Profile & Capabilities Column */}
+            <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+              <div>
+                {/* Official Logo Headline */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                  <div className="h-10 flex items-center">
+                    {renderSubsidiaryLogo(selectedSub, 'lg')}
+                  </div>
+                  {selectedSub.isCore && (
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#002554] text-white">
+                      Core Balance Sheet Flagship
                     </span>
                   )}
                 </div>
 
-                {/* Official Logo Badge */}
-                {sub.logo && (
-                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-xl shadow-md flex items-center h-8">
-                    <img
-                      src={sub.logo}
-                      alt={sub.name}
-                      className="h-5 w-auto object-contain mix-blend-multiply"
-                    />
-                  </div>
-                )}
-
-                {/* Tagline at bottom of image */}
-                <div className="absolute bottom-3 left-3 right-3 text-white text-xs font-semibold drop-shadow-sm">
-                  {sub.tagline}
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-5 flex-1 flex flex-col justify-between w-full">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-extrabold text-lg text-[#002554] group-hover:text-[#E4002B] transition-colors">
-                      {sub.name}
-                    </h3>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {sub.description}
+                <div className="mt-5 space-y-3">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#002554]">
+                    {selectedSub.name}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {selectedSub.description}
                   </p>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#002554] group-hover:text-[#E4002B] transition-colors">
-                    {sub.cta}
+                {/* Key Institutional Capabilities */}
+                <div className="mt-6 pt-5 border-t border-slate-100">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 block mb-2.5">
+                    Institutional Capabilities & Scope
                   </span>
-                  <div className="w-7 h-7 rounded-full bg-slate-100 group-hover:bg-[#E4002B] group-hover:text-white flex items-center justify-center text-slate-600 transition-all">
-                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span>Dedicated Underwriting & Execution Team</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span>Unified Single Customer ID Sign-In</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span>Full Regulatory Compliance & Reserve Audits</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span>Integrated with CBZ Touch & POS Network</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </button>
+
+              {/* Action Button Row */}
+              <div className="mt-8 pt-5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs text-slate-500">
+                  Part of CBZ Holdings Limited (ZSE: CBZ)
+                </span>
+
+                <div className="flex items-center space-x-3">
+                  {selectedSub.screen ? (
+                    <button
+                      onClick={() => onNavigate(selectedSub.screen!)}
+                      className="px-5 py-2.5 rounded-xl bg-[#002554] hover:bg-[#0A3E80] text-white text-xs font-bold transition-all flex items-center space-x-2 cursor-pointer shadow-xs"
+                    >
+                      <span>Explore {selectedSub.name} Portal</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => onNavigate('group')}
+                      className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-all flex items-center space-x-2 cursor-pointer"
+                    >
+                      <span>Contact Corporate Advisory Desk</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Directory Matrix of All 9 Subsidiaries (Clean tabular layout, no repetitive box cards) */}
+        <div className="mt-10 border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs divide-y divide-slate-100">
+          <div className="bg-slate-50 px-6 py-3 text-[11px] font-extrabold uppercase tracking-wider text-slate-500 grid grid-cols-12 gap-4">
+            <div className="col-span-4 sm:col-span-3">Official Logo & Subsidiary</div>
+            <div className="col-span-3 sm:col-span-2">Sector</div>
+            <div className="col-span-5 sm:col-span-5 hidden sm:block">Primary Financial Scope</div>
+            <div className="col-span-5 sm:col-span-2 text-right">Action</div>
+          </div>
+
+          {SUBSIDIARIES.map((sub) => (
+            <div
+              key={sub.id}
+              className="px-6 py-4 grid grid-cols-12 gap-4 items-center hover:bg-slate-50/80 transition-colors"
+            >
+              {/* Logo & Name */}
+              <div className="col-span-4 sm:col-span-3 flex items-center space-x-3">
+                <div className="h-8 w-28 flex items-center flex-shrink-0">
+                  {renderSubsidiaryLogo(sub, 'sm')}
+                </div>
+              </div>
+
+              {/* Sector */}
+              <div className="col-span-3 sm:col-span-2">
+                <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
+                  {sub.category}
+                </span>
+              </div>
+
+              {/* Scope */}
+              <div className="col-span-5 hidden sm:block text-xs text-slate-600 line-clamp-1">
+                {sub.description}
+              </div>
+
+              {/* Action */}
+              <div className="col-span-5 sm:col-span-2 text-right">
+                {sub.screen ? (
+                  <button
+                    onClick={() => onNavigate(sub.screen!)}
+                    className="text-xs font-bold text-[#E4002B] hover:text-[#C50025] inline-flex items-center space-x-1 cursor-pointer"
+                  >
+                    <span>View Portal</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => onNavigate('group')}
+                    className="text-xs font-semibold text-slate-500 hover:text-slate-800 inline-flex items-center space-x-1 cursor-pointer"
+                  >
+                    <span>Advisory</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </div>
