@@ -19,7 +19,7 @@ PORT_TO_USE="${PORT:-8000}"
 
 if [ "$#" -gt 0 ]; then
     echo "Executing start command: $@"
-    exec "$@"
+    eval "exec $@"
 else
     echo "Starting Uvicorn ASGI server on port ${PORT_TO_USE}..."
     exec uvicorn cbz_backend.asgi:application \
