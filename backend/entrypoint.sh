@@ -16,12 +16,17 @@ echo "Collecting static files..."
 python manage.py collectstatic --noinput || true
 
 PORT_TO_USE="${PORT:-8000}"
-echo "Starting Uvicorn ASGI server on port ${PORT_TO_USE}..."
 
-exec uvicorn cbz_backend.asgi:application \
-    --host 0.0.0.0 \
-    --port "$PORT_TO_USE" \
-    --workers 2 \
-    --timeout-keep-alive 75 \
-    --access-log \
-    --log-level info
+if [ "$#" -gt 0 ]; then
+    echo "Executing start command: $@"
+    exec "$@"
+else
+    echo "Starting Uvicorn ASGI server on port ${PORT_TO_USE}..."
+    exec uvicorn cbz_backend.asgi:application \
+        --host 0.0.0.0 \
+        --port "$PORT_TO_USE" \
+        --workers 2 \
+        --timeout-keep-alive 75 \
+        --access-log \
+        --log-level info
+fi
