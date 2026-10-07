@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { ScreenType, Country } from '../types';
 import { INVESTMENT_PRODUCTS, INVESTMENT_LIFECYCLE, convertTextWithCurrency } from '../data/cbzData';
+import { RateDisclosure } from './ui/RateDisclosure';
 
 interface SbuInvestmentsViewProps {
   country: Country;
@@ -94,19 +95,19 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
               <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-100">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-[#002554]">1969</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Founded as Datvest
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-[#E4002B]">50+ Yrs</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Fiduciary Stewardship
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                  <div className="text-xl font-black text-emerald-600">Daily</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xl font-black text-[#002554]">Daily</div>
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Compounding Interest
                   </div>
                 </div>
@@ -128,7 +129,7 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
                 </div>
                 <div>
                   <div className="text-xs font-bold text-[#002554]">SECZIM Regulated</div>
-                  <div className="text-xs text-slate-500">Unit Trusts & Discretionary Mandates</div>
+                  <div className="text-xs text-cbz-grey">Unit Trusts & Discretionary Mandates</div>
                 </div>
               </div>
             </div>
@@ -139,23 +140,32 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
       {/* 2. INDICATIVE FUND PERFORMANCE TICKER */}
       <section className="bg-[#001736] text-white py-6 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-white/70">
               <LineChart className="w-4 h-4 text-[#E4002B]" />
-              <span>Indicative Fund Returns:</span>
+              <span>Indicative Fund Returns — as at 30 Sep 2026:</span>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex-grow md:max-w-4xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {fundPerformances.map((fund, idx) => (
                 <div key={idx} className="bg-white/5 p-3 rounded-xl border border-white/10">
                   <div className="text-xs text-slate-300 font-medium truncate">{fund.name}</div>
-                  <div className="text-sm font-black text-emerald-400 mt-0.5">{fund.yield}</div>
-                  <div className="text-xs text-slate-400 flex items-center justify-between mt-1">
+                  <div className="text-sm font-black text-white mt-0.5">{fund.yield}</div>
+                  <div className="text-xs text-white/60 flex items-center justify-between mt-1">
                     <span>{fund.term}</span>
                     <span className="text-slate-300 font-bold">{fund.risk}</span>
                   </div>
                 </div>
               ))}
             </div>
+            {/* SECZIM-mandated compliance disclosure — must appear beside every return figure */}
+            <RateDisclosure
+              kind="return"
+              asAt="30 Sep 2026"
+              currency="USD / ZWG"
+              basis="annualised, net of Datvest management fees"
+              href="#TBC-datvest-fact-sheet-url"
+              onDark
+            />
           </div>
         </div>
       </section>
@@ -192,7 +202,7 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
                   <div className="flex items-center justify-between mb-3">
                     <span
                       className={`text-xl font-black ${
-                        isActive ? 'text-[#E4002B]' : 'text-slate-400'
+                        isActive ? 'text-[#E4002B]' : 'text-cbz-grey'
                       }`}
                     >
                       {stage.step}
@@ -245,13 +255,13 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
                   {selectedStage.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-cbz-grey leading-relaxed">
                   {selectedStage.description}
                 </p>
 
                 {/* Deliverables List */}
                 <div className="pt-2">
-                  <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2.5">
+                  <div className="text-xs font-extrabold uppercase tracking-wider text-cbz-grey mb-2.5">
                     Key Fiduciary Deliverables:
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -284,7 +294,7 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
 
                 <div className="space-y-3 pt-4 border-t border-white/10">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400">Next Stage Transition:</span>
+                    <span className="text-white/70">Next Stage Transition:</span>
                     <span className="font-bold text-blue-300">
                       {selectedStageIndex < INVESTMENT_LIFECYCLE.length - 1
                         ? `Stage 0${selectedStageIndex + 2}: ${INVESTMENT_LIFECYCLE[selectedStageIndex + 1].phase}`
@@ -411,17 +421,18 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
               </div>
 
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+                {/* Primary action first; cross-sell as secondary */}
                 <button
                   onClick={() => onNavigate('group')}
-                  className="w-full py-3.5 px-5 bg-white text-[#002554] hover:bg-slate-100 font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer"
+                  className="w-full py-3.5 px-5 bg-[#E4002B] hover:bg-[#C50025] text-white font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer"
                 >
-                  Explore Group Banking Flow
+                  Start Your Connected Journey
                 </button>
                 <button
                   onClick={() => onNavigate('sbu')}
-                  className="w-full py-3.5 px-5 bg-[#E4002B] text-white hover:bg-[#C50025] font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer"
+                  className="w-full py-3.5 px-5 bg-white text-[#002554] hover:bg-slate-100 font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer"
                 >
-                  Protect With CBZ Insurance
+                  Explore CBZ Insurance Cover
                 </button>
               </div>
             </div>

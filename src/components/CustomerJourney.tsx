@@ -85,7 +85,7 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
             </div>
           </div>
           <div className="flex items-center space-x-3 text-xs">
-            <span className="text-slate-500">Ref: <strong className="font-mono text-slate-800">MQ-4471-26</strong></span>
+            <span className="text-cbz-grey">Ref: <strong className="font-bold text-cbz-ink">MQ-4471-26</strong></span>
             <button
               onClick={() => onNavigate('home')}
               className="text-[#E4002B] font-bold hover:underline"
@@ -108,7 +108,7 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
               · Authenticated at Group Level · KYC Verified by CBZ Bank
             </span>
           </div>
-          <div className="text-slate-300 font-mono text-xs">
+          <div className="text-white/80 text-xs">
             Serving Entity: <strong className="text-white">CBZ Insurance Company Limited</strong>
           </div>
         </div>
@@ -134,7 +134,7 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
                       : 'border-transparent hover:bg-slate-50'
                   }`}
                 >
-                  <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400">
+                  <div className="text-xs font-extrabold uppercase tracking-wider text-cbz-grey">
                     Step 0{stepNum}
                   </div>
                   <div
@@ -277,24 +277,24 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
                   </div>
 
                   <div>
-                    <label className="block font-bold text-slate-700 mb-1">
+                    <label className="block font-bold text-cbz-ink mb-1">
                       Estimated Market Value ({country.pcur})
                     </label>
                     <input
                       type="text"
                       value={formatMoney(vehicleData.valueUSD, country)}
                       readOnly
-                      className="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-lg text-slate-800 font-mono font-bold"
+                      className="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-lg text-cbz-ink font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-bold text-slate-700 mb-1">Vehicle Registration Plate</label>
+                    <label className="block font-bold text-cbz-ink mb-1">Vehicle Registration Plate</label>
                     <input
                       type="text"
                       value={vehicleData.regNumber}
                       onChange={(e) => setVehicleData({ ...vehicleData, regNumber: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 font-mono font-bold focus:outline-none focus:border-[#002554]"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-cbz-ink font-bold focus:outline-none focus:border-[#002554]"
                     />
                   </div>
 
@@ -376,7 +376,7 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
                         }`}
                       >
                         <div>
-                          <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400 block mb-1">
+                          <span className="text-xs font-extrabold uppercase tracking-wider text-cbz-grey block mb-1">
                             {cover.tier}
                           </span>
                           <h4 className="font-extrabold text-base text-[#002554]">
@@ -493,7 +493,7 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
                               <span className="font-extrabold text-sm text-[#002554]">
                                 +{formatMoney(addon.priceUSD, country)}
                               </span>
-                              <span className="text-xs text-slate-400 block">/ mo</span>
+                              <span className="text-xs text-cbz-grey block">/ mo</span>
                             </div>
                           ) : (
                             <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs">
@@ -547,17 +547,17 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
                   Your electronic policy schedule has been dispatched to <strong>n.chikore@domain.com</strong> and synced to your <strong>CBZ Touch</strong> profile.
                 </p>
 
-                <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 text-xs space-y-2.5 font-mono">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 text-xs space-y-2.5">
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Policy Reference:</span>
-                    <span className="font-bold text-slate-800">MV-2026-4471</span>
+                    <span className="text-cbz-grey font-medium">Policy Reference:</span>
+                    <span className="font-bold text-cbz-ink">MV-2026-4471</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Primary Insured:</span>
-                    <span>Nyasha Chikore</span>
+                    <span className="text-cbz-grey font-medium">Primary Insured:</span>
+                    <span className="text-cbz-ink font-semibold">Nyasha Chikore</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Vehicle Covered:</span>
+                    <span className="text-cbz-grey font-medium">Vehicle Covered:</span>
                     <span>{vehicleData.year} {vehicleData.make} {vehicleData.model} ({vehicleData.regNumber})</span>
                   </div>
                   <div className="flex justify-between">
@@ -639,7 +639,7 @@ export const CustomerJourney: React.FC<CustomerJourneyProps> = ({ country, onNav
 
             {/* Cross-SBU Involved Rail */}
             <div className="pt-4 border-t border-slate-100">
-              <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
+              <div className="text-xs font-extrabold uppercase tracking-wider text-cbz-grey mb-2">
                 Group Entities in this Flow:
               </div>
               <div className="space-y-1.5 text-xs">

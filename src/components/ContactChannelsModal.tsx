@@ -15,6 +15,7 @@ import {
   Globe
 } from 'lucide-react';
 import { CONTACT_CHANNELS, SOCIAL_LINKS } from '../data/announcementsData';
+import { CONTACT, BRANCH_HOURS, branchHoursLine } from '../data/facts';
 
 interface ContactChannelsModalProps {
   isOpen: boolean;
@@ -44,11 +45,11 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
       case 'MessageSquare':
         return <MessageSquare className="w-5 h-5 text-emerald-600" />;
       case 'Smartphone':
-        return <Smartphone className="w-5 h-5 text-blue-600" />;
+        return <Smartphone className="w-5 h-5 text-[#002554]" />;
       case 'Mail':
-        return <Mail className="w-5 h-5 text-amber-600" />;
+        return <Mail className="w-5 h-5 text-[#002554]" />;
       case 'MapPin':
-        return <MapPin className="w-5 h-5 text-purple-600" />;
+        return <MapPin className="w-5 h-5 text-[#E4002B]" />;
       default:
         return <Phone className="w-5 h-5 text-[#002554]" />;
     }
@@ -88,7 +89,7 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
                 </div>
                 <div>
                   <div className="text-[11px] uppercase tracking-wider text-white/70 font-semibold">Toll-Free Mobile</div>
-                  <div className="text-lg font-black text-white font-mono">460</div>
+                  <div className="text-lg font-black text-white">{CONTACT.tollFree[0]}</div>
                 </div>
               </div>
               <span className="text-[10px] font-bold bg-red-500 text-white px-2 py-0.5 rounded">All Networks</span>
@@ -101,7 +102,7 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
                 </div>
                 <div>
                   <div className="text-[11px] uppercase tracking-wider text-white/70 font-semibold">Official WhatsApp</div>
-                  <div className="text-sm font-bold text-white font-mono">+263 774 460 460</div>
+                  <div className="text-sm font-bold text-white">{CONTACT.whatsapp.display}</div>
                 </div>
               </div>
               <span className="text-[10px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded">24/7 Bot & Live</span>
@@ -111,7 +112,7 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
 
         {/* Channels List */}
         <div className="p-6 sm:p-7 max-h-[60vh] overflow-y-auto space-y-3.5 divide-y divide-slate-100">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+          <div className="text-xs font-bold text-cbz-grey uppercase tracking-wider mb-2">
             All Available Communication Channels
           </div>
 
@@ -126,19 +127,19 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
                 </div>
                 <div>
                   <div className="flex items-center space-x-2">
-                    <span className="font-bold text-slate-900 text-sm">{ch.name}</span>
+                    <span className="font-bold text-cbz-ink text-sm">{ch.name}</span>
                     {ch.badge && (
                       <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-red-50 text-[#E4002B] border border-red-200">
                         {ch.badge}
                       </span>
                     )}
                   </div>
-                  <div className="text-xs text-slate-500 mt-0.5">{ch.description}</div>
-                  <div className="text-sm font-bold text-[#002554] font-mono mt-1 flex items-center space-x-2">
+                  <div className="text-xs text-cbz-grey mt-0.5">{ch.description}</div>
+                  <div className="text-sm font-bold text-[#002554] mt-1 flex items-center space-x-2">
                     <span>{ch.value}</span>
                     <button
                       onClick={() => handleCopy(ch.id, ch.value)}
-                      className="text-slate-400 hover:text-slate-600 p-0.5 rounded cursor-pointer"
+                      className="text-cbz-grey hover:text-cbz-ink p-0.5 rounded cursor-pointer"
                       title="Copy to clipboard"
                     >
                       {copiedId === ch.id ? (
@@ -167,7 +168,7 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
 
           {/* Official Social Media Channels Block */}
           <div className="pt-6">
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+            <div className="text-xs font-bold text-cbz-grey uppercase tracking-wider mb-3">
               Official Social Media & Direct Messaging
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -180,12 +181,12 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
                   className="p-3 rounded-xl border border-slate-200 hover:border-[#002554] hover:bg-slate-50 transition-all flex flex-col justify-between group cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-slate-800 group-hover:text-[#002554]">
+                    <span className="font-bold text-xs text-cbz-ink group-hover:text-[#002554]">
                       {s.name}
                     </span>
-                    <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-[#E4002B]" />
+                    <ExternalLink className="w-3 h-3 text-cbz-grey group-hover:text-[#E4002B]" />
                   </div>
-                  <span className="text-[11px] text-slate-500 font-medium mt-1">
+                  <span className="text-[11px] text-cbz-grey font-medium mt-1">
                     {s.handle}
                   </span>
                 </a>
@@ -195,14 +196,14 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
         </div>
 
         {/* Footer info */}
-        <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cbz-grey">
           <div className="flex items-center space-x-2">
             <Clock className="w-3.5 h-3.5 text-[#002554]" />
-            <span>Digital Support: 24/7/365 · Branches: Mon-Fri 08:00 - 15:00, Sat 08:00 - 13:00</span>
+            <span>Digital Support: {BRANCH_HOURS.digital} · Branches: {branchHoursLine()}</span>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold transition-colors cursor-pointer text-xs"
+            className="px-4 py-1.5 rounded-lg border border-slate-300 text-cbz-ink hover:bg-slate-100 font-semibold transition-colors cursor-pointer text-xs"
           >
             Close
           </button>

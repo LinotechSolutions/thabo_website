@@ -46,20 +46,20 @@ export const AnnouncementsSection: React.FC = () => {
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#002554]">
               Announcements & Press Room
             </h2>
-            <p className="text-sm text-slate-600 mt-1 max-w-2xl">
+            <p className="text-sm text-cbz-grey mt-1 max-w-2xl">
               Stay informed with official circulars, shareholder announcements, dividend declarations, and customer service updates from CBZ Holdings Limited.
             </p>
           </div>
 
           {/* Quick Search */}
           <div className="mt-4 md:mt-0 relative w-full md:w-72">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-cbz-grey" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search circulars & notices..."
-              className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#002554] focus:bg-white text-slate-800"
+              className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#002554] focus:bg-white text-cbz-ink placeholder:text-cbz-grey"
             />
           </div>
         </div>
@@ -90,13 +90,13 @@ export const AnnouncementsSection: React.FC = () => {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center space-x-2 ${
                 activeTab === tab.id
                   ? 'bg-[#002554] text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  : 'bg-slate-100 text-cbz-ink hover:bg-slate-200'
               }`}
             >
               <span>{tab.label}</span>
               <span
                 className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                  activeTab === tab.id ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+                  activeTab === tab.id ? 'bg-white/20 text-white' : 'bg-slate-200 text-cbz-ink'
                 }`}
               >
                 {tab.count}
@@ -116,7 +116,7 @@ export const AnnouncementsSection: React.FC = () => {
                 {/* Left: Date, Category, and Details */}
                 <div className="space-y-1.5 flex-1 pr-0 lg:pr-8">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-slate-500">
+                    <span className="text-xs font-semibold text-cbz-grey">
                       {item.date}
                     </span>
                     <span className="text-slate-300">•</span>
@@ -129,7 +129,7 @@ export const AnnouncementsSection: React.FC = () => {
                       </span>
                     )}
                     {item.circularRef && (
-                      <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
+                      <span className="text-[11px] text-cbz-grey hidden sm:inline">
                         Ref: {item.circularRef}
                       </span>
                     )}
@@ -139,7 +139,7 @@ export const AnnouncementsSection: React.FC = () => {
                     {item.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
+                  <p className="text-xs sm:text-sm text-cbz-grey leading-relaxed max-w-4xl">
                     {item.summary}
                   </p>
                 </div>
@@ -167,7 +167,7 @@ export const AnnouncementsSection: React.FC = () => {
 
         {/* Shareholder & Investor Relations Fast Strip */}
         <div className="mt-8 p-5 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-          <div className="flex flex-wrap items-center gap-4 text-slate-700">
+          <div className="flex flex-wrap items-center gap-4 text-cbz-ink">
             <span className="font-bold text-[#002554] uppercase tracking-wider">
               Shareholder Factsheet:
             </span>
@@ -190,7 +190,7 @@ export const AnnouncementsSection: React.FC = () => {
               Email Investor Desk
             </a>
             <span className="text-slate-300">|</span>
-            <span className="text-slate-500">FY2025 Annual Report Archive Available</span>
+            <span className="text-cbz-grey">FY2025 Annual Report Archive Available</span>
           </div>
         </div>
       </div>

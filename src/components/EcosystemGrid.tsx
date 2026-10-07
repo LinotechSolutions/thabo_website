@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { ArrowRight, ChevronRight, ExternalLink, ShieldCheck, Building2, CheckCircle2 } from 'lucide-react';
 import { Subsidiary, ScreenType } from '../types';
 import { SUBSIDIARIES } from '../data/cbzData';
-import { CbzLogo } from './CbzLogo';
+import { Logo } from './Logo';
+import { BRAND_BY_KEY } from '../brand/logos';
 
 interface EcosystemGridProps {
   onNavigate: (screen: ScreenType) => void;
@@ -14,28 +15,11 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
   const selectedSub =
     SUBSIDIARIES.find((s) => s.id === selectedSubId) || SUBSIDIARIES[0];
 
-  // Helper to render official subsidiary logo badge
+  // Helper to render official subsidiary logo badge using master SVGs
   const renderSubsidiaryLogo = (sub: Subsidiary, size: 'sm' | 'md' | 'lg' = 'md') => {
-    if (sub.logo) {
-      const heightClass =
-        size === 'lg' ? 'h-10 sm:h-12' : size === 'md' ? 'h-7 sm:h-8' : 'h-6';
-      return (
-        <img
-          src={sub.logo}
-          alt={sub.name}
-          className={`${heightClass} w-auto max-w-[170px] object-contain mix-blend-multiply`}
-        />
-      );
-    }
-
-    // Official CBZ Brand identity for subsidiaries
-    return (
-      <CbzLogo
-        entity={sub.name.replace('CBZ ', '')}
-        size={size === 'lg' ? 36 : size === 'md' ? 28 : 22}
-        lightMode={true}
-      />
-    );
+    const brand = BRAND_BY_KEY[sub.id] || BRAND_BY_KEY[sub.name.toLowerCase().replace(/^cbz\s+/, '')] || 'holdings';
+    const h = size === 'lg' ? 44 : size === 'md' ? 32 : 28;
+    return <Logo brand={brand} variant="full" height={h} clearSpace={false} />;
   };
 
   return (
@@ -54,7 +38,7 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
                 Stronger Together.
               </span>
             </h2>
-            <p className="text-sm text-slate-600 mt-1 max-w-2xl">
+            <p className="text-sm text-cbz-grey mt-1 max-w-2xl">
               CBZ Holdings brings together nine market-leading financial institutions. Select any subsidiary below by its official brand logo to explore its specialized capabilities.
             </p>
           </div>
@@ -70,7 +54,7 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
 
         {/* Subsidiary Logos Strip (Prominently showcasing official logos as requested) */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-xs mb-8">
-          <div className="text-xs font-black uppercase tracking-wider text-slate-400 mb-4">
+          <div className="text-xs font-black uppercase tracking-wider text-cbz-grey mb-4">
             Select Subsidiary by Official Brand Logo:
           </div>
 
@@ -92,7 +76,7 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
                   <div className="h-10 flex items-center justify-center">
                     {renderSubsidiaryLogo(sub, 'sm')}
                   </div>
-                  <span className="text-[10px] font-bold text-slate-700 mt-1 truncate max-w-full">
+                  <span className="text-[10px] font-bold text-cbz-ink mt-1 truncate max-w-full">
                     {sub.category}
                   </span>
                 </button>
@@ -145,17 +129,17 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
                   <h3 className="text-xl sm:text-2xl font-black text-[#002554]">
                     {selectedSub.name}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                  <p className="text-sm text-cbz-grey leading-relaxed">
                     {selectedSub.description}
                   </p>
                 </div>
 
                 {/* Key Institutional Capabilities */}
                 <div className="mt-6 pt-5 border-t border-slate-100">
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 block mb-2.5">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-cbz-grey block mb-2.5">
                     Institutional Capabilities & Scope
                   </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-cbz-ink">
                     <div className="flex items-center space-x-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                       <span>Dedicated Underwriting & Execution Team</span>
@@ -178,7 +162,7 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
 
               {/* Action Button Row */}
               <div className="mt-8 pt-5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-cbz-grey">
                   Part of CBZ Holdings Limited (ZSE: CBZ)
                 </span>
 
@@ -208,7 +192,7 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
 
         {/* Directory Matrix of All 9 Subsidiaries (Clean tabular layout, no repetitive box cards) */}
         <div className="mt-10 border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs divide-y divide-slate-100">
-          <div className="bg-slate-50 px-6 py-3 text-[11px] font-extrabold uppercase tracking-wider text-slate-500 grid grid-cols-12 gap-4">
+          <div className="bg-slate-50 px-6 py-3 text-[11px] font-extrabold uppercase tracking-wider text-cbz-grey grid grid-cols-12 gap-4">
             <div className="col-span-4 sm:col-span-3">Official Logo & Subsidiary</div>
             <div className="col-span-3 sm:col-span-2">Sector</div>
             <div className="col-span-5 sm:col-span-5 hidden sm:block">Primary Financial Scope</div>
@@ -222,20 +206,20 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
             >
               {/* Logo & Name */}
               <div className="col-span-4 sm:col-span-3 flex items-center space-x-3">
-                <div className="h-8 w-28 flex items-center flex-shrink-0">
+                <div className="h-8 min-w-[70px] flex items-center flex-shrink-0">
                   {renderSubsidiaryLogo(sub, 'sm')}
                 </div>
               </div>
 
               {/* Sector */}
               <div className="col-span-3 sm:col-span-2">
-                <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
+                <span className="text-xs font-bold text-cbz-ink bg-slate-100 px-2 py-0.5 rounded">
                   {sub.category}
                 </span>
               </div>
 
               {/* Scope */}
-              <div className="col-span-5 hidden sm:block text-xs text-slate-600 line-clamp-1">
+              <div className="col-span-5 hidden sm:block text-xs text-cbz-grey line-clamp-1">
                 {sub.description}
               </div>
 
@@ -252,7 +236,7 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
                 ) : (
                   <button
                     onClick={() => onNavigate('group')}
-                    className="text-xs font-semibold text-slate-500 hover:text-slate-800 inline-flex items-center space-x-1 cursor-pointer"
+                    className="text-xs font-semibold text-cbz-grey hover:text-cbz-ink inline-flex items-center space-x-1 cursor-pointer"
                   >
                     <span>Advisory</span>
                     <ChevronRight className="w-3.5 h-3.5" />

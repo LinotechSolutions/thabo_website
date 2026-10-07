@@ -14,6 +14,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { Country } from '../types';
+import { CONTACT, BRANCH_HOURS, branchHoursLine } from '../data/facts';
 
 interface NewsAndSupportProps {
   country: Country;
@@ -33,7 +34,7 @@ export const NewsAndSupport: React.FC<NewsAndSupportProps> = ({ country, onOpenC
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#002554]">
               We’re Here Whenever You Need Us
             </h2>
-            <p className="text-sm text-slate-600 mt-1 max-w-2xl">
+            <p className="text-sm text-cbz-grey mt-1 max-w-2xl">
               Access support through your preferred channel. From toll-free phone lines and WhatsApp assistant to nationwide branches and secure email desks.
             </p>
           </div>
@@ -63,8 +64,8 @@ export const NewsAndSupport: React.FC<NewsAndSupportProps> = ({ country, onOpenC
                 </span>
               </div>
               <div className="font-extrabold text-base text-[#002554]">Toll-Free Numbers</div>
-              <div className="text-xl font-black text-slate-900 font-mono mt-1">460 / 461</div>
-              <p className="text-xs text-slate-500 mt-1">
+              <div className="text-xl font-black text-cbz-ink tabular-nums mt-1">{CONTACT.tollFreeLabel}</div>
+              <p className="text-xs text-cbz-grey mt-1">
                 Toll-free across all Zimbabwean mobile networks (Econet, NetOne, Telecel) and fixed landlines.
               </p>
             </div>
@@ -91,10 +92,10 @@ export const NewsAndSupport: React.FC<NewsAndSupportProps> = ({ country, onOpenC
                 </span>
               </div>
               <div className="font-extrabold text-base text-[#002554]">WhatsApp Banking</div>
-              <div className="text-sm font-black text-slate-900 font-mono mt-1">
+              <div className="text-sm font-black text-cbz-ink tabular-nums mt-1">
                 {country.dial} 774 460 460
               </div>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-cbz-grey mt-1">
                 Check account balances, statement requests, airtime purchase, and direct live support agent chat.
               </p>
             </div>
@@ -123,8 +124,8 @@ export const NewsAndSupport: React.FC<NewsAndSupportProps> = ({ country, onOpenC
                 </span>
               </div>
               <div className="font-extrabold text-base text-[#002554]">USSD Quick Banking</div>
-              <div className="text-xl font-black text-slate-900 font-mono mt-1">*460#</div>
-              <p className="text-xs text-slate-500 mt-1">
+              <div className="text-xl font-black text-cbz-ink tabular-nums mt-1">{CONTACT.ussd.display}</div>
+              <p className="text-xs text-cbz-grey mt-1">
                 Bank anywhere across Zimbabwe without needing internet or mobile data from any handset.
               </p>
             </div>
@@ -143,25 +144,25 @@ export const NewsAndSupport: React.FC<NewsAndSupportProps> = ({ country, onOpenC
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-cbz-blue-50 text-cbz-blue flex items-center justify-center">
                   <Mail className="w-5 h-5" />
                 </div>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-100 text-purple-700">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-cbz-blue-100 text-cbz-blue">
                   Direct Desk
                 </span>
               </div>
               <div className="font-extrabold text-base text-[#002554]">Email & Head Office</div>
-              <div className="text-xs font-bold text-slate-800 font-mono mt-1">
-                contactcentre@cbz.co.zw
+              <div className="text-xs font-bold text-cbz-ink tabular-nums mt-1">
+                {CONTACT.email}
               </div>
-              <p className="text-xs text-slate-500 mt-1">
-                CBZ Holdings Campus, 5 Campbell Road, Pomona, Borrowdale, Harare. Over 60 branches nationwide.
+              <p className="text-xs text-cbz-grey mt-1">
+                CBZ Holdings Campus, {CONTACT.address}. Over 60 branches nationwide.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-slate-100">
               <a
                 href="mailto:contactcentre@cbz.co.zw"
-                className="text-xs font-bold text-purple-700 hover:underline inline-flex items-center space-x-1"
+                className="text-xs font-bold text-cbz-blue hover:underline inline-flex items-center space-x-1"
               >
                 <span>Email Help Desk</span>
                 <ExternalLink className="w-3 h-3" />
@@ -171,12 +172,12 @@ export const NewsAndSupport: React.FC<NewsAndSupportProps> = ({ country, onOpenC
         </div>
 
         {/* Operating Hours Strip */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-600 shadow-2xs">
+        <div className="bg-white rounded-2xl border border-cbz-line p-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-cbz-grey shadow-2xs">
           <div className="flex flex-wrap items-center gap-6">
             <div className="flex items-center space-x-2">
               <Clock className="w-4 h-4 text-[#002554]" />
               <span>
-                <strong>Branch Hours:</strong> Monday – Friday 08:00 – 15:00 · Saturday 08:00 – 13:00
+                <strong>Branch Hours:</strong> {BRANCH_HOURS.weekdays.label} {BRANCH_HOURS.weekdays.hours} · {BRANCH_HOURS.saturday.label} {BRANCH_HOURS.saturday.hours}
               </span>
             </div>
             <div className="flex items-center space-x-2">
@@ -187,8 +188,8 @@ export const NewsAndSupport: React.FC<NewsAndSupportProps> = ({ country, onOpenC
             </div>
           </div>
 
-          <div className="text-slate-500">
-            Switchboard: <strong>+263 24 2799 234-9</strong> · VoIP: <strong>+263 8677 004050</strong>
+          <div className="text-cbz-grey tabular-nums">
+            Switchboard: <strong>{CONTACT.switchboard.display}</strong>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ import { Country } from '../types';
 import { COUNTRIES } from '../data/cbzData';
 import { SOCIAL_LINKS } from '../data/announcementsData';
 import { DEMO_MODE } from '../config/env';
-import { tbc } from '../data/facts';
+import { tbc, CONTACT } from '../data/facts';
 import { RateDisclosure } from './ui/RateDisclosure';
 
 /**
@@ -218,20 +218,20 @@ export const TopUtilityBar: React.FC<TopUtilityBarProps> = ({
             <div className="w-5 h-5 rounded-full bg-red-500/20 group-hover:bg-red-500/30 flex items-center justify-center">
               <PhoneCall className="w-3 h-3 text-red-400" />
             </div>
-            <span className="text-slate-300 hidden md:inline">Toll-Free:</span>
-            <span className="font-bold text-white font-mono">460 / 461</span>
+            <span className="text-white/60 hidden md:inline">Toll-Free:</span>
+            <span className="font-bold text-white tabular-nums">{CONTACT.tollFreeLabel}</span>
           </button>
 
           {/* WhatsApp Direct */}
           <a
-            href="https://wa.me/263774460460"
+            href={CONTACT.whatsapp.href}
             target="_blank"
             rel="noreferrer"
             className="hidden sm:flex items-center space-x-1.5 text-emerald-400 hover:text-emerald-300 transition-colors font-semibold text-xs"
           >
             <MessageCircle className="w-3.5 h-3.5" />
-            <span className="hidden lg:inline text-slate-300">WhatsApp:</span>
-            <span>+263 774 460 460</span>
+            <span className="hidden lg:inline text-white/60">WhatsApp:</span>
+            <span>{CONTACT.whatsapp.display}</span>
           </a>
 
           {/* All Channels Trigger Button */}

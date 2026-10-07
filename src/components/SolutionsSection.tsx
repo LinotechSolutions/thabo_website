@@ -35,7 +35,7 @@ export const SolutionsSection: React.FC<SolutionsSectionProps> = ({ onNavigate }
               Solutions Designed for You
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-md mt-3 md:mt-0 leading-relaxed">
+          <p className="text-xs sm:text-sm text-cbz-grey max-w-md mt-3 md:mt-0 leading-relaxed">
             Whether managing personal family wealth, scaling an enterprise, or banking from abroad, we deliver custom-fit financial packages.
           </p>
         </div>
@@ -69,7 +69,7 @@ export const SolutionsSection: React.FC<SolutionsSectionProps> = ({ onNavigate }
                   <h3 className="font-extrabold text-base text-[#002554] group-hover:text-[#E4002B] transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+                  <p className="text-xs text-cbz-grey mt-2 leading-relaxed">
                     {item.description}
                   </p>
                 </div>

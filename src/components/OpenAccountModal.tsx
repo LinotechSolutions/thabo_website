@@ -57,7 +57,6 @@ const ACCOUNT_OPTIONS: AccountProduct[] = [
     name: 'Individual Nostro FCA (Foreign Currency)',
     category: 'nostro',
     pricing: 'Zero Opening Deposit',
-    popular: true,
     description: 'Hard currency account held in USD, EUR, GBP, or ZAR with international Visa Gold/Platinum contactless cards.',
     requirements: ['National ID / Valid Passport', 'Proof of Residence (within 3 months)', '2 Passport-size color photos'],
     features: ['Free domestic Nostro transfers', 'International contactless Visa debit card', 'Online e-commerce shopping ready', 'Global ATM withdrawals'],
@@ -198,17 +197,17 @@ export const OpenAccountModal: React.FC<OpenAccountModalProps> = ({
 
           {/* Stepper indicator */}
           <div className="mt-6 flex items-center space-x-3 text-xs">
-            <div className={`flex items-center space-x-2 ${step === 'select' ? 'text-white font-bold' : 'text-slate-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'select' ? 'text-white font-bold' : 'text-white/60'}`}>
               <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${step === 'select' ? 'bg-[#E4002B] text-white font-bold' : 'bg-white/10'}`}>1</span>
               <span>Choose Account</span>
             </div>
             <span className="text-white/30">―</span>
-            <div className={`flex items-center space-x-2 ${step === 'form' ? 'text-white font-bold' : 'text-slate-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'form' ? 'text-white font-bold' : 'text-white/60'}`}>
               <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${step === 'form' ? 'bg-[#E4002B] text-white font-bold' : 'bg-white/10'}`}>2</span>
               <span>Applicant Details</span>
             </div>
             <span className="text-white/30">―</span>
-            <div className={`flex items-center space-x-2 ${step === 'success' ? 'text-white font-bold' : 'text-slate-400'}`}>
+            <div className={`flex items-center space-x-2 ${step === 'success' ? 'text-white font-bold' : 'text-white/60'}`}>
               <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${step === 'success' ? 'bg-emerald-500 text-white font-bold' : 'bg-white/10'}`}>3</span>
               <span>Fast-Track Reference</span>
             </div>
@@ -491,14 +490,14 @@ export const OpenAccountModal: React.FC<OpenAccountModalProps> = ({
 
             {/* Reference Number Card */}
             <div className="my-6 max-w-md mx-auto p-4 rounded-xl bg-slate-50 border-2 border-dashed border-[#002554]/30">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-cbz-grey uppercase tracking-wider">
                 Fast-Track Branch / Verification Reference
               </span>
-              <div className="text-2xl font-black text-[#002554] font-mono tracking-wider my-1 flex items-center justify-center space-x-2">
+              <div className="text-2xl font-black text-[#002554] tracking-wider my-1 flex items-center justify-center space-x-2">
                 <span>{refCode}</span>
                 <button
                   onClick={handleCopy}
-                  className="p-1 rounded text-slate-400 hover:text-[#002554] cursor-pointer"
+                  className="p-1 rounded text-cbz-grey hover:text-[#002554] cursor-pointer"
                   title="Copy Reference"
                 >
                   {copied ? (
@@ -508,7 +507,7 @@ export const OpenAccountModal: React.FC<OpenAccountModalProps> = ({
                   )}
                 </button>
               </div>
-              <div className="text-[11px] text-slate-500 mt-1">
+              <div className="text-[11px] text-cbz-grey mt-1">
                 Present this code at <strong>{formData.branch}</strong> with your National ID for express same-day card collection.
               </div>
             </div>

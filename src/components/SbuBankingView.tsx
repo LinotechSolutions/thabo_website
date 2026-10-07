@@ -153,20 +153,20 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
               {/* Stat Badges */}
               <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-100">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                  <div className="text-xl font-black text-[#002554]">40+ Yrs</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xl font-black text-[#002554]">46+ Yrs</div>
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Banking Heritage
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                  <div className="text-xl font-black text-[#E4002B]">120+</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xl font-black text-[#E4002B]">60+</div>
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Branches & Agencies
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-blue-900">24/7</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Touch & WhatsApp
                   </div>
                 </div>
@@ -231,7 +231,7 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                   <div className="flex items-center justify-between mb-3">
                     <span
                       className={`text-xl font-black ${
-                        isActive ? 'text-[#E4002B]' : 'text-slate-400'
+                        isActive ? 'text-[#E4002B]' : 'text-cbz-grey'
                       }`}
                     >
                       {stage.step}
@@ -286,12 +286,12 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                   {selectedStage.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-cbz-grey leading-relaxed">
                   {selectedStage.description}
                 </p>
 
                 <div className="pt-2">
-                  <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-3">
+                  <div className="text-xs font-extrabold uppercase tracking-wider text-cbz-grey mb-3">
                     Stage Highlights & Deliverables:
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -324,7 +324,7 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
 
                 <div className="space-y-3 pt-4 border-t border-white/10">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400">Next Lifecycle Phase:</span>
+                    <span className="text-white/70">Next Lifecycle Phase:</span>
                     <span className="font-bold text-blue-300">
                       {selectedStageIndex < BANK_LIFECYCLE.length - 1
                         ? `Stage 0${selectedStageIndex + 2}: ${BANK_LIFECYCLE[selectedStageIndex + 1].phase}`
@@ -454,10 +454,10 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                   <span>Connected Group Journey</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-                  Buying a Home? Experience Zimbabwe's First Unified 4-SBU Handover.
+                  Buy a home with one application.
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-2xl">
-                  Start with property reservation at CBZ Properties, step into pre-approved mortgage underwriting with CBZ Bank, bundle seamless homeowner insurance with CBZ Insurance, and activate credit life protection with CBZ Life — with single-entry KYC and zero duplicate paperwork.
+                  Reserve your home, secure your mortgage, insure it and protect your family — entering your details once across all four CBZ institutions with zero duplicate paperwork.
                 </p>
               </div>
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
@@ -497,12 +497,12 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                       Sandbox Demo
                     </span>
                   </div>
-                  <div className="text-xs text-slate-500">Interactive Digital Onboarding</div>
+                  <div className="text-xs text-cbz-grey">Interactive Digital Onboarding</div>
                 </div>
               </div>
               <button
                 onClick={() => setAccountModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer p-1"
+                className="text-cbz-grey hover:text-cbz-ink font-bold text-lg cursor-pointer p-1"
                 aria-label="Close modal"
               >
                 ✕
@@ -517,7 +517,7 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                     <CheckCircle2 className="w-8 h-8 text-emerald-600" />
                   </div>
                   <h3 className="text-lg font-black text-[#002554]">Application Initiated</h3>
-                  <p className="text-xs text-slate-600 max-w-xs mx-auto">
+                  <p className="text-xs text-cbz-grey max-w-xs mx-auto">
                     Your digital application for <strong className="text-[#002554]">{selectedProduct}</strong> has been successfully staged.
                   </p>
                 </div>
@@ -525,8 +525,8 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                 {/* Reference Code Card */}
                 <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
                   <div>
-                    <div className="text-xs uppercase font-bold text-slate-400">Application Reference</div>
-                    <div className="font-mono font-black text-sm text-[#002554] mt-0.5">{refCode}</div>
+                    <div className="text-xs uppercase font-bold text-cbz-grey">Application Reference</div>
+                    <div className="font-bold text-sm text-[#002554] mt-0.5">{refCode}</div>
                   </div>
                   <button
                     onClick={() => {
@@ -547,7 +547,7 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                     <Smartphone className="w-4 h-4 text-[#E4002B]" />
                     <span>Simulated SMS Dispatch Preview</span>
                   </div>
-                  <div className="bg-white p-3 rounded-lg border border-blue-100 text-slate-700 text-xs font-mono leading-relaxed shadow-2xs">
+                  <div className="bg-white p-3 rounded-lg border border-blue-100 text-cbz-ink text-xs leading-relaxed shadow-2xs">
                     "CBZ Alerts: Dear {formData.fullName}, your digital application for {selectedProduct} (Ref: {refCode}) has been initiated. Complete biometric verification via CBZ Touch or present this code at any branch."
                   </div>
                 </div>
@@ -581,11 +581,6 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                 <div className="p-3 bg-blue-50/70 rounded-xl border border-blue-100">
                   <div className="text-xs font-bold text-blue-900">Selected Facility:</div>
                   <div className="text-sm font-extrabold text-[#002554] mt-0.5">{selectedProduct}</div>
-                </div>
-
-                <div className="p-2.5 bg-amber-50/80 rounded-xl border border-amber-200 text-xs text-amber-800 flex items-center space-x-2">
-                  <Info className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                  <span>Interactive demo mode. Feel free to use test details.</span>
                 </div>
 
                 <div className="space-y-3 text-xs">

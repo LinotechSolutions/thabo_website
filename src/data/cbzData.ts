@@ -373,7 +373,7 @@ export const SBU_PRODUCTS: Record<string, ProductItem[]> = {
 
 export const LEDGER_DATA: LedgerItem[] = [
   { field: 'Full Legal Name', value: 'Nyasha Chikore', stage: 0, source: 'Group Sign-In', isTypedByUser: false },
-  { field: 'National ID & KYC', value: '63-119284 K18 · Verified', stage: 0, source: 'CBZ Bank (Group KYC)', isTypedByUser: false },
+  { field: 'National ID & KYC', value: '63-•••••• K18 · Verified', stage: 0, source: 'CBZ Bank (Group KYC)', isTypedByUser: false },
   { field: 'Phone & Email', value: '0774 ••• 460 · n.chikore@•••', stage: 0, source: 'Group Profile', isTypedByUser: false },
   { field: 'Selected Property', value: 'Unit 14, 4-Bed Cluster, Bloomingdale', stage: 1, source: 'CBZ Properties', isTypedByUser: false },
   { field: 'Purchase Price', value: 'USD 165 000', stage: 1, source: 'CBZ Properties', isTypedByUser: false },

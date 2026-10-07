@@ -121,19 +121,19 @@ export const SbuInsuranceView: React.FC<SbuInsuranceViewProps> = ({ country, onN
               <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-100">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-[#002554]">2006</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Underwriting Since
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-[#E4002B]">4 Steps</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     To Cover Note
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-emerald-600">24/7</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Claims Lodgement
                   </div>
                 </div>
@@ -304,12 +304,12 @@ export const SbuInsuranceView: React.FC<SbuInsuranceViewProps> = ({ country, onN
                       Specialist Quote
                     </span>
                   </div>
-                  <div className="text-xs text-slate-500">Underwriting Request</div>
+                  <div className="text-xs text-cbz-grey">Underwriting Request</div>
                 </div>
               </div>
               <button
                 onClick={() => setQuoteModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer p-1"
+                className="text-cbz-grey hover:text-cbz-ink font-bold text-lg cursor-pointer p-1"
                 aria-label="Close quote modal"
               >
                 ✕
@@ -323,15 +323,15 @@ export const SbuInsuranceView: React.FC<SbuInsuranceViewProps> = ({ country, onN
                     <CheckCircle2 className="w-8 h-8 text-emerald-600" />
                   </div>
                   <h3 className="text-lg font-black text-[#002554]">Quote Request Dispatched</h3>
-                  <p className="text-xs text-slate-600 max-w-xs mx-auto">
+                  <p className="text-xs text-cbz-grey max-w-xs mx-auto">
                     Your request for <strong className="text-[#002554]">{selectedQuoteProd.name}</strong> has been assigned to a specialist commercial underwriter.
                   </p>
                 </div>
 
                 <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
                   <div>
-                    <div className="text-xs uppercase font-bold text-slate-400">Quote Tracking ID</div>
-                    <div className="font-mono font-black text-sm text-[#002554] mt-0.5">{quoteRef}</div>
+                    <div className="text-xs uppercase font-bold text-cbz-grey">Quote Tracking ID</div>
+                    <div className="font-bold text-sm text-[#002554] mt-0.5">{quoteRef}</div>
                   </div>
                   <button
                     onClick={() => {

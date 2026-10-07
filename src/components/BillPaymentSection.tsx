@@ -32,14 +32,14 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
   const getBillerIcon = (iconName: string) => {
     switch (iconName) {
       case 'GraduationCap': return <GraduationCap className="w-5 h-5 text-[#E4002B]" />;
-      case 'Zap': return <Zap className="w-5 h-5 text-amber-500" />;
+      case 'Zap': return <Zap className="w-5 h-5 text-[#002554]" />;
       case 'Tv': return <Tv className="w-5 h-5 text-[#002554]" />;
-      case 'Droplet': return <Droplet className="w-5 h-5 text-blue-500" />;
+      case 'Droplet': return <Droplet className="w-5 h-5 text-[#002554]" />;
       case 'Shield': return <Shield className="w-5 h-5 text-[#E4002B]" />;
-      case 'Smartphone': return <Smartphone className="w-5 h-5 text-emerald-600" />;
-      case 'Wifi': return <Wifi className="w-5 h-5 text-indigo-600" />;
-      case 'FileText': return <FileText className="w-5 h-5 text-red-600" />;
-      case 'Ticket': return <Ticket className="w-5 h-5 text-purple-600" />;
+      case 'Smartphone': return <Smartphone className="w-5 h-5 text-[#002554]" />;
+      case 'Wifi': return <Wifi className="w-5 h-5 text-[#002554]" />;
+      case 'FileText': return <FileText className="w-5 h-5 text-[#E4002B]" />;
+      case 'Ticket': return <Ticket className="w-5 h-5 text-[#E4002B]" />;
       default: return <Grid className="w-5 h-5 text-[#002554]" />;
     }
   };
@@ -77,7 +77,7 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
               </h3>
             </div>
           </div>
-          <p className="text-xs text-slate-500 max-w-lg leading-relaxed">
+          <p className="text-xs text-cbz-grey max-w-lg leading-relaxed">
             Directly integrated into the CBZ Touch mobile app and Ziki marketplace. Settle fees, municipal rates, electricity tokens, and subscriptions with zero wait time.
           </p>
         </div>
@@ -96,7 +96,7 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
               <div className="font-bold text-xs text-[#002554] group-hover:text-[#E4002B] transition-colors">
                 {biller.name}
               </div>
-              <div className="text-xs text-slate-400 mt-1">
+              <div className="text-xs text-cbz-grey mt-1">
                 {biller.category}
               </div>
             </button>
@@ -109,7 +109,7 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
             <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 animate-in zoom-in-95 duration-150 relative">
               <button
                 onClick={resetModal}
-                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-slate-100 text-cbz-grey hover:text-cbz-ink transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -121,7 +121,7 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
                       {getBillerIcon(selectedBiller.iconName)}
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                      <div className="text-xs font-bold text-cbz-grey uppercase tracking-wider">
                         Ziki Payment Gateway
                       </div>
                       <h4 className="font-bold text-lg text-[#002554]">
@@ -132,7 +132,7 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
 
                   <form onSubmit={handlePay} className="space-y-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-cbz-ink mb-1">
                         Account / Meter / Reference Number
                       </label>
                       <input
@@ -141,12 +141,12 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
                         value={accountNo}
                         onChange={(e) => setAccountNo(e.target.value)}
                         placeholder="e.g. 0419-88210-9"
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:border-[#002554]"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-cbz-ink focus:outline-none focus:border-[#002554]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-cbz-ink mb-1">
                         Amount to Pay ({country.pcur})
                       </label>
                       <input
@@ -154,16 +154,16 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
                         required
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono font-bold text-slate-800 focus:outline-none focus:border-[#002554]"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold text-cbz-ink focus:outline-none focus:border-[#002554]"
                       />
                     </div>
 
-                    <div className="p-3 bg-blue-50/70 rounded-xl border border-blue-100 text-xs text-slate-600">
+                    <div className="p-3 bg-blue-50/70 rounded-xl border border-blue-100 text-xs text-cbz-ink">
                       <div className="flex justify-between font-semibold text-[#002554]">
                         <span>Payment Method:</span>
                         <span>CBZ Bank Account •••• 4471</span>
                       </div>
-                      <div className="flex justify-between mt-1 text-xs text-slate-500">
+                      <div className="flex justify-between mt-1 text-xs text-cbz-grey">
                         <span>Convenience Fee:</span>
                         <span>Free (0.00)</span>
                       </div>
@@ -196,29 +196,29 @@ export const BillPaymentSection: React.FC<BillPaymentSectionProps> = ({ country 
                     <h4 className="font-bold text-lg text-[#002554]">
                       Payment Successful!
                     </h4>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-cbz-grey mt-1">
                       Your receipt has been generated and saved to your CBZ Touch record.
                     </p>
                   </div>
 
-                  <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 text-xs text-left space-y-1 font-mono">
+                  <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 text-xs text-left space-y-1">
                     <div className="flex justify-between">
-                      <span className="text-slate-400 font-sans">Biller:</span>
-                      <span className="font-bold">{selectedBiller.name}</span>
+                      <span className="text-cbz-grey font-medium">Biller:</span>
+                      <span className="font-bold text-cbz-ink">{selectedBiller.name}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400 font-sans">Account:</span>
-                      <span>{accountNo || '0419-88210-9'}</span>
+                      <span className="text-cbz-grey font-medium">Account:</span>
+                      <span className="text-cbz-ink">{accountNo || '0419-88210-9'}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400 font-sans">Amount:</span>
+                      <span className="text-cbz-grey font-medium">Amount:</span>
                       <span className="text-[#E4002B] font-bold">
                         {country.pcur} {amount}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400 font-sans">Auth Ref:</span>
-                      <span>ZK-2026-98124</span>
+                      <span className="text-cbz-grey font-medium">Auth Ref:</span>
+                      <span className="text-cbz-ink">ZK-2026-98124</span>
                     </div>
                   </div>
 

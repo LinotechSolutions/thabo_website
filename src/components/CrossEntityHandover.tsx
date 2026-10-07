@@ -75,17 +75,13 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
               onClick={() => onNavigate('home')}
             />
             <div className="hidden sm:flex items-center space-x-2 text-xs">
-              <span className="px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 font-bold">
-                Connected Journey: Buy a Home
-              </span>
-              <span className="text-slate-300">•</span>
-              <span className="text-slate-500 font-medium">
-                Stage {currentStage} of 4 ({currentEntity.name})
+              <span className="px-2.5 py-0.5 rounded bg-slate-100 text-cbz-ink font-bold">
+                Buy a Home
               </span>
             </div>
           </div>
           <div className="flex items-center space-x-3 text-xs">
-            <span className="text-slate-500 font-mono">Ref: <strong>HM-8842-26</strong></span>
+            <span className="text-cbz-grey">Ref: <strong className="font-bold text-cbz-ink">HM-8842-26</strong></span>
             <button
               onClick={() => onNavigate('home')}
               className="text-[#E4002B] font-bold hover:underline cursor-pointer"
@@ -100,15 +96,15 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
       <div className="bg-[#001736] text-white py-2.5 px-4 sm:px-6 lg:px-8 text-xs">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center space-x-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-[#E4002B] text-white text-xs font-extrabold uppercase tracking-wider">
-              Consensual Group Data Sharing
-            </span>
             <span className="font-bold">Client: Nyasha Chikore</span>
-            <span className="text-white/60 hidden md:inline">
-              · Verified under Cyber & Data Protection Act [Cap 11:12]
+            <span className="text-white/70 hidden md:inline">
+              · You agreed to share your details across CBZ companies on 2 Oct 2026.
             </span>
+            <button type="button" className="text-white/90 underline hover:text-white cursor-pointer ml-1">
+              Manage consent
+            </button>
           </div>
-          <div className="flex items-center space-x-3 text-xs text-slate-300">
+          <div className="flex items-center space-x-3 text-xs text-white/80">
             <span>Current Handler: <strong className="text-white">{currentEntity.name}</strong></span>
           </div>
         </div>
@@ -133,7 +129,7 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                       : 'border-transparent hover:bg-slate-50'
                   }`}
                 >
-                  <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400">
+                  <div className="text-xs font-extrabold uppercase tracking-wider text-cbz-grey">
                     {stg.num === 5 ? 'SUMMARY' : `STAGE 0${stg.num}`}
                   </div>
                   <div
@@ -142,7 +138,7 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                         ? 'text-[#E4002B]'
                         : isDone
                         ? 'text-[#002554]'
-                        : 'text-slate-500'
+                        : 'text-cbz-grey'
                     }`}
                   >
                     {stg.entity}
@@ -164,13 +160,10 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
               <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <span className="text-xs font-extrabold uppercase tracking-widest text-[#E4002B]">
-                      Stage 1 of 4 · CBZ Properties
-                    </span>
                     <h3 className="text-2xl sm:text-3xl font-black text-[#002554] mt-0.5">
                       Bloomingdale Cluster — Unit 14
                     </h3>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-cbz-grey mt-1">
                       Property mandate held exclusively by CBZ Properties. Certified sworn valuation and title deed search already verified.
                     </p>
                   </div>
@@ -214,22 +207,28 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                       <span className="font-bold text-slate-800">Clear · Free of Encumbrance</span>
                     </div>
                     <div className="flex justify-between py-1.5 border-b border-slate-100">
-                      <span className="text-slate-500">Reservation Status:</span>
-                      <span className="font-bold text-emerald-600">Reserved for You until Friday</span>
+                      <span className="text-cbz-grey">Reservation Status:</span>
+                      <div className="text-right">
+                        <span className="font-bold text-amber-600 block">Reserved until Fri 9 Oct 2026, 17:00</span>
+                        <span className="text-[11px] text-cbz-grey">Held exclusively during mortgage underwriting</span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-4 bg-blue-50/70 border border-blue-200 rounded-xl text-xs text-slate-600">
+                <div className="p-4 bg-blue-50/70 border border-blue-200 rounded-xl text-xs text-cbz-ink">
                   Because the valuation was prepared by CBZ Properties, CBZ Bank accepts it directly without commissioning a duplicate appraisal.
                 </div>
 
-                <div className="pt-4 flex justify-end">
+                <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <span className="text-xs text-cbz-grey">
+                    Next: CBZ Bank reviews your application (about 2 days)
+                  </span>
                   <button
                     onClick={triggerNextStage}
                     className="px-6 py-3.5 bg-[#002554] hover:bg-[#0A3E80] text-white text-xs font-bold rounded-xl flex items-center space-x-1.5 cursor-pointer shadow-xs"
                   >
-                    <span>Handover to CBZ Bank for Mortgage</span>
+                    <span>Continue to Mortgage</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -240,13 +239,10 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
             {currentStage === 2 && (
               <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
                 <div>
-                  <span className="text-xs font-extrabold uppercase tracking-widest text-[#E4002B]">
-                    Stage 2 of 4 · CBZ Bank
-                  </span>
                   <h3 className="text-2xl sm:text-3xl font-black text-[#002554] mt-0.5">
-                    Your Mortgage, Pre-Filled from SBU 1
+                    Your Mortgage, Pre-Filled from Property Reservation
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-cbz-grey mt-1">
                     Everything captured at CBZ Properties has carried forward. Only your current monthly income is required to confirm loan pricing.
                   </p>
                 </div>
@@ -260,39 +256,39 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                       type="text"
                       readOnly
                       value={formatMoney(165000, country)}
-                      className="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-lg text-slate-800 font-bold font-mono"
+                      className="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-lg text-cbz-ink font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-bold text-slate-700 mb-1">
+                    <label className="block font-bold text-cbz-ink mb-1">
                       Sworn Valuation <span className="text-emerald-600 text-xs font-extrabold">(Carried)</span>
                     </label>
                     <input
                       type="text"
                       readOnly
                       value={formatMoney(171000, country)}
-                      className="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-lg text-slate-800 font-bold font-mono"
+                      className="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-lg text-cbz-ink font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-bold text-slate-700 mb-1">Buyer Deposit (20%)</label>
+                    <label className="block font-bold text-cbz-ink mb-1">Buyer Deposit (20%)</label>
                     <input
                       type="text"
                       readOnly
                       value={formatMoney(33000, country)}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 font-bold font-mono"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-cbz-ink font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-bold text-slate-700 mb-1">Mortgage Term</label>
+                    <label className="block font-bold text-cbz-ink mb-1">Mortgage Term</label>
                     <input
                       type="text"
                       readOnly
                       value="20 Years (240 Monthly Payments)"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 font-medium"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-cbz-ink font-medium"
                     />
                   </div>
 
@@ -304,7 +300,7 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                       type="number"
                       value={monthlyIncome}
                       onChange={(e) => setMonthlyIncome(e.target.value)}
-                      className="w-full px-4 py-3 bg-white border-2 border-[#E4002B] rounded-xl text-slate-900 font-black text-sm font-mono focus:outline-none"
+                      className="w-full px-4 py-3 bg-white border-2 border-[#E4002B] rounded-xl text-cbz-ink font-black text-sm focus:outline-none"
                     />
                   </div>
                 </div>
@@ -373,26 +369,26 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                   </div>
                 </div>
 
-                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5 text-xs font-mono">
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Risk Address:</span>
-                    <span className="font-bold">Unit 14, Bloomingdale Cluster, Harare North</span>
+                    <span className="text-cbz-grey font-medium">Risk Address:</span>
+                    <span className="font-bold text-cbz-ink">Unit 14, Bloomingdale Cluster, Harare North</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Sum Insured (Replacement Cost):</span>
+                    <span className="text-cbz-grey font-medium">Sum Insured (Replacement Cost):</span>
                     <strong className="text-[#002554]">{formatMoney(171000, country)}</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Monthly Buildings Premium:</span>
+                    <span className="text-cbz-grey font-medium">Monthly Buildings Premium:</span>
                     <strong className="text-[#E4002B] text-sm">{formatMoney(41, country)} / mo</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Mortgagee Clause:</span>
-                    <span className="font-bold text-slate-800">CBZ Bank Limited Endorsed</span>
+                    <span className="text-cbz-grey font-medium">Mortgagee Clause:</span>
+                    <span className="font-bold text-cbz-ink">CBZ Bank Limited Endorsed</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Billing Alignment:</span>
-                    <span>28th of every month (Synced with loan instalment)</span>
+                    <span className="text-cbz-grey font-medium">Billing Alignment:</span>
+                    <span className="text-cbz-ink">28th of every month (Synced with loan instalment)</span>
                   </div>
                 </div>
 
@@ -430,27 +426,27 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                   <h3 className="text-2xl sm:text-3xl font-black text-[#002554] mt-0.5">
                     Mortgage Protection Shield
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-cbz-grey mt-1">
                     Decreasing term credit life cover exactly matches the declining balance of your mortgage over 20 years.
                   </p>
                 </div>
 
-                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5 text-xs font-mono">
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Required Life Sum Assured:</span>
+                    <span className="text-cbz-grey font-medium">Required Life Sum Assured:</span>
                     <strong className="text-[#002554]">{formatMoney(132000, country)}</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Monthly Credit Life Premium:</span>
+                    <span className="text-cbz-grey font-medium">Monthly Credit Life Premium:</span>
                     <strong className="text-[#E4002B] text-sm">{formatMoney(27, country)} / mo</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Medical Exam Status:</span>
+                    <span className="text-cbz-grey font-medium">Medical Exam Status:</span>
                     <span className="text-emerald-700 font-bold">Waived (Good standing banking history)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 font-sans">Beneficiary Designation:</span>
-                    <span>Carried from verified Group Profile</span>
+                    <span className="text-cbz-grey font-medium">Beneficiary Designation:</span>
+                    <span className="text-cbz-ink">Carried from verified Group Profile</span>
                   </div>
                 </div>
 
@@ -492,29 +488,29 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                 {/* 3 Components Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <span className="text-xs font-bold text-slate-400 uppercase">CBZ Bank</span>
+                    <span className="text-xs font-bold text-cbz-grey uppercase">CBZ Bank</span>
                     <div className="font-bold text-xs text-[#002554] mt-1">Home Mortgage</div>
                     <div className="text-lg font-black text-[#002554] mt-2">
                       {formatMoney(1232, country)}
-                      <span className="text-xs font-normal text-slate-500"> /mo</span>
+                      <span className="text-xs font-normal text-cbz-grey"> /mo</span>
                     </div>
                   </div>
 
                   <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <span className="text-xs font-bold text-slate-400 uppercase">CBZ Insurance</span>
+                    <span className="text-xs font-bold text-cbz-grey uppercase">CBZ Insurance</span>
                     <div className="font-bold text-xs text-[#002554] mt-1">Buildings Policy</div>
                     <div className="text-lg font-black text-[#002554] mt-2">
                       {formatMoney(41, country)}
-                      <span className="text-xs font-normal text-slate-500"> /mo</span>
+                      <span className="text-xs font-normal text-cbz-grey"> /mo</span>
                     </div>
                   </div>
 
                   <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <span className="text-xs font-bold text-slate-400 uppercase">CBZ Life</span>
+                    <span className="text-xs font-bold text-cbz-grey uppercase">CBZ Life</span>
                     <div className="font-bold text-xs text-[#002554] mt-1">Mortgage Protection</div>
                     <div className="text-lg font-black text-[#002554] mt-2">
                       {formatMoney(27, country)}
-                      <span className="text-xs font-normal text-slate-500"> /mo</span>
+                      <span className="text-xs font-normal text-cbz-grey"> /mo</span>
                     </div>
                   </div>
                 </div>
@@ -537,13 +533,13 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                 {/* Comparison Grid: Traditional vs CBZ Ecosystem */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-                    <span className="font-bold text-slate-400 uppercase text-xs">
+                    <span className="font-bold text-cbz-grey uppercase text-xs">
                       Traditional 4-Site Experience
                     </span>
-                    <div className="text-slate-600">❌ 4 separate application forms</div>
-                    <div className="text-slate-600">❌ 38 redundant form fields</div>
-                    <div className="text-slate-600">❌ 2-3 physical branch visits</div>
-                    <div className="text-slate-600">❌ 2-3 weeks elapsed processing</div>
+                    <div className="text-cbz-grey">❌ 4 separate application forms</div>
+                    <div className="text-cbz-grey">❌ 38 redundant form fields</div>
+                    <div className="text-cbz-grey">❌ 2-3 physical branch visits</div>
+                    <div className="text-cbz-grey">❌ 2-3 weeks elapsed processing</div>
                   </div>
 
                   <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1.5 text-emerald-900">
@@ -619,8 +615,8 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
               </div>
             </div>
 
-            {/* Field Entries List */}
-            <div className="space-y-2 pt-2 border-t border-slate-100 max-h-96 overflow-y-auto pr-1 text-xs">
+            {/* Field Entries List (No nested scroll area) */}
+            <div className="space-y-2 pt-2 border-t border-slate-100 text-xs">
               {LEDGER_DATA.map((item, idx) => {
                 const isAvailable = item.stage <= currentStage;
                 return (
@@ -658,7 +654,7 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
             <div className="flex justify-between items-start border-b border-slate-100 pb-4">
               <div>
                 <span className="text-xs font-extrabold uppercase tracking-wider text-[#E4002B]">
-                  Handover Data Packet · SBU {showHandoverModal - 1} → SBU {showHandoverModal}
+                  Instant Handover Packet · Step 0{showHandoverModal - 1} → Step 0{showHandoverModal}
                 </span>
                 <h4 className="text-xl font-black text-[#002554] mt-0.5">
                   {HANDOVER_TRANSITIONS[showHandoverModal]?.from} → {HANDOVER_TRANSITIONS[showHandoverModal]?.to}

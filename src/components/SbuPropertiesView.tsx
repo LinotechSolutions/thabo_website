@@ -82,19 +82,19 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
               <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-100">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-[#002554]">15+</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Master Developments
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-[#E4002B]">Sworn</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Certified Valuers
                   </div>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xl font-black text-amber-700">100%</div>
-                  <div className="text-xs uppercase font-bold text-slate-400 mt-0.5">
+                  <div className="text-xs uppercase font-bold text-cbz-grey mt-0.5">
                     Mortgage Pipeline
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                 </div>
                 <div>
                   <div className="text-xs font-bold text-[#002554]">Bloomingdale Clusters</div>
-                  <div className="text-xs text-slate-500">4-Bed Duplex Units · Harare North</div>
+                  <div className="text-xs text-cbz-grey">4-Bed Duplex Units · Harare North</div>
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
             <h2 className="text-2xl sm:text-3xl font-black text-[#002554] mt-1">
               From Master-Plan Discovery to Title Deeds & Yield
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-2">
+            <p className="text-xs sm:text-sm text-cbz-grey mt-2">
               Experience the complete real estate lifecycle backed by the unified ecosystem of CBZ Properties, CBZ Bank, and CBZ Insurance.
             </p>
           </div>
@@ -156,7 +156,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                   <div className="flex items-center justify-between mb-3">
                     <span
                       className={`text-xl font-black ${
-                        isActive ? 'text-[#E4002B]' : 'text-slate-400'
+                        isActive ? 'text-[#E4002B]' : 'text-cbz-grey'
                       }`}
                     >
                       {stage.step}
@@ -209,13 +209,13 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                   {selectedStage.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-cbz-grey leading-relaxed">
                   {selectedStage.description}
                 </p>
 
                 {/* Deliverables List */}
                 <div className="pt-2">
-                  <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2.5">
+                  <div className="text-xs font-extrabold uppercase tracking-wider text-cbz-grey mb-2.5">
                     Guaranteed Stage Deliverables:
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -248,7 +248,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
 
                 <div className="space-y-3 pt-4 border-t border-white/10">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400">Next Stage Transition:</span>
+                    <span className="text-white/70">Next Stage Transition:</span>
                     <span className="font-bold text-amber-300">
                       {selectedStageIndex < PROPERTY_LIFECYCLE.length - 1
                         ? `Stage 0${selectedStageIndex + 2}: ${PROPERTY_LIFECYCLE[selectedStageIndex + 1].phase}`
@@ -268,7 +268,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                       onClick={() => onNavigate('group')}
                       className="w-full py-2.5 px-4 bg-[#E4002B] hover:bg-[#C50025] text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer"
                     >
-                      <span>Test Interactive 4-SBU Handover</span>
+                      <span>Start Home Application</span>
                     </button>
                   )}
                 </div>
@@ -364,7 +364,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                   The Signature Group Handover
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-black text-white">
-                  Buy a Cluster Home Across 4 CBZ Subsidiaries in 1 Flow
+                  Buy a Home with One Application
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
                   See how CBZ Properties passes your chosen home directly to CBZ Bank for 15-year mortgage approval, CBZ Insurance for homeowner building cover, and CBZ Life for mortgage loan shield — eliminating 27 redundant form fields along the way.
@@ -376,7 +376,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                   onClick={() => onNavigate('group')}
                   className="w-full py-3.5 px-5 bg-[#E4002B] hover:bg-[#C50025] text-white font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer flex items-center justify-center space-x-2"
                 >
-                  <span>Launch 4-SBU Handover Demo</span>
+                  <span>Start Home Application</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
                 <button

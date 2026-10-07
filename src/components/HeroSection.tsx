@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { ScreenType, Country } from '../types';
 import { GOALS } from '../data/cbzData';
+import { GROUP_FACTS, CONTACT } from '../data/facts';
 
 interface HeroSectionProps {
   country: Country;
@@ -87,8 +88,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
-              Commercial banking, insurance, asset management, property development, and agri-finance — nine synergised institutions powering your financial journey under one trusted balance sheet.
+            <p className="text-base sm:text-lg text-cbz-grey max-w-2xl leading-relaxed font-normal">
+              Commercial banking, insurance, asset management, property development, and agri-finance — {GROUP_FACTS.companies.value} synergised institutions powering your financial journey under one trusted balance sheet.
             </p>
 
             {/* Action Buttons: Prioritizing "Open an Account" (the primary customer goal) */}
@@ -117,29 +118,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   className="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-all duration-150 flex items-center space-x-2 cursor-pointer"
                 >
                   <PhoneCall className="w-4 h-4 text-[#E4002B]" />
-                  <span>Toll-Free 460 / 461</span>
+                  <span>Toll-Free {CONTACT.tollFreeLabel}</span>
                 </button>
               )}
             </div>
 
             {/* Credibility Institutional Badges */}
-            <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center gap-6 text-xs text-slate-600">
+            <div className="pt-4 border-t border-cbz-line flex flex-wrap items-center gap-6 text-xs text-cbz-grey">
               <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-[#E4002B]" />
+                <CheckCircle2 className="w-4 h-4 text-cbz-red" />
                 <span>
-                  <strong>46 Years</strong> of Market Leadership
+                  <strong>{GROUP_FACTS.years.value}</strong> of Market Leadership
                 </span>
               </div>
               <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-[#002554]" />
+                <CheckCircle2 className="w-4 h-4 text-cbz-blue" />
                 <span>
                   <strong>ZSE: CBZ</strong> Listed Since 1998
                 </span>
               </div>
               <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <CheckCircle2 className="w-4 h-4 text-status-success" />
                 <span>
-                  <strong>9 Synergised</strong> Business Units
+                  <strong>{GROUP_FACTS.companies.value}</strong> Synergised
                 </span>
               </div>
             </div>
@@ -175,7 +176,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     <UserPlus className="w-3.5 h-3.5 text-[#E4002B]" />
                     <span>New to CBZ?</span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <p className="text-[11px] text-cbz-grey mt-0.5">
                     Open SmartCash or Nostro FCA with zero ledger fees.
                   </p>
                   {onOpenAccount && (
@@ -194,8 +195,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     <PhoneCall className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Need Immediate Help?</span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
-                    Toll-free 460 or WhatsApp +263 774 460 460 available 24/7.
+                  <p className="text-[11px] text-cbz-grey mt-0.5">
+                    Toll-free {CONTACT.tollFreeLabel} or WhatsApp {CONTACT.whatsapp.display} available 24/7.
                   </p>
                   {onOpenContact && (
                     <button
@@ -242,11 +243,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     }
                   }}
                   placeholder="e.g. Open an account, insure my car, apply for mortgage, invest with Datvest..."
-                  className="w-full pl-4 pr-10 py-3 bg-white rounded-xl text-sm font-medium border border-slate-300 focus:outline-none focus:border-[#002554] text-slate-800 placeholder-slate-400 transition-all shadow-2xs"
+                  className="w-full pl-4 pr-10 py-3 bg-white rounded-xl text-sm font-medium border border-cbz-line focus:outline-none focus:border-cbz-blue text-cbz-ink placeholder-cbz-grey transition-all shadow-2xs"
                 />
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-cbz-grey hover:text-cbz-ink cursor-pointer"
                   aria-label="Toggle options"
                 >
                   <ChevronDown
@@ -260,7 +261,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Autocomplete Dropdown List */}
               {isOpen && (
                 <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-xl z-50 p-2 text-xs divide-y divide-slate-50 animate-in fade-in zoom-in-95 duration-100">
-                  <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-cbz-grey">
                     Suggested Client Journeys
                   </div>
                   <div className="py-1">
@@ -275,7 +276,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             {goal.label}
                           </div>
                           <div className="flex items-center space-x-2">
-                            <span className="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                            <span className="text-xs text-cbz-grey bg-cbz-surface px-2 py-0.5 rounded">
                               {goal.subsidiary}
                             </span>
                             {goal.route && (
@@ -287,7 +288,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         </div>
                       ))
                     ) : (
-                      <div className="p-3 text-center text-slate-500">
+                      <div className="p-3 text-center text-cbz-grey">
                         No exact match. Click "Show me how" to explore recommendations.
                       </div>
                     )}
@@ -308,7 +309,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
           {/* Quick Shortcuts Bar */}
           <div className="pt-4 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <span className="text-slate-500 font-bold uppercase tracking-wider text-[11px]">
+            <span className="text-cbz-grey font-bold uppercase tracking-wider text-[11px]">
               Direct Shortcuts:
             </span>
             <div className="flex flex-wrap items-center gap-2">
@@ -319,7 +320,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#E4002B] hover:text-[#E4002B] text-slate-800 font-bold transition-colors flex items-center space-x-1.5 cursor-pointer shadow-2xs"
                 >
                   <UserPlus className="w-3.5 h-3.5 text-[#E4002B]" />
-                  <span>Open SmartCash / Nostro</span>
+                  <span>Open a USD account</span>
                 </button>
               )}
               <button
@@ -335,7 +336,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 onClick={() => onNavigate('group')}
                 className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#002554] text-slate-800 font-semibold transition-colors flex items-center space-x-1 cursor-pointer shadow-2xs"
               >
-                <span>Buy a Home (4-SBU Flow)</span>
+                <span>Buy a home</span>
               </button>
               <button
                 type="button"

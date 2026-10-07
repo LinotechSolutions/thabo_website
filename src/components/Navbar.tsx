@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-0.5 whitespace-nowrap">
             {navItems.map((item) => {
               const isOpen = activeMega === item.key;
               const isCurrent = isItemActive(item.key);
@@ -118,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         setActiveMega(null);
                       }
                     }}
-                    className={`relative flex items-center space-x-1 px-3.5 py-2 font-medium text-[13.5px] transition-colors cursor-pointer ${
+                    className={`relative flex items-center space-x-1 px-3 py-2 font-medium text-[13px] transition-colors cursor-pointer whitespace-nowrap ${
                       isOpen || isCurrent
                         ? 'text-[#002554] font-bold'
                         : 'text-slate-700 hover:text-[#002554]'
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Login Dropdown */}
               {authDropdown && (
                 <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 text-xs">
-                  <div className="px-3 py-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <div className="px-3 py-1.5 text-xs font-bold text-cbz-grey uppercase tracking-wider">
                     Sign In Portals
                   </div>
                   <button
@@ -203,7 +203,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="w-full text-left px-3.5 py-2 hover:bg-slate-50 font-semibold text-[#002554] flex items-center justify-between cursor-pointer"
                   >
                     <span>Internet Banking (Personal)</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                    <ArrowRight className="w-3.5 h-3.5 text-cbz-grey" />
                   </button>
                   <button
                     onClick={() => {
@@ -213,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="w-full text-left px-3.5 py-2 hover:bg-slate-50 font-semibold text-[#002554] flex items-center justify-between cursor-pointer"
                   >
                     <span>Corporate Banking</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                    <ArrowRight className="w-3.5 h-3.5 text-cbz-grey" />
                   </button>
                   <button
                     onClick={() => {
@@ -223,7 +223,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="w-full text-left px-3.5 py-2 hover:bg-slate-50 font-semibold text-[#002554] flex items-center justify-between cursor-pointer"
                   >
                     <span>CBZ Self-Service Hub</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                    <ArrowRight className="w-3.5 h-3.5 text-cbz-grey" />
                   </button>
                 </div>
               )}
@@ -361,7 +361,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-3"
             >
               <div className="relative flex-1">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-cbz-grey absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={searchQuery}
@@ -384,7 +384,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Quick search suggestions row to prevent silent failure */}
             <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
-              <span className="text-slate-400 font-medium">
+              <span className="text-cbz-grey font-medium">
                 {searchFeedback || 'Suggested:'}
               </span>
               <button
@@ -463,7 +463,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {activeMega === 'bank' && (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Everyday Banking
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -516,7 +516,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Borrowing & Mortgages
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -570,7 +570,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Microfinance & SME
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -653,7 +653,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       }}
                       className="w-full py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 transition-all flex items-center justify-center space-x-1 cursor-pointer"
                     >
-                      <span>Buy a Home (4-SBU Handover)</span>
+                      <span>Buy a Home (One Application)</span>
                     </button>
                   </div>
                 </div>
@@ -664,7 +664,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {activeMega === 'ins' && (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Short-Term Insurance
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -686,7 +686,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Life Assurance
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -699,7 +699,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Risk Advisory
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -774,7 +774,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* 3. THE GROUP MEGA MENU */}
             {activeMega === 'group' && (
               <div>
-                <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-4">
+                <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-4">
                   The Unified CBZ Ecosystem · 9 Integrated Businesses
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -816,7 +816,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {activeMega === 'prop' && (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Residential Real Estate
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -837,7 +837,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Commercial Real Estate
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -849,7 +849,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Valuation & Advisory
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -898,7 +898,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         Unified Journey
                       </span>
                       <h4 className="font-bold text-xs text-[#002554] mb-1">
-                        Bloomingdale 4-SBU Flow
+                        Bloomingdale Home Journey
                       </h4>
                       <p className="text-xs text-slate-500 leading-relaxed mb-3">
                         Seamless property selection, bank mortgage, and home cover with zero re-keying.
@@ -923,7 +923,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {activeMega === 'inv' && (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Datvest Asset Management
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -936,7 +936,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Private Wealth & Advisory
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -949,7 +949,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Securities & Capital Markets
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -998,7 +998,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {activeMega === 'agro' && (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     CBZ Agro-Yield
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -1011,7 +1011,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Farm Infrastructure & Tech
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -1024,7 +1024,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3.5">
+                  <div className="text-xs font-bold tracking-wider text-cbz-grey uppercase mb-3.5">
                     Value Chain & Trade Finance
                   </div>
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
@@ -1075,7 +1075,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-4">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+          <div className="text-xs font-bold text-cbz-grey uppercase tracking-wider">
             Explore Portals
           </div>
           <div className="space-y-1.5">
@@ -1172,7 +1172,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 currentScreen === 'group' ? 'bg-[#E4002B] text-white' : 'text-[#002554] hover:bg-slate-50'
               }`}
             >
-              <span>Handover · Buy a Home (4-SBU Flow)</span>
+              <span>Buy a Home (Unified Application)</span>
               <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">Unified</span>
             </button>
           </div>

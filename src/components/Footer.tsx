@@ -12,6 +12,7 @@ import { CbzLogo } from './CbzLogo';
 import { Country, ScreenType } from '../types';
 import { SUBSIDIARIES } from '../data/cbzData';
 import { SOCIAL_LINKS } from '../data/announcementsData';
+import { CONTACT, branchHoursLine } from '../data/facts';
 
 interface FooterProps {
   country: Country;
@@ -40,8 +41,8 @@ export const Footer: React.FC<FooterProps> = ({
                 <PhoneCall className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[10px] uppercase font-bold text-slate-400">Toll-Free (All Networks)</div>
-                <div className="font-mono text-sm font-bold text-white">460 / 461</div>
+                <div className="text-[10px] uppercase font-bold text-white/60">Toll-Free (All Networks)</div>
+                <div className="text-sm font-bold text-white tabular-nums">{CONTACT.tollFreeLabel}</div>
               </div>
             </div>
 
@@ -50,8 +51,8 @@ export const Footer: React.FC<FooterProps> = ({
                 <MessageSquare className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[10px] uppercase font-bold text-slate-400">WhatsApp Assistant</div>
-                <div className="font-mono text-sm font-bold text-white">+263 774 460 460</div>
+                <div className="text-[10px] uppercase font-bold text-white/60">WhatsApp Assistant</div>
+                <div className="text-sm font-bold text-white tabular-nums">{CONTACT.whatsapp.display}</div>
               </div>
             </div>
 
@@ -60,15 +61,15 @@ export const Footer: React.FC<FooterProps> = ({
                 <Mail className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[10px] uppercase font-bold text-slate-400">Client Support Email</div>
-                <div className="text-xs font-bold text-white">contactcentre@cbz.co.zw</div>
+                <div className="text-[10px] uppercase font-bold text-white/60">Client Support Email</div>
+                <div className="text-xs font-bold text-white">{CONTACT.email}</div>
               </div>
             </div>
           </div>
 
           {/* Social Media Links (Verified Official Channels) */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-white/60 uppercase tracking-wider whitespace-nowrap">
               Follow CBZ Holdings:
             </span>
             <div className="flex items-center space-x-2">
@@ -99,12 +100,12 @@ export const Footer: React.FC<FooterProps> = ({
               lightMode={false}
               onClick={() => onNavigate('home')}
             />
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-white/70 leading-relaxed">
               A premier, diversified financial services powerhouse listed on the Zimbabwe Stock Exchange. Your partner for sustainable success.
             </p>
-            <div className="text-xs text-slate-400 space-y-1">
-              <div>5 Campbell Road, Pomona, Harare</div>
-              <div>Tel: +263 24 2799 234-9 · 8677 004050</div>
+            <div className="text-xs text-white/60 space-y-1">
+              <div>{CONTACT.address}</div>
+              <div>Tel: <span className="tabular-nums">{CONTACT.switchboard.display}</span></div>
             </div>
 
             {onOpenAccount && (
@@ -143,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Column 2: Personal & Business */}
           <div>
-            <div className="text-xs font-extrabold uppercase tracking-widest text-slate-300 mb-3">
+            <div className="text-xs font-extrabold uppercase tracking-widest text-white/60 mb-3">
               Core Offerings
             </div>
             <ul className="space-y-1.5 text-xs text-slate-300">
@@ -170,7 +171,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Column 3: Digital Platforms */}
           <div>
-            <div className="text-xs font-extrabold uppercase tracking-widest text-slate-300 mb-3">
+            <div className="text-xs font-extrabold uppercase tracking-widest text-white/60 mb-3">
               Digital Platforms
             </div>
             <ul className="space-y-1.5 text-xs text-slate-300">
@@ -185,7 +186,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Column 4: Governance & Legal */}
           <div>
-            <div className="text-xs font-extrabold uppercase tracking-widest text-slate-300 mb-3">
+            <div className="text-xs font-extrabold uppercase tracking-widest text-white/60 mb-3">
               Governance & Disclosures
             </div>
             <ul className="space-y-1.5 text-xs text-slate-300">
@@ -211,7 +212,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Bottom Tier: Copyright, Regulator & Market Notice */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <div>
             © 2026 CBZ Holdings Limited. All rights reserved. A registered financial holding institution.
           </div>

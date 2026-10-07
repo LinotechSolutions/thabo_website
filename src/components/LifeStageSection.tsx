@@ -41,7 +41,7 @@ export const LifeStageSection: React.FC<LifeStageSectionProps> = ({ onNavigate }
               One Group, Built Around Your Life
             </h3>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-md mt-2 md:mt-0 leading-relaxed">
+          <p className="text-xs sm:text-sm text-cbz-grey max-w-md mt-2 md:mt-0 leading-relaxed">
             Move effortlessly between commercial banking, family insurance, asset building, and real estate under one trusted brand.
           </p>
         </div>
@@ -60,7 +60,7 @@ export const LifeStageSection: React.FC<LifeStageSectionProps> = ({ onNavigate }
                 <h4 className="font-bold text-base text-[#002554] group-hover:text-[#E4002B] transition-colors">
                   {stage.title}
                 </h4>
-                <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                <p className="text-xs text-cbz-grey mt-1.5 leading-relaxed">
                   {stage.subtitle}
                 </p>
               </div>
