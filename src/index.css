@@ -1,47 +1,139 @@
 @import "tailwindcss";
 
+/*
+ * CBZ Sans — primary typeface (Brand Identity Guideline 1.0).
+ * TODO(font): the WOFF2 files are not in the repo yet. Drop them into
+ * public/fonts/cbz-sans/ with these names and the slots below pick them up.
+ * Until then text renders in the system fallback stack defined in --font-sans.
+ */
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/cbz-sans/CBZSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/cbz-sans/CBZSans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/cbz-sans/CBZSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/cbz-sans/CBZSans-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * Design tokens. Defined in @theme so Tailwind generates utilities:
+ *   bg-cbz-red, text-cbz-blue, text-cbz-grey, bg-cbz-blue-900, border-cbz-line, …
+ * Brand colours: Red #E4002B, Blue #002554, Grey #636466. Blue 900 #001736 is
+ * the approved dark shade for the top bar and footer.
+ * Green and amber are STATUS colours only (success / warning), never decoration.
+ * WhatsApp green is allowed on WhatsApp elements only.
+ */
+@theme {
+  --font-sans: 'CBZ Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* No monospace in the UI: anything still using font-mono falls back to the brand sans. */
+  --font-mono: var(--font-sans);
+
+  /* Red */
+  --color-cbz-red: #E4002B;
+  --color-cbz-red-hover: #C50025;
+  --color-cbz-red-700: #920019;
+  --color-cbz-red-50: #FFF1F3;
+
+  /* Blue */
+  --color-cbz-blue: #002554;
+  --color-cbz-blue-900: #001736;
+  --color-cbz-blue-700: #0A3E80;
+  --color-cbz-blue-100: #DCE6F2;
+  --color-cbz-blue-50: #F0F5FC;
+
+  /* Grey — #636466 is the minimum for secondary text on white (5.9:1). */
+  --color-cbz-grey: #636466;
+  --color-cbz-ink: #1D1D1F;
+  --color-cbz-line: #DDE1E6;
+  --color-cbz-surface: #F6F7F9;
+
+  /* Status (text values pass 4.5:1 on white) */
+  --color-status-success: #007A56;
+  --color-status-success-50: #E8F5EF;
+  --color-status-warning: #8A5300;
+  --color-status-warning-50: #FFF5E0;
+  --color-status-error: #C50025;
+
+  /* WhatsApp (WhatsApp elements only). Text on this green must be cbz-blue-900. */
+  --color-whatsapp: #25D366;
+}
+
 @layer base {
   :root {
-    --cbz-red: #E4002B;
-    --cbz-red-hover: #C50025;
-    --cbz-red-dark: #920019;
-    --cbz-red-light: #FFF1F3;
-    --cbz-navy: #002554;
-    --cbz-navy-dark: #001736;
-    --cbz-navy-light: #0A3E80;
-    --cbz-navy-soft: #F0F5FC;
-    --cbz-gold: #C59B27;
+    /* Legacy aliases kept so older inline var() references keep working. */
+    --cbz-red: var(--color-cbz-red);
+    --cbz-red-hover: var(--color-cbz-red-hover);
+    --cbz-navy: var(--color-cbz-blue);
+    --cbz-navy-dark: var(--color-cbz-blue-900);
+    --cbz-grey: var(--color-cbz-grey);
   }
 
   body {
-    font-family: 'Poppins', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-sans);
+    color: var(--color-cbz-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cbz-blue);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible,
+  :is(.bg-cbz-blue, .bg-cbz-blue-900) :focus-visible {
+    outline-color: #FFFFFF;
   }
 }
 
-/* Custom smooth animation & scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Glassmorphism & Soft shadows */
+/* DEPRECATED — to be removed in Phase 3 once no component references them. */
 .glass-panel {
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
-
 .cbz-shadow-sm {
   box-shadow: 0 2px 8px -2px rgba(0, 37, 84, 0.05), 0 1px 4px -1px rgba(0, 37, 84, 0.04);
 }
-
 .cbz-shadow-md {
   box-shadow: 0 8px 24px -4px rgba(0, 37, 84, 0.08), 0 2px 6px -1px rgba(0, 37, 84, 0.04);
 }
-
 .cbz-shadow-lg {
   box-shadow: 0 20px 40px -8px rgba(0, 37, 84, 0.12), 0 4px 12px -2px rgba(0, 37, 84, 0.06);
 }
-
 .cbz-shadow-red {
-  box-shadow: 0 8px 24px -4px rgba(228, 0, 43, 0.28);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { ScreenType, Country } from './types';
+import React, { useState } from 'react';
+import { Country } from './types';
+import { useScreenRoute } from './lib/routes';
 import { COUNTRIES } from './data/cbzData';
 import { TopUtilityBar } from './components/TopUtilityBar';
 import { Navbar } from './components/Navbar';
@@ -25,17 +26,13 @@ import { Footer } from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState<ScreenType>('home');
+  // URL-backed screen state (see src/lib/routes.ts). navigate() pushes history and scrolls to top.
+  const [currentScreen, setCurrentScreen] = useScreenRoute();
   const [currentCountry, setCurrentCountry] = useState<Country>(COUNTRIES[0]);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [loginPortal, setLoginPortal] = useState<PortalType>('personal');
   const [isOpenAccountOpen, setIsOpenAccountOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-
-  // Scroll to top on screen change
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentScreen]);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">

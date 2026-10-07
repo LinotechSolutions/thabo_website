@@ -1,0 +1,118 @@
+{
+  "holdings-full": {
+    "source": "public/Logos/holdings/Full colour.svg",
+    "aspect": 2.666
+  },
+  "holdings-white": {
+    "source": "public/Logos/holdings/white.svg",
+    "aspect": 2.666
+  },
+  "holdings-roundel": {
+    "source": "public/Logos/holdings/favicon 16x16 copy.svg",
+    "aspect": 1.0388
+  },
+  "bank-full": {
+    "source": "public/Logos/Bank/Full colour copy.svg",
+    "aspect": 1.9481
+  },
+  "bank-white": {
+    "source": "public/Logos/Bank/white copy.svg",
+    "aspect": 1.9481
+  },
+  "insurance-full": {
+    "source": "public/Logos/Insurance/Full colour copy 3.svg",
+    "aspect": 2.7588
+  },
+  "insurance-white": {
+    "source": "public/Logos/Insurance/white copy 3.svg",
+    "aspect": 2.7588
+  },
+  "life-full": {
+    "source": "public/Logos/life/Full colour copy 2.svg",
+    "aspect": 1.6301
+  },
+  "life-white": {
+    "source": "public/Logos/life/white copy 2.svg",
+    "aspect": 1.6301
+  },
+  "datvest-full": {
+    "source": "public/Logos/DatVest/Full colour copy 12.svg",
+    "aspect": 2.0178
+  },
+  "datvest-white": {
+    "source": "public/Logos/DatVest/white copy 12.svg",
+    "aspect": 2.0178
+  },
+  "datvest-roundel": {
+    "source": "public/Logos/DatVest/favicon 48x48_1.svg",
+    "aspect": 1
+  },
+  "capital-full": {
+    "source": "public/Logos/Capital/Full colour copy 9.svg",
+    "aspect": 2.3194
+  },
+  "capital-white": {
+    "source": "public/Logos/Capital/white copy 9.svg",
+    "aspect": 2.3194
+  },
+  "properties-full": {
+    "source": "public/Logos/Properties/Full colour copy 4.svg",
+    "aspect": 2.8212
+  },
+  "properties-white": {
+    "source": "public/Logos/Properties/white copy 4.svg",
+    "aspect": 2.8212
+  },
+  "agro-yield-full": {
+    "source": "public/Logos/Agro yield/Full colour copy 5.svg",
+    "aspect": 2.8892
+  },
+  "agro-yield-white": {
+    "source": "public/Logos/Agro yield/white copy 5.svg",
+    "aspect": 2.8892
+  },
+  "risk-advisory-full": {
+    "source": "public/Logos/Risk/Full colour copy 10.svg",
+    "aspect": 3.3631
+  },
+  "risk-advisory-white": {
+    "source": "public/Logos/Risk/white copy 10.svg",
+    "aspect": 3.3631
+  },
+  "red-sphere-full": {
+    "source": "public/Logos/Red sphere/Full colour copy 11.svg",
+    "aspect": 4.9137
+  },
+  "red-sphere-white": {
+    "source": "public/Logos/Red sphere/white copy 11.svg",
+    "aspect": 4.9137
+  },
+  "red-sphere-roundel": {
+    "source": "public/Logos/Red sphere/favicon 48x48.svg",
+    "aspect": 1
+  },
+  "cbz-touch-full": {
+    "source": "public/Logos/cbz touch/Full colour copy 16.svg",
+    "aspect": 0.9091
+  },
+  "cbz-touch-white": {
+    "source": "public/Logos/cbz touch/white copy 16.svg",
+    "aspect": 0.9091
+  },
+  "ziki-cash-full": {
+    "source": "public/Logos/Ziki cash/Full colour copy 13.svg",
+    "aspect": 3.6127
+  },
+  "ziki-cash-white": {
+    "source": "public/Logos/Ziki cash/white copy 13.svg",
+    "aspect": 3.6127
+  },
+  "cbz-way-full": {
+    "source": "public/Logos/cbz way/Full colour copy 15.svg",
+    "aspect": 2.8353
+  },
+  "cbz-way-white": {
+    "source": "public/Logos/cbz way/white copy 15.svg",
+    "aspect": 2.8353
+  }
+}

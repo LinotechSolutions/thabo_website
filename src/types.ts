@@ -1,4 +1,20 @@
-export type ScreenType = 'home' | 'journey' | 'sbu' | 'group' | 'login' | 'agro' | 'invest' | 'properties' | 'bank';
+/**
+ * Screen keys. Each has a URL in src/lib/routes.ts.
+ * 'sbu' = CBZ Insurance page, 'group' = Buy a home journey, 'journey' = car insurance quote journey,
+ * 'the-group' = group companies overview, 'login' = log-in portal chooser, 'open-account' = account opening flow.
+ */
+export type ScreenType =
+  | 'home'
+  | 'journey'
+  | 'sbu'
+  | 'group'
+  | 'login'
+  | 'agro'
+  | 'invest'
+  | 'properties'
+  | 'bank'
+  | 'open-account'
+  | 'the-group';
 
 export interface LifecycleStage {
   step: string;
