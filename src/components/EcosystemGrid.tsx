@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, ChevronRight, ExternalLink, ShieldCheck, Building2, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { Subsidiary, ScreenType } from '../types';
 import { SUBSIDIARIES } from '../data/cbzData';
 import { Logo } from './Logo';
@@ -188,63 +188,6 @@ export const EcosystemGrid: React.FC<EcosystemGridProps> = ({ onNavigate }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Directory Matrix of All 9 Subsidiaries (Clean tabular layout, no repetitive box cards) */}
-        <div className="mt-10 border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs divide-y divide-slate-100">
-          <div className="bg-slate-50 px-6 py-3 text-[11px] font-extrabold uppercase tracking-wider text-cbz-grey grid grid-cols-12 gap-4">
-            <div className="col-span-4 sm:col-span-3">Official Logo & Subsidiary</div>
-            <div className="col-span-3 sm:col-span-2">Sector</div>
-            <div className="col-span-5 sm:col-span-5 hidden sm:block">Primary Financial Scope</div>
-            <div className="col-span-5 sm:col-span-2 text-right">Action</div>
-          </div>
-
-          {SUBSIDIARIES.map((sub) => (
-            <div
-              key={sub.id}
-              className="px-6 py-4 grid grid-cols-12 gap-4 items-center hover:bg-slate-50/80 transition-colors"
-            >
-              {/* Logo & Name */}
-              <div className="col-span-4 sm:col-span-3 flex items-center space-x-3">
-                <div className="h-8 min-w-[70px] flex items-center flex-shrink-0">
-                  {renderSubsidiaryLogo(sub, 'sm')}
-                </div>
-              </div>
-
-              {/* Sector */}
-              <div className="col-span-3 sm:col-span-2">
-                <span className="text-xs font-bold text-cbz-ink bg-slate-100 px-2 py-0.5 rounded">
-                  {sub.category}
-                </span>
-              </div>
-
-              {/* Scope */}
-              <div className="col-span-5 hidden sm:block text-xs text-cbz-grey line-clamp-1">
-                {sub.description}
-              </div>
-
-              {/* Action */}
-              <div className="col-span-5 sm:col-span-2 text-right">
-                {sub.screen ? (
-                  <button
-                    onClick={() => onNavigate(sub.screen!)}
-                    className="text-xs font-bold text-[#E4002B] hover:text-[#C50025] inline-flex items-center space-x-1 cursor-pointer"
-                  >
-                    <span>View Portal</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => onNavigate('group')}
-                    className="text-xs font-semibold text-cbz-grey hover:text-cbz-ink inline-flex items-center space-x-1 cursor-pointer"
-                  >
-                    <span>Advisory</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

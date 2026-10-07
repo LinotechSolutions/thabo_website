@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { CONTACT_CHANNELS, SOCIAL_LINKS } from '../data/announcementsData';
 import { CONTACT, BRANCH_HOURS, branchHoursLine } from '../data/facts';
+import { WhatsAppIcon, BrandSocialIcon } from './ui/BrandIcons';
 
 interface ContactChannelsModalProps {
   isOpen: boolean;
@@ -97,8 +98,8 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
 
             <div className="bg-white/10 rounded-xl p-3 border border-white/10 flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center">
-                  <MessageSquare className="w-4 h-4 text-emerald-400" />
+                <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-[#25D366] flex items-center justify-center">
+                  <WhatsAppIcon className="w-4 h-4 fill-current" />
                 </div>
                 <div>
                   <div className="text-[11px] uppercase tracking-wider text-white/70 font-semibold">Official WhatsApp</div>
@@ -181,9 +182,14 @@ export const ContactChannelsModal: React.FC<ContactChannelsModalProps> = ({
                   className="p-3 rounded-xl border border-slate-200 hover:border-[#002554] hover:bg-slate-50 transition-all flex flex-col justify-between group cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-cbz-ink group-hover:text-[#002554]">
-                      {s.name}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="w-4 h-4 flex items-center justify-center text-cbz-grey group-hover:text-[#002554] transition-colors">
+                        <BrandSocialIcon name={s.name} className="w-3.5 h-3.5" />
+                      </span>
+                      <span className="font-bold text-xs text-cbz-ink group-hover:text-[#002554]">
+                        {s.name}
+                      </span>
+                    </div>
                     <ExternalLink className="w-3 h-3 text-cbz-grey group-hover:text-[#E4002B]" />
                   </div>
                   <span className="text-[11px] text-cbz-grey font-medium mt-1">

@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   ChevronDown,
   MapPin,
-  MessageCircle,
   Globe,
   PhoneCall,
   ChevronLeft,
@@ -17,6 +16,7 @@ import { SOCIAL_LINKS } from '../data/announcementsData';
 import { DEMO_MODE } from '../config/env';
 import { tbc, CONTACT } from '../data/facts';
 import { RateDisclosure } from './ui/RateDisclosure';
+import { WhatsAppIcon } from './ui/BrandIcons';
 
 /**
  * Illustrative non-Zimbabwe markets are stakeholder-walkthrough material only.
@@ -229,7 +229,7 @@ export const TopUtilityBar: React.FC<TopUtilityBarProps> = ({
             rel="noreferrer"
             className="hidden sm:flex items-center space-x-1.5 text-emerald-400 hover:text-emerald-300 transition-colors font-semibold text-xs"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
+            <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
             <span className="hidden lg:inline text-white/60">WhatsApp:</span>
             <span>{CONTACT.whatsapp.display}</span>
           </a>

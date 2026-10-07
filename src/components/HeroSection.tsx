@@ -66,149 +66,97 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   return (
-    <section className="bg-white border-b border-slate-200">
+    <section className="relative bg-white border-b border-slate-200 overflow-hidden">
       {/* Top Accent Institutional Strip */}
       <div className="h-1 bg-gradient-to-r from-[#002554] via-[#E4002B] to-[#002554]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Hero Left Content */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* Authoritative Corporate Eyebrow (No generic AI pill with pulse dot) */}
-            <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-[#002554]">
-              <span className="w-1.5 h-4 bg-[#E4002B] rounded-xs inline-block" />
-              <span>CBZ Holdings Limited · Listed on the Zimbabwe Stock Exchange</span>
-            </div>
+      {/* Hero Background Artwork: cbzpicture1 */}
+      <div
+        className="absolute top-2 sm:top-0 right-4 sm:right-10 md:right-16 lg:right-20 xl:right-28 h-[500px] sm:h-[550px] lg:h-[580px] w-4/5 sm:w-3/4 lg:w-3/5 bg-no-repeat pointer-events-none select-none z-0"
+        style={{
+          backgroundImage: "url('/images/cbzpicture1.png')",
+          backgroundPosition: 'right center',
+          backgroundSize: 'contain',
+        }}
+        aria-hidden="true"
+      />
+      {/* Soft gradient wash on smaller screens to ensure complete text contrast */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[600px] bg-gradient-to-r from-white via-white/95 to-transparent sm:via-white/75 lg:hidden pointer-events-none z-0"
+        aria-hidden="true"
+      />
 
-            {/* Dominant Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#002554] leading-[1.08]">
-              One Group.{' '}
-              <span className="text-[#E4002B] block sm:inline">
-                Every Financial Possibility.
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-cbz-grey max-w-2xl leading-relaxed font-normal">
-              Commercial banking, insurance, asset management, property development, and agri-finance — {GROUP_FACTS.companies.value} synergised institutions powering your financial journey under one trusted balance sheet.
-            </p>
-
-            {/* Action Buttons: Prioritizing "Open an Account" (the primary customer goal) */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              {onOpenAccount && (
-                <button
-                  onClick={onOpenAccount}
-                  className="px-6 py-3.5 bg-[#E4002B] hover:bg-[#C50025] text-white text-sm font-bold rounded-xl shadow-md transition-all duration-150 transform hover:-translate-y-0.5 flex items-center space-x-2 cursor-pointer"
-                >
-                  <UserPlus className="w-4 h-4" />
-                  <span>Open an Account</span>
-                </button>
-              )}
-
-              <button
-                onClick={() => onNavigate('group')}
-                className="px-6 py-3.5 bg-[#002554] hover:bg-[#0A3E80] text-white text-sm font-bold rounded-xl shadow-sm transition-all duration-150 flex items-center space-x-2 cursor-pointer"
-              >
-                <span>Explore the 9 Businesses</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              {onOpenContact && (
-                <button
-                  onClick={onOpenContact}
-                  className="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-all duration-150 flex items-center space-x-2 cursor-pointer"
-                >
-                  <PhoneCall className="w-4 h-4 text-[#E4002B]" />
-                  <span>Toll-Free {CONTACT.tollFreeLabel}</span>
-                </button>
-              )}
-            </div>
-
-            {/* Credibility Institutional Badges */}
-            <div className="pt-4 border-t border-cbz-line flex flex-wrap items-center gap-6 text-xs text-cbz-grey">
-              <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-cbz-red" />
-                <span>
-                  <strong>{GROUP_FACTS.years.value}</strong> of Market Leadership
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-cbz-blue" />
-                <span>
-                  <strong>ZSE: CBZ</strong> Listed Since 1998
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-status-success" />
-                <span>
-                  <strong>{GROUP_FACTS.companies.value}</strong> Synergised
-                </span>
-              </div>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 relative z-10">
+        {/* Hero Left Content (Now with background image on the right, card removed) */}
+        <div className="max-w-2xl lg:max-w-3xl space-y-6 pt-2 pb-6">
+          {/* Authoritative Corporate Eyebrow (No generic AI pill with pulse dot) */}
+          <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-[#002554]">
+            <span className="w-1.5 h-4 bg-[#E4002B] rounded-xs inline-block" />
+            <span>CBZ Holdings Limited · Listed on the Zimbabwe Stock Exchange</span>
           </div>
 
-          {/* Hero Right Visual: Authentic Corporate Showcase (De-cardified) */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-md">
-              <div className="relative aspect-[16/10] bg-slate-200 overflow-hidden">
-                <img
-                  src="/images/cbz-banking-branch.jpg"
-                  alt="CBZ Bank Headquarters & Branches"
-                  className="w-full h-full object-cover object-center"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/images/cbz-banking.png';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#001736]/80 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-4 right-4 text-white">
-                  <span className="px-2 py-0.5 rounded bg-[#E4002B] text-[10px] font-bold uppercase tracking-wider">
-                    CBZ Towers · Harare
-                  </span>
-                  <p className="text-sm font-bold mt-1 text-white/95">
-                    Centralising Capital · Powering Sustainable Growth
-                  </p>
-                </div>
-              </div>
+          {/* Dominant Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#002554] leading-[1.08]">
+            One Group.{' '}
+            <span className="text-[#E4002B] block sm:inline">
+              Every Financial Possibility.
+            </span>
+          </h1>
 
-              {/* Fast Action Row: Answering customer intent immediately */}
-              <div className="p-4 grid grid-cols-2 gap-2 text-xs divide-x divide-slate-200">
-                <div className="pr-3">
-                  <div className="font-bold text-[#002554] flex items-center space-x-1.5">
-                    <UserPlus className="w-3.5 h-3.5 text-[#E4002B]" />
-                    <span>New to CBZ?</span>
-                  </div>
-                  <p className="text-[11px] text-cbz-grey mt-0.5">
-                    Open SmartCash or Nostro FCA with zero ledger fees.
-                  </p>
-                  {onOpenAccount && (
-                    <button
-                      onClick={onOpenAccount}
-                      className="mt-2 text-xs font-bold text-[#E4002B] hover:underline flex items-center space-x-1 cursor-pointer"
-                    >
-                      <span>Open in 3 steps</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
+          <p className="text-base sm:text-lg text-cbz-grey max-w-2xl leading-relaxed font-normal">
+            Commercial banking, insurance, asset management, property development, and agri-finance — {GROUP_FACTS.companies.value} synergised institutions powering your financial journey under one trusted balance sheet.
+          </p>
 
-                <div className="pl-3">
-                  <div className="font-bold text-[#002554] flex items-center space-x-1.5">
-                    <PhoneCall className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Need Immediate Help?</span>
-                  </div>
-                  <p className="text-[11px] text-cbz-grey mt-0.5">
-                    Toll-free {CONTACT.tollFreeLabel} or WhatsApp {CONTACT.whatsapp.display} available 24/7.
-                  </p>
-                  {onOpenContact && (
-                    <button
-                      onClick={onOpenContact}
-                      className="mt-2 text-xs font-bold text-[#002554] hover:underline flex items-center space-x-1 cursor-pointer"
-                    >
-                      <span>All 7 Channels</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
-              </div>
+          {/* Action Buttons: Prioritizing "Open an Account" (the primary customer goal) */}
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            {onOpenAccount && (
+              <button
+                onClick={onOpenAccount}
+                className="px-6 py-3.5 bg-[#E4002B] hover:bg-[#C50025] text-white text-sm font-bold rounded-xl shadow-md transition-all duration-150 transform hover:-translate-y-0.5 flex items-center space-x-2 cursor-pointer"
+              >
+                <UserPlus className="w-4 h-4" />
+                <span>Open an Account</span>
+              </button>
+            )}
+
+            <button
+              onClick={() => onNavigate('group')}
+              className="px-6 py-3.5 bg-[#002554] hover:bg-[#0A3E80] text-white text-sm font-bold rounded-xl shadow-sm transition-all duration-150 flex items-center space-x-2 cursor-pointer"
+            >
+              <span>Explore the 9 Businesses</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            {onOpenContact && (
+              <button
+                onClick={onOpenContact}
+                className="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-all duration-150 flex items-center space-x-2 cursor-pointer"
+              >
+                <PhoneCall className="w-4 h-4 text-[#E4002B]" />
+                <span>Toll-Free {CONTACT.tollFreeLabel}</span>
+              </button>
+            )}
+          </div>
+
+          {/* Credibility Institutional Badges */}
+          <div className="pt-4 border-t border-cbz-line flex flex-wrap items-center gap-6 text-xs text-cbz-grey">
+            <div className="flex items-center space-x-2">
+              <CheckCircle2 className="w-4 h-4 text-cbz-red" />
+              <span>
+                <strong>{GROUP_FACTS.years.value}</strong> of Market Leadership
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <CheckCircle2 className="w-4 h-4 text-cbz-blue" />
+              <span>
+                <strong>ZSE: CBZ</strong> Listed Since 1998
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <CheckCircle2 className="w-4 h-4 text-status-success" />
+              <span>
+                <strong>{GROUP_FACTS.companies.value}</strong> Synergised
+              </span>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   PhoneCall,
-  MessageSquare,
   Mail,
   MapPin,
   ExternalLink,
@@ -13,6 +12,7 @@ import { Country, ScreenType } from '../types';
 import { SUBSIDIARIES } from '../data/cbzData';
 import { SOCIAL_LINKS } from '../data/announcementsData';
 import { CONTACT, branchHoursLine } from '../data/facts';
+import { WhatsAppIcon, BrandSocialIcon } from './ui/BrandIcons';
 
 interface FooterProps {
   country: Country;
@@ -21,6 +21,16 @@ interface FooterProps {
   onOpenContact?: () => void;
   activeEntity?: string;
 }
+
+const getSocialHoverClass = (name: string) => {
+  const n = name.toLowerCase();
+  if (n.includes('facebook')) return 'hover:text-[#1877F2] hover:border-[#1877F2]/40 hover:bg-[#1877F2]/10';
+  if (n.includes('twitter') || n.includes('x')) return 'hover:text-white hover:border-white/40 hover:bg-white/10';
+  if (n.includes('linkedin')) return 'hover:text-[#0A66C2] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/10';
+  if (n.includes('youtube')) return 'hover:text-[#FF0000] hover:border-[#FF0000]/40 hover:bg-[#FF0000]/10';
+  if (n.includes('instagram')) return 'hover:text-[#E4405F] hover:border-[#E4405F]/40 hover:bg-[#E4405F]/10';
+  return 'hover:bg-white/15';
+};
 
 export const Footer: React.FC<FooterProps> = ({
   country,
@@ -34,45 +44,62 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Tier: Multi-Channel Contact & Social Links Bar */}
         <div className="pb-10 mb-10 border-b border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          {/* Contact Highlight: Toll Free & WhatsApp */}
+          {/* Contact Highlight: Toll Free & WhatsApp & Support Email */}
           <div className="flex flex-wrap items-center gap-6 text-xs">
-            <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center font-bold">
+            {/* Toll-Free */}
+            <a
+              href="tel:460"
+              className="flex items-center space-x-2.5 group hover:opacity-90 transition-opacity"
+              title="Call Toll-Free 460 / 461"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[#E4002B]/20 text-[#E4002B] border border-[#E4002B]/30 flex items-center justify-center font-bold transition-all group-hover:bg-[#E4002B] group-hover:text-white shadow-xs">
                 <PhoneCall className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[10px] uppercase font-bold text-white/60">Toll-Free (All Networks)</div>
-                <div className="text-sm font-bold text-white tabular-nums">{CONTACT.tollFreeLabel}</div>
+                <div className="text-[10px] uppercase font-bold text-white/60 tracking-wider">Toll-Free (All Networks)</div>
+                <div className="text-sm font-black text-white tabular-nums group-hover:text-red-300 transition-colors">{CONTACT.tollFreeLabel}</div>
               </div>
-            </div>
+            </a>
 
-            <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
-                <MessageSquare className="w-4 h-4" />
+            {/* WhatsApp Assistant */}
+            <a
+              href={CONTACT.whatsapp.href}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center space-x-2.5 group hover:opacity-90 transition-opacity"
+              title="Chat on WhatsApp +263 774 460 460"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[#25D366]/20 text-[#25D366] border border-[#25D366]/30 flex items-center justify-center font-bold transition-all group-hover:bg-[#25D366] group-hover:text-white shadow-xs">
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
               </div>
               <div>
-                <div className="text-[10px] uppercase font-bold text-white/60">WhatsApp Assistant</div>
-                <div className="text-sm font-bold text-white tabular-nums">{CONTACT.whatsapp.display}</div>
+                <div className="text-[10px] uppercase font-bold text-white/60 tracking-wider">WhatsApp Assistant</div>
+                <div className="text-sm font-black text-white tabular-nums group-hover:text-[#25D366] transition-colors">{CONTACT.whatsapp.display}</div>
               </div>
-            </div>
+            </a>
 
-            <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+            {/* Client Support Email */}
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="flex items-center space-x-2.5 group hover:opacity-90 transition-opacity"
+              title="Email Client Support Desk"
+            >
+              <div className="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center font-bold transition-all group-hover:bg-blue-500 group-hover:text-white shadow-xs">
                 <Mail className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[10px] uppercase font-bold text-white/60">Client Support Email</div>
-                <div className="text-xs font-bold text-white">{CONTACT.email}</div>
+                <div className="text-[10px] uppercase font-bold text-white/60 tracking-wider">Client Support Email</div>
+                <div className="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">{CONTACT.email}</div>
               </div>
-            </div>
+            </a>
           </div>
 
-          {/* Social Media Links (Verified Official Channels) */}
+          {/* Social Media Links (Verified Official Channels with Official Icon Logos) */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
             <span className="text-xs font-bold text-white/60 uppercase tracking-wider whitespace-nowrap">
               Follow CBZ Holdings:
             </span>
-            <div className="flex items-center space-x-2">
+            <div className="flex flex-wrap items-center gap-2">
               {SOCIAL_LINKS.map((s, idx) => (
                 <a
                   key={idx}
@@ -80,10 +107,13 @@ export const Footer: React.FC<FooterProps> = ({
                   target="_blank"
                   rel="noreferrer"
                   title={`${s.name} (${s.handle})`}
-                  className="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors flex items-center space-x-1"
+                  aria-label={`${s.name} - ${s.handle}`}
+                  className={`px-3 py-1.5 rounded-lg bg-white/5 text-white text-xs font-semibold transition-all flex items-center space-x-2 border border-white/10 group cursor-pointer ${getSocialHoverClass(s.name)}`}
                 >
+                  <span className="w-4 h-4 flex items-center justify-center transition-transform group-hover:scale-110 flex-shrink-0">
+                    <BrandSocialIcon name={s.name} className="w-3.5 h-3.5" />
+                  </span>
                   <span>{s.name}</span>
-                  <ExternalLink className="w-2.5 h-2.5 opacity-60" />
                 </a>
               ))}
             </div>
