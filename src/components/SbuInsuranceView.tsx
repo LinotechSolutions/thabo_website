@@ -78,9 +78,9 @@ export const SbuInsuranceView: React.FC<SbuInsuranceViewProps> = ({ country, onN
               <div className="flex flex-wrap items-center gap-3">
                 <div className="h-11 flex items-center">
                   <img
-                    src="/logos/cbz-insurance.png"
+                    src="/brand/logos/insurance-full.svg"
                     alt="CBZ Insurance"
-                    className="h-10 w-auto object-contain mix-blend-multiply"
+                    className="h-10 w-auto object-contain"
                   />
                 </div>
                 <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200">

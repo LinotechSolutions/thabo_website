@@ -12,15 +12,19 @@ export const SCREEN_PATHS: Record<ScreenType, string> = {
   invest: '/datvest',
   agro: '/agro-yield',
   properties: '/properties',
-  group: '/buy-a-home',
+  group: '/the-group',
+  'the-group': '/the-group',
+  'home-journey': '/buy-a-home',
   journey: '/car-insurance-quote',
+  'journey-invest': '/invest-journey',
+  'journey-bank': '/banking-journey',
+  'journey-agro': '/agro-journey',
   login: '/login',
   'open-account': '/open-account',
-  'the-group': '/the-group',
 };
 
 /** Screens that render inside the focused FlowShell (no marketing header, mega-menus or full footer). */
-export const FLOW_SCREENS: ScreenType[] = ['group', 'journey', 'open-account'];
+export const FLOW_SCREENS: ScreenType[] = ['home-journey', 'journey', 'journey-invest', 'journey-bank', 'journey-agro', 'open-account'];
 
 export function screenFromPath(pathname: string): ScreenType {
   const clean = pathname.replace(/\/+$/, '') || '/';

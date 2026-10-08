@@ -1,0 +1,74 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-full h-auto drop-shadow-lg">
+  <defs>
+    <!-- Interior Cavity Dark Depth -->
+    <linearGradient id="cavityGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000d1a" />
+      <stop offset="50%" stop-color="#001833" />
+      <stop offset="100%" stop-color="#002554" />
+    </linearGradient>
+
+    <!-- Outflowing Light Core -->
+    <radialGradient id="outflowCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E4002B" stop-opacity="0.85" />
+      <stop offset="40%" stop-color="#0A3E80" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#001833" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Back Left Flap -->
+    <linearGradient id="backLeftFlapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+
+    <!-- Back Right Flap -->
+    <linearGradient id="backRightFlapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+
+    <!-- Front Left Face -->
+    <linearGradient id="frontLeftFaceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#f1f5f9" />
+    </linearGradient>
+
+    <!-- Front Right Face (with soft perspective lighting) -->
+    <linearGradient id="frontRightFaceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+
+    <!-- Front Left Flap -->
+    <linearGradient id="frontLeftFlapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+
+    <!-- Front Right Flap -->
+    <linearGradient id="frontRightFlapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+  </defs>
+
+  <!-- 1. BACK FLAPS (Layered behind inner opening) -->
+  <polygon points="16,119 206,67 256,126 68,225" fill="url(#backLeftFlapGrad)" />
+  <polygon points="256,126 305,67 495,122 444,225" fill="url(#backRightFlapGrad)" />
+
+  <!-- 2. CAVITY DEPTH (Inside where offers originate) -->
+  <polygon points="68,225 256,126 444,225 256,215" fill="url(#cavityGradient)" />
+  <!-- Radiant Core of Outflow -->
+  <ellipse cx="256" cy="180" rx="90" ry="35" fill="url(#outflowCore)" opacity="0.75" />
+
+  <!-- 3. FRONT WALLS OF BOX -->
+  <polygon points="68,225 256,215 256,444 75,387" fill="url(#frontLeftFaceGrad)" />
+  <polygon points="256,215 444,225 436,387 256,444" fill="url(#frontRightFaceGrad)" />
+
+  <!-- 4. FRONT DOWNWARD-FOLDING FLAPS -->
+  <polygon points="16,225 205,275 256,215 68,225" fill="url(#frontLeftFlapGrad)" />
+  <polygon points="256,215 305,275 495,225 444,225" fill="url(#frontRightFlapGrad)" />
+
+  <!-- 5. USER'S BOX LINE ART (Exact pixel-perfect strokes on top) -->
+  <image href="/images/open-box.png" x="0" y="0" width="512" height="512" />
+</svg>

@@ -169,9 +169,9 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                   </div>
                   <div className="h-10 flex items-center overflow-hidden flex-shrink-0">
                     <img
-                      src="/logos/cbz-properties.jpg"
+                      src="/brand/logos/properties-full.svg"
                       alt="CBZ Properties"
-                      className="h-9 w-auto object-contain mix-blend-multiply scale-125"
+                      className="h-9 w-auto object-contain"
                     />
                   </div>
                 </div>
@@ -362,9 +362,9 @@ export const CrossEntityHandover: React.FC<CrossEntityHandoverProps> = ({ countr
                   </div>
                   <div className="h-10 flex items-center flex-shrink-0">
                     <img
-                      src="/logos/cbz-insurance.png"
+                      src="/brand/logos/insurance-full.svg"
                       alt="CBZ Insurance"
-                      className="h-9 w-auto object-contain mix-blend-multiply"
+                      className="h-9 w-auto object-contain"
                     />
                   </div>
                 </div>

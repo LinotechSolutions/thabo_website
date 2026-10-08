@@ -23,10 +23,19 @@ export const LifeStageSection: React.FC<LifeStageSectionProps> = ({ onNavigate }
     }
   };
 
-  const getRoute = (index: number): ScreenType => {
-    if (index === 0 || index === 3) return 'group';
-    if (index === 1) return 'journey';
-    return 'sbu';
+  const getRoute = (title: string): ScreenType => {
+    switch (title.toLowerCase()) {
+      case 'everyday banking':
+        return 'bank';
+      case 'protection & care':
+        return 'sbu';
+      case 'wealth & growth':
+        return 'invest';
+      case 'property & agribusiness':
+        return 'properties';
+      default:
+        return 'bank';
+    }
   };
 
   return (
@@ -50,7 +59,7 @@ export const LifeStageSection: React.FC<LifeStageSectionProps> = ({ onNavigate }
           {LIFE_STAGES.map((stage, idx) => (
             <div
               key={idx}
-              onClick={() => onNavigate(getRoute(idx))}
+              onClick={() => onNavigate(getRoute(stage.title))}
               className="p-5 rounded-2xl border border-slate-200/90 bg-slate-50/50 hover:bg-white hover:border-[#002554]/30 hover:shadow-md transition-all duration-200 cursor-pointer group flex flex-col justify-between"
             >
               <div>

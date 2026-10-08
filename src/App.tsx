@@ -14,16 +14,17 @@ import { BillPaymentSection } from './components/BillPaymentSection';
 import { NewsAndSupport } from './components/NewsAndSupport';
 import { CustomerJourney } from './components/CustomerJourney';
 import { SbuInsuranceView } from './components/SbuInsuranceView';
-import { CrossEntityHandover } from './components/CrossEntityHandover';
 import { SbuAgribusinessView } from './components/SbuAgribusinessView';
 import { SbuInvestmentsView } from './components/SbuInvestmentsView';
 import { SbuPropertiesView } from './components/SbuPropertiesView';
 import { SbuBankingView } from './components/SbuBankingView';
+import { TheGroupView } from './components/TheGroupView';
 import { LoginModal, PortalType } from './components/LoginModal';
 import { OpenAccountModal } from './components/OpenAccountModal';
 import { ContactChannelsModal } from './components/ContactChannelsModal';
 import { Footer } from './components/Footer';
 import ChatWidget from './components/ChatWidget';
+import { ClientProfileProvider } from './context/ClientProfileContext';
 
 export default function App() {
   // URL-backed screen state (see src/lib/routes.ts). navigate() pushes history and scrolls to top.
@@ -35,25 +36,26 @@ export default function App() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">
+    <ClientProfileProvider>
+      <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">
 
       {/* Top Utility Bar (Rotating Indicative FX, Toll-Free, WhatsApp, Channels Trigger) */}
       <TopUtilityBar
         currentCountry={currentCountry}
         onSelectCountry={setCurrentCountry}
         activeEntityName={
-          currentScreen === 'bank'
+          currentScreen === 'bank' || currentScreen === 'journey-bank'
             ? 'CBZ Bank'
-            : currentScreen === 'sbu'
+            : currentScreen === 'sbu' || currentScreen === 'journey'
             ? 'CBZ Insurance'
-            : currentScreen === 'agro'
+            : currentScreen === 'agro' || currentScreen === 'journey-agro'
             ? 'CBZ Agro-Yield'
-            : currentScreen === 'invest'
+            : currentScreen === 'invest' || currentScreen === 'journey-invest'
             ? 'Datvest Investments'
-            : currentScreen === 'properties'
+            : currentScreen === 'properties' || currentScreen === 'home-journey'
             ? 'CBZ Properties'
-            : currentScreen === 'group'
-            ? 'Connected Group Journey'
+            : currentScreen === 'group' || currentScreen === 'the-group'
+            ? 'CBZ Holdings Limited'
             : undefined
         }
         onGoHome={() => setCurrentScreen('home')}
@@ -71,18 +73,16 @@ export default function App() {
         onOpenAccount={() => setIsOpenAccountOpen(true)}
         onOpenContact={() => setIsContactModalOpen(true)}
         entityName={
-          currentScreen === 'bank'
+          currentScreen === 'bank' || currentScreen === 'journey-bank'
             ? 'Bank'
-            : currentScreen === 'sbu'
+            : currentScreen === 'sbu' || currentScreen === 'journey'
             ? 'Insurance'
-            : currentScreen === 'agro'
+            : currentScreen === 'agro' || currentScreen === 'journey-agro'
             ? 'Agro-Yield'
-            : currentScreen === 'invest'
+            : currentScreen === 'invest' || currentScreen === 'journey-invest'
             ? 'Datvest'
-            : currentScreen === 'properties'
+            : currentScreen === 'properties' || currentScreen === 'home-journey'
             ? 'Properties'
-            : currentScreen === 'group'
-            ? 'Holdings'
             : 'Holdings'
         }
       />
@@ -107,9 +107,6 @@ export default function App() {
               onOpenContact={() => setIsContactModalOpen(true)}
             />
 
-            {/* Dedicated Announcements & Press Room Section */}
-            <AnnouncementsSection />
-
             {/* Life Stage Framework */}
             <LifeStageSection onNavigate={setCurrentScreen} />
 
@@ -127,11 +124,19 @@ export default function App() {
               country={currentCountry}
               onOpenContact={() => setIsContactModalOpen(true)}
             />
+
+            {/* Dedicated Announcements & Press Room Section */}
+            <AnnouncementsSection />
           </div>
         )}
 
         {currentScreen === 'journey' && (
-          <CustomerJourney country={currentCountry} onNavigate={setCurrentScreen} />
+          <CustomerJourney
+            country={currentCountry}
+            onNavigate={setCurrentScreen}
+            startWith="insurance"
+            seed={{ asset: 'motor' }}
+          />
         )}
 
         {currentScreen === 'bank' && (
@@ -154,8 +159,40 @@ export default function App() {
           <SbuPropertiesView country={currentCountry} onNavigate={setCurrentScreen} />
         )}
 
-        {currentScreen === 'group' && (
-          <CrossEntityHandover country={currentCountry} onNavigate={setCurrentScreen} />
+        {(currentScreen === 'group' || currentScreen === 'the-group') && (
+          <TheGroupView country={currentCountry} onNavigate={setCurrentScreen} />
+        )}
+
+        {currentScreen === 'home-journey' && (
+          <CustomerJourney
+            country={currentCountry}
+            onNavigate={setCurrentScreen}
+            startWith="properties"
+          />
+        )}
+
+        {currentScreen === 'journey-invest' && (
+          <CustomerJourney
+            country={currentCountry}
+            onNavigate={setCurrentScreen}
+            startWith="datvest"
+          />
+        )}
+
+        {currentScreen === 'journey-bank' && (
+          <CustomerJourney
+            country={currentCountry}
+            onNavigate={setCurrentScreen}
+            startWith="bank"
+          />
+        )}
+
+        {currentScreen === 'journey-agro' && (
+          <CustomerJourney
+            country={currentCountry}
+            onNavigate={setCurrentScreen}
+            startWith="agroyield"
+          />
         )}
       </main>
 
@@ -205,5 +242,6 @@ export default function App() {
       <ChatWidget />
 
     </div>
+    </ClientProfileProvider>
   );
 }

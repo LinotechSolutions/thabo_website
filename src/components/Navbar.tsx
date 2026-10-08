@@ -73,9 +73,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isItemActive = (key: string) => {
     if (key === 'home') return currentScreen === 'home';
     if (key === 'ins') return currentScreen === 'sbu' || currentScreen === 'journey';
-    if (key === 'bank') return currentScreen === 'bank';
-    if (key === 'inv') return currentScreen === 'invest';
-    if (key === 'agro') return currentScreen === 'agro';
+    if (key === 'bank') return currentScreen === 'bank' || currentScreen === 'journey-bank';
+    if (key === 'inv') return currentScreen === 'invest' || currentScreen === 'journey-invest';
+    if (key === 'agro') return currentScreen === 'agro' || currentScreen === 'journey-agro';
     if (key === 'prop') return currentScreen === 'properties';
     if (key === 'group') return currentScreen === 'group';
     return false;
@@ -152,82 +152,27 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Search className="w-4 h-4" />
             </button>
 
-            {/* CBZ Touch app button */}
-            <button
-              onClick={() => onNavigate('bank')}
-              className="hidden xl:inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-full text-xs font-bold text-[#002554] bg-[#002554]/5 hover:bg-[#002554]/10 border border-[#002554]/10 transition-colors cursor-pointer"
-            >
-              <Smartphone className="w-3.5 h-3.5 text-[#E4002B]" />
-              <span>CBZ Touch</span>
-            </button>
-
-            {/* Open Account Primary CTA */}
+            {/* Open Account Primary CTA (Smaller button, not a pill) */}
             {onOpenAccount && (
               <button
                 onClick={onOpenAccount}
-                className="hidden md:inline-flex items-center space-x-1.5 bg-[#002554] hover:bg-[#0A3E80] text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-xs cursor-pointer border border-[#002554]"
+                className="hidden md:inline-flex items-center space-x-1.5 bg-[#002554] hover:bg-[#0A3E80] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer border border-[#002554]"
               >
                 <UserPlus className="w-3.5 h-3.5 text-red-400" />
                 <span>Open Account</span>
               </button>
             )}
 
-            {/* Split Log In Button */}
-            <div className="relative inline-flex shadow-sm rounded-full" ref={authMenuRef}>
-              <button
-                onClick={() => onOpenLogin('personal')}
-                className="inline-flex items-center space-x-1.5 bg-[#E4002B] hover:bg-[#C50025] text-white px-4 py-2 rounded-l-full text-xs font-bold transition-colors cursor-pointer"
-              >
-                <Lock className="w-3.5 h-3.5" />
-                <span>Log In</span>
-              </button>
-              <button
-                onClick={() => setAuthDropdown(!authDropdown)}
-                className="bg-[#C50025] hover:bg-[#920019] text-white px-2.5 py-2 rounded-r-full border-l border-white/20 transition-colors cursor-pointer"
-                aria-label="Login portals menu"
-              >
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-
-              {/* Login Dropdown */}
-              {authDropdown && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 text-xs">
-                  <div className="px-3 py-1.5 text-xs font-bold text-cbz-grey uppercase tracking-wider">
-                    Sign In Portals
-                  </div>
-                  <button
-                    onClick={() => {
-                      onOpenLogin('personal');
-                      setAuthDropdown(false);
-                    }}
-                    className="w-full text-left px-3.5 py-2 hover:bg-slate-50 font-semibold text-[#002554] flex items-center justify-between cursor-pointer"
-                  >
-                    <span>Internet Banking (Personal)</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-cbz-grey" />
-                  </button>
-                  <button
-                    onClick={() => {
-                      onOpenLogin('corporate');
-                      setAuthDropdown(false);
-                    }}
-                    className="w-full text-left px-3.5 py-2 hover:bg-slate-50 font-semibold text-[#002554] flex items-center justify-between cursor-pointer"
-                  >
-                    <span>Corporate Banking</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-cbz-grey" />
-                  </button>
-                  <button
-                    onClick={() => {
-                      onOpenLogin('self-service');
-                      setAuthDropdown(false);
-                    }}
-                    className="w-full text-left px-3.5 py-2 hover:bg-slate-50 font-semibold text-[#002554] flex items-center justify-between cursor-pointer"
-                  >
-                    <span>CBZ Self-Service Hub</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-cbz-grey" />
-                  </button>
-                </div>
-              )}
-            </div>
+            {/* Internet Banking Button (Not a pill, direct link to official portal) */}
+            <a
+              href="https://obdx.cbz.co.zw/index.html?module=login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-1.5 bg-[#E4002B] hover:bg-[#C50025] text-white px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer shadow-xs border border-[#E4002B]"
+            >
+              <Lock className="w-3.5 h-3.5" />
+              <span>Internet Banking</span>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -648,7 +593,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </button>
                     <button
                       onClick={() => {
-                        onNavigate('group');
+                        onNavigate('home-journey');
                         setActiveMega(null);
                       }}
                       className="w-full py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 transition-all flex items-center justify-center space-x-1 cursor-pointer"
@@ -741,9 +686,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div>
                       <div className="h-7 mb-2 flex items-center">
                         <img
-                          src="/logos/cbz-insurance.png"
+                          src="/brand/logos/insurance-full.svg"
                           alt="CBZ Insurance"
-                          className="h-6 w-auto object-contain mix-blend-multiply"
+                          className="h-6 w-auto object-contain"
                         />
                       </div>
                       <span className="inline-block px-2 py-0.5 rounded bg-[#002554]/10 text-[#002554] text-xs font-bold tracking-wider uppercase mb-2">
@@ -822,7 +767,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
                     <li
                       onClick={() => {
-                        onNavigate('group');
+                        onNavigate('home-journey');
                         setActiveMega(null);
                       }}
                       className="hover:text-[#E4002B] cursor-pointer transition-colors font-semibold text-[#002554] flex items-center justify-between"
@@ -865,9 +810,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div>
                       <div className="h-7 mb-2 flex items-center overflow-hidden">
                         <img
-                          src="/logos/cbz-properties.jpg"
+                          src="/brand/logos/properties-full.svg"
                           alt="CBZ Properties"
-                          className="h-6 w-auto object-contain mix-blend-multiply scale-125"
+                          className="h-6 w-auto object-contain"
                         />
                       </div>
                       <span className="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-xs font-bold tracking-wider uppercase mb-2">
@@ -906,7 +851,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </div>
                     <button
                       onClick={() => {
-                        onNavigate('group');
+                        onNavigate('home-journey');
                         setActiveMega(null);
                       }}
                       className="w-full py-1.5 px-3 bg-[#E4002B] hover:bg-[#C50025] text-white text-xs font-bold rounded-lg transition-all flex items-center justify-center space-x-1 cursor-pointer shadow-xs"
@@ -965,9 +910,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <div>
                     <div className="h-8 mb-2.5 flex items-center">
                       <img
-                        src="/logos/datvest.png"
+                        src="/brand/logos/datvest-full.svg"
                         alt="Datvest Asset Management"
-                        className="h-7 w-auto object-contain mix-blend-multiply"
+                        className="h-7 w-auto object-contain"
                       />
                     </div>
                     <span className="inline-block px-2 py-0.5 rounded bg-[#002554]/10 text-[#002554] text-xs font-bold tracking-wider uppercase mb-2.5">
@@ -1040,9 +985,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <div>
                     <div className="h-8 mb-2.5 flex items-center">
                       <img
-                        src="/logos/cbz-agro-yield.jpg"
+                        src="/brand/logos/agro-yield-full.svg"
                         alt="CBZ Agro-Yield"
-                        className="h-7 w-auto object-contain mix-blend-multiply"
+                        className="h-7 w-auto object-contain"
                       />
                     </div>
                     <span className="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xs font-bold tracking-wider uppercase mb-2.5">
@@ -1172,8 +1117,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 currentScreen === 'group' ? 'bg-[#E4002B] text-white' : 'text-[#002554] hover:bg-slate-50'
               }`}
             >
-              <span>Buy a Home (Unified Application)</span>
-              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">Unified</span>
+              <span>The Group · 9 Operating Subsidiaries</span>
+              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">Ecosystem</span>
             </button>
           </div>
 
@@ -1190,15 +1135,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>Open an Account</span>
               </button>
             )}
-            <button
-              onClick={() => {
-                onOpenLogin();
-                setMobileMenuOpen(false);
-              }}
-              className="w-full py-2.5 bg-[#E4002B] text-white text-xs font-bold rounded-lg text-center cursor-pointer"
+            <a
+              href="https://obdx.cbz.co.zw/index.html?module=login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2.5 bg-[#E4002B] text-white text-xs font-bold rounded-lg text-center cursor-pointer flex items-center justify-center space-x-2"
             >
-              Log In to Online Banking
-            </button>
+              <Lock className="w-3.5 h-3.5" />
+              <span>Internet Banking</span>
+            </a>
             {onOpenContact && (
               <button
                 onClick={() => {

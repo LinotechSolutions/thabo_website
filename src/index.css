@@ -2,35 +2,101 @@
 
 /*
  * CBZ Sans — primary typeface (Brand Identity Guideline 1.0).
- * TODO(font): the WOFF2 files are not in the repo yet. Drop them into
- * public/fonts/cbz-sans/ with these names and the slots below pick them up.
- * Until then text renders in the system fallback stack defined in --font-sans.
+ * Self-hosted fonts loaded from public/fonts/.
  */
 @font-face {
   font-family: 'CBZ Sans';
-  src: url('/fonts/cbz-sans/CBZSans-Regular.woff2') format('woff2');
+  src: url('/fonts/CBZSans-Light.otf') format('opentype'),
+       url('/fonts/CBZsans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-Regular.otf') format('opentype'),
+       url('/fonts/CBZsans-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'CBZ Sans';
-  src: url('/fonts/cbz-sans/CBZSans-Medium.woff2') format('woff2');
+  src: url('/fonts/CBZSans-Italic.otf') format('opentype'),
+       url('/fonts/CBZSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-Medium.otf') format('opentype'),
+       url('/fonts/CBZsans-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'CBZ Sans';
-  src: url('/fonts/cbz-sans/CBZSans-Bold.woff2') format('woff2');
+  src: url('/fonts/CBZSans-MediumItalic.otf') format('opentype'),
+       url('/fonts/CBZSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-SemiBold.otf') format('opentype'),
+       url('/fonts/CBZSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-SemiBoldItalic.otf') format('opentype'),
+       url('/fonts/CBZSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-Bold.otf') format('opentype'),
+       url('/fonts/CBZsans-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'CBZ Sans';
-  src: url('/fonts/cbz-sans/CBZSans-ExtraBold.woff2') format('woff2');
+  src: url('/fonts/CBZSans-BoldItalic.otf') format('opentype'),
+       url('/fonts/CBZSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-ExtraBold.otf') format('opentype'),
+       url('/fonts/CBZsans-ExtraBold.ttf') format('truetype');
   font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-ExtraBoldItalic.otf') format('opentype'),
+       url('/fonts/CBZSans-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CBZ Sans';
+  src: url('/fonts/CBZSans-Black.otf') format('opentype'),
+       url('/fonts/CBZsans-Black.ttf') format('truetype');
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
@@ -88,6 +154,21 @@
     --cbz-grey: var(--color-cbz-grey);
   }
 
+  html,
+  body,
+  #root,
+  button,
+  input,
+  select,
+  textarea,
+  optgroup,
+  dialog,
+  [role="dialog"],
+  [role="menu"],
+  [role="combobox"] {
+    font-family: var(--font-sans);
+  }
+
   body {
     font-family: var(--font-sans);
     color: var(--color-cbz-ink);
@@ -123,8 +204,51 @@ html {
 .cbz-shadow-lg {
   box-shadow: 0 20px 40px -8px rgba(0, 37, 84, 0.12), 0 4px 12px -2px rgba(0, 37, 84, 0.06);
 }
-.cbz-shadow-red {
-  box-shadow: none;
+/* Outflow box animations for Connected Journey */
+@keyframes cbzOutflowStream {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes cbzFloat0 {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50% { transform: translateY(-7px) rotate(-4.2deg); }
+}
+
+@keyframes cbzFloat1 {
+  0%, 100% { transform: translateY(0px) rotate(0.5deg); }
+  50% { transform: translateY(-10px) rotate(-0.5deg); }
+}
+
+@keyframes cbzFloat2 {
+  0%, 100% { transform: translateY(0px) rotate(3deg); }
+  50% { transform: translateY(-7px) rotate(4.2deg); }
+}
+
+@keyframes cbzPulseGlow {
+  0%, 100% { transform: scale(0.96); opacity: 0.6; }
+  50% { transform: scale(1.06); opacity: 0.95; }
+}
+
+.animate-outflow-stream {
+  stroke-dasharray: 4 4;
+  animation: cbzOutflowStream 2s linear infinite;
+}
+
+.animate-float-card-0 {
+  animation: cbzFloat0 4.2s ease-in-out infinite;
+}
+
+.animate-float-card-1 {
+  animation: cbzFloat1 3.6s ease-in-out infinite 0.4s;
+}
+
+.animate-float-card-2 {
+  animation: cbzFloat2 4s ease-in-out infinite 0.8s;
+}
+
+.animate-pulse-glow {
+  animation: cbzPulseGlow 3s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -99,7 +99,8 @@ export const SUBSIDIARIES: Subsidiary[] = [
     screen: 'bank',
     tagline: 'Banking solutions for every stage of life.',
     isCore: true,
-    image: '/images/cbz-banking.png'
+    image: '/images/cbz-banking.png',
+    logo: '/brand/logos/bank-full.svg'
   },
   {
     id: 'insurance',
@@ -110,7 +111,7 @@ export const SUBSIDIARIES: Subsidiary[] = [
     screen: 'sbu',
     tagline: 'Protection for what matters most.',
     image: '/images/insurance-car.jpg',
-    logo: '/logos/cbz-insurance.png'
+    logo: '/brand/logos/insurance-full.svg'
   },
   {
     id: 'life',
@@ -120,7 +121,8 @@ export const SUBSIDIARIES: Subsidiary[] = [
     cta: 'Protect Your Family',
     screen: 'group',
     tagline: 'Cover for life. Security for your family.',
-    image: '/images/insurance-family.jpg'
+    image: '/images/insurance-family.jpg',
+    logo: '/brand/logos/life-full.svg'
   },
   {
     id: 'datvest',
@@ -131,7 +133,7 @@ export const SUBSIDIARIES: Subsidiary[] = [
     screen: 'invest',
     tagline: 'Growing wealth. Building resilient futures.',
     image: '/images/cbz-wealth.png',
-    logo: '/logos/datvest.png'
+    logo: '/brand/logos/datvest-full.svg'
   },
   {
     id: 'capital',
@@ -142,7 +144,7 @@ export const SUBSIDIARIES: Subsidiary[] = [
     screen: null,
     tagline: 'Capital raised. Strategic ambitions realised.',
     image: '/images/cbz-banking-branch.jpg',
-    logo: '/logos/cbz-capital.png'
+    logo: '/brand/logos/capital-full.svg'
   },
   {
     id: 'properties',
@@ -153,7 +155,7 @@ export const SUBSIDIARIES: Subsidiary[] = [
     screen: 'properties',
     tagline: 'Spaces for living. Places for life.',
     image: '/images/loan-home.jpg',
-    logo: '/logos/cbz-properties.jpg'
+    logo: '/brand/logos/properties-full.svg'
   },
   {
     id: 'agri',
@@ -164,7 +166,7 @@ export const SUBSIDIARIES: Subsidiary[] = [
     screen: 'agro',
     tagline: 'Financing harvest across the entire food chain.',
     image: '/images/cbz-agriculture.png',
-    logo: '/logos/cbz-agro-yield.jpg'
+    logo: '/brand/logos/agro-yield-full.svg'
   },
   {
     id: 'risk',
@@ -174,7 +176,8 @@ export const SUBSIDIARIES: Subsidiary[] = [
     cta: 'Audit Your Portfolio',
     screen: null,
     tagline: 'Risk understood. Exposure managed with precision.',
-    image: '/images/cbz-protection.png'
+    image: '/images/cbz-protection.png',
+    logo: '/brand/logos/risk-advisory-full.svg'
   },
   {
     id: 'micro',

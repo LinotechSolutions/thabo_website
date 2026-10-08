@@ -63,8 +63,7 @@ export const LOGOS: Record<LogoBrand, BrandEntry> = {
   'red-sphere': { name: 'Red Sphere Finance', full: art('red-sphere-full', 4.9137), white: art('red-sphere-white', 4.9137), roundel: art('red-sphere-roundel', 1) },
   'cbz-touch': { name: 'CBZ Touch', full: art('cbz-touch-full', 0.9091), white: art('cbz-touch-white', 0.9091) },
   'ziki-cash': { name: 'ZikiCash', full: art('ziki-cash-full', 3.6127), white: art('ziki-cash-white', 3.6127) },
-  // TODO(logo): Ziki Mall master artwork exists only as PNG/PDF (no SVG). Request SVG from brand team.
-  'ziki-mall': { name: 'Ziki Mall' },
+  'ziki-mall': { name: 'Ziki Mall', full: { src: '/brand/logos/ziki-mall-full.png', aspect: 1.5617 } },
   'cbz-way': { name: 'The CBZ Way', full: art('cbz-way-full', 2.8353), white: art('cbz-way-white', 2.8353) },
 };
 

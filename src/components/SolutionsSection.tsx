@@ -23,6 +23,21 @@ export const SolutionsSection: React.FC<SolutionsSectionProps> = ({ onNavigate }
     }
   };
 
+  const getScreenForAudience = (title: string): ScreenType => {
+    switch (title.toLowerCase()) {
+      case 'personal':
+        return 'bank';
+      case 'business & smes':
+        return 'bank';
+      case 'corporate & institutional':
+        return 'the-group';
+      case 'diaspora banking':
+        return 'bank';
+      default:
+        return 'bank';
+    }
+  };
+
   return (
     <section className="py-16 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +59,7 @@ export const SolutionsSection: React.FC<SolutionsSectionProps> = ({ onNavigate }
           {AUDIENCES.map((item, idx) => (
             <div
               key={idx}
-              onClick={() => onNavigate(idx % 2 === 0 ? 'journey' : 'group')}
+              onClick={() => onNavigate(getScreenForAudience(item.title))}
               className="bg-slate-50/70 border border-slate-200 rounded-2xl overflow-hidden hover:bg-white hover:border-slate-300 hover:shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer group"
             >
               {/* Card Image */}

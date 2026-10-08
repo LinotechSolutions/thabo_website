@@ -14,7 +14,11 @@ export type ScreenType =
   | 'properties'
   | 'bank'
   | 'open-account'
-  | 'the-group';
+  | 'the-group'
+  | 'journey-invest'
+  | 'journey-bank'
+  | 'journey-agro'
+  | 'home-journey';
 
 export interface LifecycleStage {
   step: string;

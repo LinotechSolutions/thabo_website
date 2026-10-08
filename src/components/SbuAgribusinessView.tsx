@@ -41,9 +41,9 @@ export const SbuAgribusinessView: React.FC<SbuAgribusinessViewProps> = ({ countr
               <div className="flex flex-wrap items-center gap-3">
                 <div className="h-11 flex items-center">
                   <img
-                    src="/logos/cbz-agro-yield.jpg"
+                    src="/brand/logos/agro-yield-full.svg"
                     alt="CBZ Agro-Yield"
-                    className="h-10 w-auto object-contain mix-blend-multiply"
+                    className="h-10 w-auto object-contain"
                   />
                 </div>
                 <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200">
@@ -383,7 +383,7 @@ export const SbuAgribusinessView: React.FC<SbuAgribusinessViewProps> = ({ countr
 
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
                 <button
-                  onClick={() => onNavigate('group')}
+                  onClick={() => onNavigate('home-journey')}
                   className="w-full py-3.5 px-5 bg-[#E4002B] text-white hover:bg-[#C50025] font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer flex items-center justify-center space-x-2"
                 >
                   <span>Buy a Home with One Application</span>

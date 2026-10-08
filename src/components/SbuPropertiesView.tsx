@@ -39,9 +39,9 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
               <div className="flex flex-wrap items-center gap-3">
                 <div className="h-11 flex items-center overflow-hidden">
                   <img
-                    src="/logos/cbz-properties.jpg"
+                    src="/brand/logos/properties-full.svg"
                     alt="CBZ Properties"
-                    className="h-10 w-auto object-contain mix-blend-multiply scale-125"
+                    className="h-10 w-auto object-contain"
                   />
                 </div>
                 <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200">
@@ -63,7 +63,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
-                  onClick={() => onNavigate('group')}
+                  onClick={() => onNavigate('home-journey')}
                   className="px-6 py-3.5 bg-[#E4002B] hover:bg-[#C50025] text-white text-xs font-bold rounded-xl shadow-md cbz-shadow-red transition-all cursor-pointer flex items-center space-x-2"
                 >
                   <span>Buy a Home Across CBZ (4 Steps)</span>
@@ -265,7 +265,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                     </button>
                   ) : (
                     <button
-                      onClick={() => onNavigate('group')}
+                      onClick={() => onNavigate('home-journey')}
                       className="w-full py-2.5 px-4 bg-[#E4002B] hover:bg-[#C50025] text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer"
                     >
                       <span>Start Home Application</span>
@@ -342,7 +342,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
                   {convertTextWithCurrency(prod.pricing, country)}
                 </span>
                 <button
-                  onClick={() => onNavigate('group')}
+                  onClick={() => onNavigate('home-journey')}
                   className="font-bold text-[#002554] hover:text-[#E4002B] flex items-center space-x-1 cursor-pointer"
                 >
                   <span>Apply with Mortgage</span>
@@ -373,7 +373,7 @@ export const SbuPropertiesView: React.FC<SbuPropertiesViewProps> = ({ country, o
 
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
                 <button
-                  onClick={() => onNavigate('group')}
+                  onClick={() => onNavigate('home-journey')}
                   className="w-full py-3.5 px-5 bg-[#E4002B] hover:bg-[#C50025] text-white font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer flex items-center justify-center space-x-2"
                 >
                   <span>Start Home Application</span>

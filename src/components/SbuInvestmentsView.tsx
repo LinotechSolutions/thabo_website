@@ -49,9 +49,9 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
               <div className="flex flex-wrap items-center gap-3">
                 <div className="h-11 flex items-center">
                   <img
-                    src="/logos/datvest.png"
+                    src="/brand/logos/datvest-full.svg"
                     alt="Datvest Asset Management"
-                    className="h-10 w-auto object-contain mix-blend-multiply"
+                    className="h-10 w-auto object-contain"
                   />
                 </div>
                 <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200">
@@ -423,7 +423,7 @@ export const SbuInvestmentsView: React.FC<SbuInvestmentsViewProps> = ({ country,
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
                 {/* Primary action first; cross-sell as secondary */}
                 <button
-                  onClick={() => onNavigate('group')}
+                  onClick={() => onNavigate('journey-invest')}
                   className="w-full py-3.5 px-5 bg-[#E4002B] hover:bg-[#C50025] text-white font-bold text-xs rounded-xl transition-all shadow-md text-center cursor-pointer"
                 >
                   Start Your Connected Journey

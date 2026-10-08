@@ -281,7 +281,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </button>
               <button
                 type="button"
-                onClick={() => onNavigate('group')}
+                onClick={() => onNavigate('home-journey')}
                 className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#002554] text-slate-800 font-semibold transition-colors flex items-center space-x-1 cursor-pointer shadow-2xs"
               >
                 <span>Buy a home</span>

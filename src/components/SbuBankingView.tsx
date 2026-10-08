@@ -341,7 +341,7 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
                     </button>
                   ) : (
                     <button
-                      onClick={() => onNavigate('group')}
+                      onClick={() => onNavigate('home-journey')}
                       className="w-full py-2.5 px-4 bg-[#E4002B] hover:bg-[#C50025] text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer"
                     >
                       <span>Explore Connected Home Buying Journey</span>
@@ -462,7 +462,7 @@ export const SbuBankingView: React.FC<SbuBankingViewProps> = ({ country, onNavig
               </div>
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
                 <button
-                  onClick={() => onNavigate('group')}
+                  onClick={() => onNavigate('home-journey')}
                   className="w-full py-3.5 px-5 bg-[#E4002B] hover:bg-[#C50025] text-white font-bold text-xs rounded-xl transition-all shadow-lg flex items-center justify-center space-x-2 cursor-pointer"
                 >
                   <span>Launch Connected Journey</span>

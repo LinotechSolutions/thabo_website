@@ -1,0 +1,14 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Back Cavity (Inside of box) -->
+  <polygon points="68,225 256,126 444,225 256,215" fill="#001428" />
+
+  <!-- Front Left Face -->
+  <polygon points="68,225 256,215 256,444 75,387" fill="#f8fafc" stroke="#002554" stroke-width="1" />
+
+  <!-- Front Right Face -->
+  <polygon points="256,215 444,225 436,387 256,444" fill="#f1f5f9" stroke="#002554" stroke-width="1" />
+
+  <!-- The Open Box PNG on top -->
+  <image href="/images/open-box.png" x="0" y="0" width="512" height="512" />
+</svg>
