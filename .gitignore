@@ -7,3 +7,12 @@ coverage/
 .env*
 !.env.example
 .vercel
+*.sqlite3
+*.db
+.tempmediaStorage/
+staticfiles/
+__pycache__/
+*.pyc
+.tmp/
+.strapi/
+

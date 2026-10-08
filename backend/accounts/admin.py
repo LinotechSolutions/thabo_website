@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from accounts.models import User
+from accounts.models import OnboardingApplication, User
 
 
 @admin.register(User)
@@ -34,6 +34,34 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
+
+
+@admin.register(OnboardingApplication)
+class OnboardingApplicationAdmin(admin.ModelAdmin):
+    list_display = (
+        "reference_code",
+        "service",
+        "first_name",
+        "surname",
+        "national_id",
+        "email",
+        "phone",
+        "status",
+        "created_at",
+    )
+    list_filter = ("status", "service", "created_at")
+    search_fields = (
+        "reference_code",
+        "first_name",
+        "surname",
+        "national_id",
+        "email",
+        "phone",
+    )
+    readonly_fields = ("reference_code", "ip_address", "user_agent", "created_at", "updated_at")
+    list_editable = ("status",)
+    ordering = ("-created_at",)
+
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
             "CBZ Custom Profile",

@@ -62,3 +62,73 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"
+
+
+class ApplicationStatus(models.TextChoices):
+    PENDING = "pending", _("Pending Verification")
+    UNDER_REVIEW = "under_review", _("Under Review")
+    APPROVED = "approved", _("Approved")
+    REJECTED = "rejected", _("Rejected")
+
+
+class OnboardingApplication(models.Model):
+    """
+    Persisted customer journey onboarding application with KYC verification data,
+    audit records, and structured product answers.
+    """
+    reference_code = models.CharField(
+        max_length=64,
+        unique=True,
+        db_index=True,
+        help_text=_("Unique customer application tracking reference (e.g. FCA-482910)"),
+    )
+    service = models.CharField(
+        max_length=64,
+        db_index=True,
+        help_text=_("Service identifier e.g. bank-fca, ins-motor, prop-stand"),
+    )
+    first_name = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
+    national_id = models.CharField(
+        max_length=64,
+        db_index=True,
+        help_text=_("Zimbabwe National ID or Passport Number"),
+    )
+    date_of_birth = models.CharField(max_length=32)
+    phone = models.CharField(max_length=40)
+    email = models.EmailField(db_index=True)
+    address = models.TextField()
+    answers = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text=_("Structured multi-step form answers submitted by user."),
+    )
+    status = models.CharField(
+        max_length=30,
+        choices=ApplicationStatus.choices,
+        default=ApplicationStatus.PENDING,
+        db_index=True,
+    )
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.TextField(blank=True, default="")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="onboarding_applications",
+    )
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _("Onboarding Application")
+        verbose_name_plural = _("Onboarding Applications")
+        indexes = [
+            models.Index(fields=["service", "status"]),
+            models.Index(fields=["national_id", "email"]),
+        ]
+
+    def __str__(self):
+        return f"[{self.reference_code}] {self.service} - {self.first_name} {self.surname} ({self.status})"

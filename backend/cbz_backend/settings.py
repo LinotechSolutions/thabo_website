@@ -28,9 +28,10 @@ ALLOWED_HOSTS = env.list(
         "127.0.0.1",
         "0.0.0.0",
         "testserver",
+        ".cbz.co.zw",
+        "cbz.co.zw",
         ".railway.app",
         ".vercel.app",
-        "*",
     ],
 )
 
@@ -59,10 +60,12 @@ INSTALLED_APPS = [
     "insurance.apps.InsuranceConfig",
     "calculators.apps.CalculatorsConfig",
     "chatbot.apps.ChatbotConfig",
+    "communications.apps.CommunicationsConfig",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "core.middleware.SecurityHeadersMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -138,6 +141,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ============================================================
 # CORS & CSRF Configuration
 # ============================================================
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = env.list(
     "CORS_ALLOWED_ORIGINS",
     default=[
@@ -145,11 +149,14 @@ CORS_ALLOWED_ORIGINS = env.list(
         "http://127.0.0.1:3000",
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://cbz.co.zw",
+        "https://www.cbz.co.zw",
     ],
 )
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https:\/\/.*\.vercel\.app$",
     r"^https:\/\/.*\.up\.railway\.app$",
+    r"^https:\/\/([a-zA-Z0-9-]+\.)*cbz\.co\.zw$",
     r"^http:\/\/localhost:\d+$",
     r"^http:\/\/127\.0\.0\.1:\d+$",
 ]
@@ -175,6 +182,8 @@ CSRF_TRUSTED_ORIGINS = env.list(
         "http://127.0.0.1:5173",
         "https://*.vercel.app",
         "https://*.up.railway.app",
+        "https://*.cbz.co.zw",
+        "https://cbz.co.zw",
     ],
 )
 CSRF_COOKIE_HTTPONLY = False  # Client reads CSRF cookie to provide in X-CSRFToken header

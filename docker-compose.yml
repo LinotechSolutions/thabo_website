@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: cbz_secure_db_password_2026
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init-cms-db.sql:/docker-entrypoint-initdb.d/init-cms-db.sql:ro
     ports:
       - "5432:5432"
     healthcheck:
@@ -61,9 +62,36 @@ services:
              python manage.py seed_cbz_data &&
              gunicorn cbz_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3"
 
+  cms:
+    build:
+      context: ./cms
+      dockerfile: Dockerfile
+    container_name: cbz-cms
+    restart: unless-stopped
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=cbz_cms
+      - DATABASE_USERNAME=cbz_user
+      - DATABASE_PASSWORD=cbz_secure_db_password_2026
+      - DATABASE_SSL=false
+      - APP_KEYS=cbz_app_key_alpha_2026,cbz_app_key_beta_2026,cbz_app_key_gamma_2026,cbz_app_key_delta_2026
+      - API_TOKEN_SALT=cbz_api_token_salt_production_2026
+      - ADMIN_JWT_SECRET=cbz_admin_jwt_secret_production_2026_super_secure
+      - TRANSFER_TOKEN_SALT=cbz_transfer_token_salt_2026
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - cms_uploads:/opt/app/public/uploads
+
   web:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: cbz-frontend
     restart: unless-stopped
@@ -72,9 +100,13 @@ services:
     environment:
       - NODE_ENV=production
       - VITE_API_URL=http://localhost:8000/api
+      - VITE_STRAPI_URL=http://localhost:1337/api
     depends_on:
       - backend
+      - cms
 
 volumes:
   postgres_data:
   redis_data:
+  cms_uploads:
+

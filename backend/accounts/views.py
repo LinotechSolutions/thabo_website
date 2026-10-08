@@ -7,9 +7,14 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from accounts.models import User
-from accounts.serializers import LoginSerializer, RegisterSerializer, UserSerializer
-from audit.services import record_audit_event
+from accounts.models import OnboardingApplication, User
+from accounts.serializers import (
+    LoginSerializer,
+    OnboardingSerializer,
+    RegisterSerializer,
+    UserSerializer,
+)
+from audit.services import get_client_ip, record_audit_event
 from core.throttling import AuthRateThrottle
 
 
@@ -230,3 +235,65 @@ class MeView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class OnboardView(APIView):
+    """
+    POST /api/accounts/onboard/
+    Securely commits customer journey onboarding submissions into PostgreSQL,
+    performs National ID and identity validation, captures client IP/User Agent,
+    and writes an immutable security audit event.
+    """
+    permission_classes = [AllowAny]
+    throttle_classes = [AuthRateThrottle]
+
+    def post(self, request):
+        serializer = OnboardingSerializer(data=request.data)
+        if not serializer.is_valid():
+            record_audit_event(
+                request=request,
+                action="customer_onboarding_failed",
+                status="failure",
+                details={
+                    "errors": serializer.errors,
+                    "service": request.data.get("service"),
+                },
+            )
+            return Response(
+                {"detail": "Validation error", "errors": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        client_ip = get_client_ip(request)
+        user_agent = request.META.get("HTTP_USER_AGENT", "")[:500]
+        authenticated_user = request.user if request.user.is_authenticated else None
+
+        application = serializer.save(
+            ip_address=client_ip,
+            user_agent=user_agent,
+            user=authenticated_user,
+        )
+
+        record_audit_event(
+            request=request,
+            action="customer_onboarding_submitted",
+            status="success",
+            user=authenticated_user,
+            details={
+                "ref": application.reference_code,
+                "service": application.service,
+                "email": application.email,
+            },
+        )
+
+        return Response(
+            {
+                "status": "success",
+                "reference_code": application.reference_code,
+                "service": application.service,
+                "message": "Your onboarding application has been securely received and recorded.",
+                "created_at": application.created_at,
+            },
+            status=status.HTTP_201_CREATED,
+        )
+

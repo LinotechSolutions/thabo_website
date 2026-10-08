@@ -4,12 +4,14 @@ from accounts.views import (
     LoginView,
     LogoutView,
     MeView,
+    OnboardView,
     RegisterView,
 )
 
 app_name = "accounts"
 
 urlpatterns = [
+    path("onboard/", OnboardView.as_view(), name="onboard"),
     path("register/", RegisterView.as_view(), name="register"),
     path("login/", LoginView.as_view(), name="login"),
     path("refresh/", CookieTokenRefreshView.as_view(), name="refresh"),

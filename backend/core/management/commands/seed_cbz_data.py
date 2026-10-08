@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 from billers.models import Biller
 from branches.models import Branch, BranchType
 from countries.models import Country
+from communications.models import Announcement, ContactChannel, CorporateFact
 from insurance.models import AddonOption, AssetOption, CoverOption
 from products.models import ProductItem
 from subsidiaries.models import (
@@ -412,4 +413,188 @@ class Command(BaseCommand):
         for label, route, sub, order in goals_data:
             Goal.objects.create(label=label, route=route, subsidiary=sub, order=order)
 
+        # 9. Corporate Announcements & Disclosures
+        announcements_data = [
+            {
+                "slug": "fy2025-results",
+                "category": "shareholder",
+                "title": "Audited Financial Results for the Year Ended 31 December 2025 & Final Dividend Declaration",
+                "date_display": "28 March 2026",
+                "summary": "The Board of Directors of CBZ Holdings Limited advises shareholders that the audited financial results have been approved, with a recommended final dividend declaration of USD 0.045 per share.",
+                "circular_ref": "ZSE: CBZ / CIR-03-2026",
+                "is_urgent": True,
+                "file_size": "PDF · 3.4 MB",
+                "tag": "Dividend & Results",
+                "order": 1,
+            },
+            {
+                "slug": "saturday-banking",
+                "category": "customer",
+                "title": "Customer Notice: Extended Saturday Banking Hours Across Selected Urban Branches",
+                "date_display": "18 March 2026",
+                "summary": "To enhance customer convenience for cash deposits, Nostro account opening, and card collection, 18 branches across Harare, Bulawayo, Mutare, and Gweru will now operate from 08:00 to 13:00 on Saturdays.",
+                "circular_ref": "OPS / BNK-2026-04",
+                "is_urgent": False,
+                "file_size": "PDF · 420 KB",
+                "tag": "Branch Notice",
+                "order": 2,
+            },
+            {
+                "slug": "agm-notice-2026",
+                "category": "shareholder",
+                "title": "Notice of the 37th Annual General Meeting of Shareholders",
+                "date_display": "10 March 2026",
+                "summary": "Notice is hereby given that the 37th AGM of members of CBZ Holdings Limited will be held virtually and physically at CBZ Training Centre, Pomona, Harare on Friday 15 May 2026 at 10:00 AM.",
+                "circular_ref": "SEC / AGM-2026-01",
+                "is_urgent": False,
+                "file_size": "PDF · 1.2 MB",
+                "tag": "Shareholder Notice",
+                "order": 3,
+            },
+            {
+                "slug": "digital-card-upgrade",
+                "category": "customer",
+                "title": "Service Upgrade: Enhanced 3D Secure Protection on All CBZ Visa Cards",
+                "date_display": "02 March 2026",
+                "summary": "All CBZ Visa Gold, Platinum, and Corporate debit cards have been upgraded with multi-factor biometric authentication for international e-commerce purchases, providing zero-liability fraud protection.",
+                "circular_ref": "DIG / SEC-2026-08",
+                "is_urgent": False,
+                "file_size": "PDF · 650 KB",
+                "tag": "Security Update",
+                "order": 4,
+            },
+            {
+                "slug": "monetary-policy-circular",
+                "category": "regulatory",
+                "title": "RBZ Monetary Policy Directive Alignment & Foreign Exchange Guidelines",
+                "date_display": "24 February 2026",
+                "summary": "Operationalization guidelines for individual Nostro retention, export surrender requirements, and revised interbank FX trading spreads in full compliance with the latest RBZ directives.",
+                "circular_ref": "REG / RBZ-2026-02",
+                "is_urgent": False,
+                "file_size": "PDF · 1.8 MB",
+                "tag": "Regulatory Circular",
+                "order": 5,
+            },
+            {
+                "slug": "cautionary-statement",
+                "category": "shareholder",
+                "title": "Cautionary Statement: Proposed Strategic Regional Expansion Transaction",
+                "date_display": "15 February 2026",
+                "summary": "Shareholders are advised that negotiations are ongoing regarding a proposed strategic transaction which, if successfully concluded, may have a material effect on the price of the company’s securities.",
+                "circular_ref": "ZSE: CBZ / CAUT-2026-01",
+                "is_urgent": True,
+                "file_size": "PDF · 880 KB",
+                "tag": "Cautionary Statement",
+                "order": 6,
+            },
+        ]
+        for item in announcements_data:
+            Announcement.objects.update_or_create(slug=item["slug"], defaults=item)
+        self.stdout.write(self.style.SUCCESS(f"Seeded {len(announcements_data)} corporate announcements."))
+
+        # 10. Contact Channels
+        channels_data = [
+            {
+                "slug": "tollfree-mobile",
+                "name": "Toll-Free Line (All Networks)",
+                "description": "Free of charge from Econet, NetOne, and Telecel mobile lines",
+                "value": "460",
+                "action_text": "Call 460 Toll-Free",
+                "action_href": "tel:460",
+                "badge": "Toll-Free",
+                "icon_name": "PhoneCall",
+                "availability": "24/7 Available",
+                "order": 1,
+            },
+            {
+                "slug": "tollfree-telone",
+                "name": "Toll-Free Landline Support",
+                "description": "Toll-free access for fixed landlines and alternative support",
+                "value": "461",
+                "action_text": "Call 461 Toll-Free",
+                "action_href": "tel:461",
+                "badge": "Toll-Free",
+                "icon_name": "Phone",
+                "availability": "24/7 Available",
+                "order": 2,
+            },
+            {
+                "slug": "whatsapp",
+                "name": "Official WhatsApp Banking",
+                "description": "Check balances, mini-statements, buy airtime, and chat with an agent",
+                "value": "+263 774 460 460",
+                "action_text": "Open WhatsApp Chat",
+                "action_href": "https://wa.me/263774460460?text=Hi%20CBZ%20I%20would%20like%20assistance",
+                "badge": "Instant Bot & Agents",
+                "icon_name": "MessageSquare",
+                "availability": "24/7 Active",
+                "order": 3,
+            },
+            {
+                "slug": "contactcentre",
+                "name": "Direct Contact Centre Lines",
+                "description": "Direct inquiries, card blocking, and cross-entity issue escalation",
+                "value": "+263 8677 004050 / +263 24 2799 234-9",
+                "action_text": "Call +263 8677 004050",
+                "action_href": "tel:+2638677004050",
+                "icon_name": "Phone",
+                "availability": "24 Hours / 7 Days",
+                "order": 4,
+            },
+            {
+                "slug": "ussd",
+                "name": "USSD Fast Banking",
+                "description": "Perform transactions on any phone without data or internet connection",
+                "value": "*460#",
+                "action_text": "Dial *460#",
+                "action_href": "tel:*460%23",
+                "badge": "No Data Required",
+                "icon_name": "Smartphone",
+                "availability": "Always Available",
+                "order": 5,
+            },
+            {
+                "slug": "email-support",
+                "name": "Client Support Email Desk",
+                "description": "Formal inquiries, document submissions, and statements",
+                "value": "contactcentre@cbz.co.zw",
+                "action_text": "Send Email",
+                "action_href": "mailto:contactcentre@cbz.co.zw",
+                "icon_name": "Mail",
+                "availability": "Response within 2 hours",
+                "order": 6,
+            },
+            {
+                "slug": "branch-locator",
+                "name": "Branch & ATM Network",
+                "description": "Over 60 branches and 800+ agency outlets nationwide",
+                "value": "Branches in Harare, Bulawayo, Mutare, Gweru & Nationwide",
+                "action_text": "Locate Nearest Branch",
+                "action_href": "#branch-directory",
+                "icon_name": "MapPin",
+                "availability": "Mon - Fri 08:00 - 15:00 · Sat 08:00 - 13:00",
+                "order": 7,
+            },
+        ]
+        for ch in channels_data:
+            ContactChannel.objects.update_or_create(slug=ch["slug"], defaults=ch)
+        self.stdout.write(self.style.SUCCESS(f"Seeded {len(channels_data)} contact channels."))
+
+        # 11. Corporate Verified Facts
+        facts_data = [
+            {"key": "years", "label": "Years in Operation", "value": "46 years", "confirmed": True, "order": 1},
+            {"key": "branches", "label": "Branch Network", "value": "Over 60 branches", "confirmed": True, "order": 2},
+            {"key": "zseListed", "label": "Stock Exchange Status", "value": "Listed on the Zimbabwe Stock Exchange (ZSE: CBZ)", "confirmed": True, "order": 3},
+            {"key": "companies", "label": "Ecosystem Entities", "value": "9 companies", "confirmed": True, "order": 4},
+            {"key": "tollFree", "label": "Toll-Free Numbers", "value": "460 / 461", "confirmed": True, "order": 5},
+            {"key": "whatsapp", "label": "WhatsApp Desk", "value": "+263 774 460 460", "confirmed": True, "order": 6},
+            {"key": "switchboard", "label": "Switchboard Line", "value": "+263 8677 004050", "confirmed": True, "order": 7},
+            {"key": "email", "label": "Contact Centre Email", "value": "contactcentre@cbz.co.zw", "confirmed": True, "order": 8},
+            {"key": "address", "label": "Corporate Headquarters", "value": "5 Campbell Road, Pomona, Harare", "confirmed": True, "order": 9},
+        ]
+        for f in facts_data:
+            CorporateFact.objects.update_or_create(key=f["key"], defaults=f)
+        self.stdout.write(self.style.SUCCESS(f"Seeded {len(facts_data)} corporate facts."))
+
         self.stdout.write(self.style.SUCCESS("Master data seeding completed successfully!"))
+
